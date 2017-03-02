@@ -1,0 +1,510 @@
+/*
+ * 	CSS Stylesheet From Lucas Lukasavicus Silva's
+ *  Curriculo Site - 2016
+ *
+ *  This code has a GPL License and can be used by anyone, since 
+ *  devidamente referenced.  
+ *
+ */
+
+/* =============================================== Index.html ======================================================= */
+	.adp_collection{
+		display: block;
+	}
+
+	.adp_nav{
+		margin-top: 1%;
+	}
+
+	.nav-tabs > li.adp_active > a,
+	.nav-tabs > li.adp_active > a:hover,
+	.nav-tabs > li.adp_active > a:focus {
+	  color: #428BCA;
+	}
+
+	.float_group{
+		width: 10%;
+		height: 20%;
+		margin-top: 7%;
+		margin-left: 1%;
+	}
+
+	.adp_container{
+		width:85%;
+	}
+
+	.containers{
+		display: inline-flex;
+	}
+
+	.adp_glyphicon{
+		padding: 1% 0.5% 0.5% 1%;
+	}
+
+	.chapter{
+		width:100%;
+		border: 4px solid red;
+	}
+
+	.chapter p {
+		font-family: Times;
+	}
+
+	.subchapter{
+		width:50%;
+		border: 1px solid black;
+	}
+
+	.chapter_divider {
+		width:100%;
+		margin-left: 0%;
+		border-top: 1px solid #ccc;
+	}
+
+	.subchapter_divider {
+		width:1px;
+		border-left: 1px solid #ccc;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	.left{
+		float: left;
+	}
+
+	.right{
+		float: right;
+	}
+
+	.adp_chip{
+
+		display: inline-block;
+		height: 32px;
+		font-size: 13px;
+		font-weight: 500;
+		color: rgba(0, 0, 0, 0.6);
+		line-height: 32px;
+
+		padding: 0 12px;
+
+		background-color: #ccc;
+
+		margin-bottom: 5px;
+		margin-right: 5px;
+	}
+
+	.adp_chip_img{
+		float: right;
+		margin: 0.2em;
+		height: 2em;
+		width: 5em;
+		border-radius: 25%;
+	}
+
+	.description_img{
+		width: 12em;
+		height: 12em;
+		border-radius: 50%;
+		display: block;
+		margin: auto;
+		margin-top: 5%;
+	}
+
+	.description_p{
+		margin-top: 5%;
+		text-align: center;
+		font-size: 1.95em;
+		color: #777;
+	}
+
+	.float_container_box{
+		display: inline-block;
+		width: 80%;
+		height: 80%;
+		margin-right: 10%;
+		margin-left:  10%;
+	}
+
+	.float_minibox{
+		display: inline-flex;
+		width: 100%;
+		border: 1px solid green;
+	}
+
+	.float_minibox p{
+		font-size: 1.4em;
+	}
+
+	.float_minibox span{
+		margin: 0 1% 1% 0;
+	}
+
+	.FAB_btn{
+		position: fixed;
+		right: 23px;
+		bottom: 23px;
+		height: 40px;
+		width: 56px;
+		border: none;
+	}
+
+
+	.education_bullet li, .professional_bullet li {
+	    display: block;
+	    margin-top: 2%;
+	}
+
+	.education_bullet li:before{
+	    content: "\e233";
+	    font-family: 'Glyphicons Halflings';
+	    font-size: 1.2em;
+	    float: left;
+	    margin-left: -20px;
+	    color: #CCCCCC;
+	}
+
+	.professional_bullet li:before{
+	    content: "\e139";
+	    font-family: 'Glyphicons Halflings';
+	    font-size: 1.2em;
+	    float: left;
+	    margin-left: -20px;
+	    color: #CCCCCC;
+	}
+
+	.ability_container{
+		width:100%;
+		height: 50%
+	}
+
+	.ability_component{
+		display: inline-flex;
+		vertical-align: middle;
+		width:100%;
+	}
+
+	.ability_component p{
+		font-size: 1em;
+		margin-right: 1em;
+		margin-left: 1em;
+		width: 15%;
+	}
+
+	.progress.adp_progress{
+		width:85%;
+	}
+
+	.progress-bar.adp_progress_bar{
+		-webkit-transition-property: width; /* Safari */
+	    -webkit-transition-duration: 2s; /* Safari */
+	    transition-property: width;
+	    transition-duration: 2s;
+	    width:0%;
+	}
+
+	.radar_container{
+		display: block;
+		width:100%;
+		height: 50%
+	}
+
+	.radar_component{
+		width: 100%;
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
+
+	.adp_media{
+		display: inline-block;
+
+		width: 20%;
+		height: 20%;
+		
+		border: 1px outset #ccc;
+		margin: 2.35%;
+	}
+
+	.adp_media_img{
+		background-color: #428BCA;
+	}
+
+	.adp_media h4{
+		text-align: center;
+		color: #777;
+	}
+
+	.mini_picture{
+		width: 100%;
+		height: 100%;
+		opacity: 1;
+		-webkit-transition-property: opacity; /* Safari */
+	    -webkit-transition-duration: 0.2s; /* Safari */
+	    transition-property: opacity;
+	    transition-duration: 0.2s;
+	}
+
+	.mini_picture:hover{
+		opacity: 0.3;
+	}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* ============================================== Projects.html ===================================================== */
+
+	.float_box{
+		display: inline-flex;
+		width: 100%;
+	}
+
+	.adp_card{
+		display: inline-block;
+		width:20%;
+		height:20%;
+		margin: 2.35%;
+		border-radius: 0px 5px 0px 5px;
+		border-width: 2px;
+		border-style: none outset outset none;
+		border-color: #ccc;
+	}
+
+	.card-image > img{
+		width: 20em;
+		height: 20em;
+	}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* ============================================= Extracurricular.html =============================================== */
+	.adp_minimedia{
+		display: inline-flex;
+
+		width: 100%;
+		height: 100%;
+	}
+
+	.adp_minimedia_img{
+		width: 10%;
+		height: 100%;
+		border: 2.5px outset #ccc;
+	}
+
+	.adp_minimedia_img img{
+		width: 100%;
+		height: 100%;
+	}
+
+	.adp_texts{
+		width: 90%;
+		height: 100%;
+		display: inline-block;
+		font-family: Times;
+	}
+
+	.adp_texts.right{
+		text-align: right;
+		margin-right: 1%;
+	}
+
+	.adp_texts.left{
+		text-align: left;
+		margin-left: 1%;
+	}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* ================================================== Tastes.html =================================================== */
+	.carousel_description, .carousel-comment{
+		width: 20%;
+		height: 100%;
+		border: none;
+		
+		border-radius: 25%;
+		margin: auto;
+		font-family: Times;
+		font-size: 1.4em;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.carousel_description{
+		margin-top: 2%;
+	}
+
+	.carousel-comment{
+		width:40%;
+		margin-bottom: 2%;
+	}
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* ================================================= Articles.html ================================================== */
+
+	.adp_collapsible, .adp_side_nav{
+		list-style-type: none;
+	}
+
+	.collapsible_img_header{
+		width: 10%;
+		height: 100%;
+		border: 2.5px outset #ccc;
+	}
+
+	.collapsible_img_header img{
+		width: 100%;
+		height: 100%;
+	}
+
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+/* =================================================== SideNavMenu ================================================== */
+	.side-item, .side-item:hover, .side-item:active, .side-item:link, .side-item:visited{
+		text-decoration: none;
+	}
+
+	.userView{
+		display: block;
+	}
+
+	.profile_img{
+		display: block;
+		margin:auto;
+		border-radius: 50%;
+		width: 5em;
+		height: 5em;
+	}
+
+	.profile_name{
+		text-align: center;
+	}
+
+	.adp_btn_collapse{
+		display: none;
+		position: fixed;
+		left: 23px;
+		top: 23px;
+		height: 40px;
+		width: 56px;
+		border: none;
+	}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
+
+
+
+
+/* =========================================== Responsible Itens ==================================================== */
+	@media screen and (max-device-width: 1210px){
+	/* ================================================ Projects.html =============================================== */
+		.adp_card{
+			width:26.7%;
+			height:26.7%;
+			margin: 3%;
+		}
+		.float_box{
+			display: inline-flex;
+			width: 100%;
+		}
+
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+
+	@media screen and (max-device-width: 1180px){
+	/* ================================================= Index.html ================================================= */
+		.adp_media{
+			width: 26.6%;
+			height: 26.6%;
+			margin: 3%;
+		}
+		.ability_component p{
+			font-size: 1.2em;
+		}
+
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+	/* ============================================== Extracurricular.html ========================================== */
+		.adp_minimedia_img{
+			width: 20%;
+			height: 100%;
+			border: 2.5px outset #ccc;
+		}
+
+		.adp_texts{
+			width: 80%;
+			font-size: 2em;
+		}
+
+		.adp_texts h4{
+			font-size: 2em;
+		}
+
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+	/* ================================================== Tastes.html =============================================== */
+		.carousel_description, .carousel-comment{
+			font-size: 1.75em;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+
+	@media screen and (max-device-width: 890px){
+	/* ================================================== SideNavMenu =============================================== */
+		.adp_nav{
+			display: none;
+		}
+
+		.adp_btn_collapse{
+			display: initial;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+
+	@media screen and (max-device-width: 670px){
+	/* ================================================= Index.html ================================================= */
+		.adp_media{
+			width: 40%;
+			height: 40%;
+			margin: 4%;
+		}
+		.ability_component p{
+			font-size: 1.4em;
+		}
+		.containers{
+			display: inline-block;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+	/* ================================================ Projects.html =============================================== */
+		.adp_card{
+			width:35%;
+			height:35%;
+			margin: 7.35%;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	/* ================================================== Tastes.html =============================================== */
+		.carousel_description, .carousel-comment{
+			font-size: 2em;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+
+	@media screen and (max-device-width: 480px){
+	/* ================================================== Tastes.html =============================================== */
+		.carousel_description, .carousel-comment{
+			font-size: 2.3em;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+
+	@media screen and (max-device-width: 360px){
+	/* ================================================== Tastes.html =============================================== */
+		.carousel_description, .carousel-comment{
+			font-size: 2.6em;
+		}
+	/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+	}
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */

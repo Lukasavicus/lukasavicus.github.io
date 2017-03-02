@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lucas Lukasavicus</title>
+
+	<script src="../jquery1/jquery-1.11.3.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="../bootstrap3/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="../bootstrap3/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="../bootstrap3/js/bootstrap.js"></script>
+	<script src="../bootstrap3/js/npm.js"></script>
+
+	<link rel="stylesheet" href="../myownsdn/adapted_style.css">
+
+	<script src="../myownsdn/script.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../materialize/css/materialize_lucas.css">
+	<script src="../materialize/js/materialize_lucas.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="../materialize/css/materialize_side-nav.css">
+	<script src="../materialize/js/materialize_side-nav.js"></script>
+
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="container adp_container">
+		<ul class="nav nav-tabs adp_nav">
+			<li role="presentation" class="deactive adp_deactive"><a href="../index.html">Profile</a></li>
+			<li role="presentation" class="deactive adp_deactive"><a href="../projects.html">Projects</a></li>
+			<li role="presentation" class="dropdown active adp_active">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Me <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="extracurricular.html">Extracurricular</a></li>
+					<li><a href="social.html">Social Engament</a></li>
+					<li><a href="tastes.html">Tastes</a></li>
+				</ul>
+			</li>
+			<li role="presentation" class="deactive adp_deactive"><a href="#">Awards</a></li>
+			<li role="presentation" class="deactive adp_deactive"><a href="#">Calculus</a></li>
+			<li role="presentation" class="deactive adp_deactive"><a href="#">Other</a></li>
+		</ul>
+
+		<div class="collection">
+			<div class="chapter">
+				<div class="carousel_description">
+					Natureza
+				</div>
+				<div class="carousel" id="carousel-tastes">
+					<a class="carousel-item" data-description="One" href="#one!"><img src="../foto.jpg"></a>
+					<a class="carousel-item" data-description="Two" href="#two!"><img src="../foto.jpg"></a>
+					<a class="carousel-item" data-description="Three" href="#three!"><img src="../foto.jpg"></a>
+					<a class="carousel-item" data-description="Four" href="#four!"><img src="../foto.jpg"></a>
+					<a class="carousel-item" data-description="Five" href="#five!"><img src="../foto.jpg"></a>
+				</div>
+				<div class="carousel-comment">
+					Test
+				</div>
+				<div class="carousel-comments" data-target="#carousel-tastes">
+					<div class="comment-item"> This is the First photo </div>
+					<div class="comment-item"> This is the Second photo </div>
+					<div class="comment-item"> This is the Third photo </div>
+					<div class="comment-item"> This is the Fourth photo </div>
+					<div class="comment-item"> This is the Fifth photo </div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- ================================== MODAL ================================================= -->
+		<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Hey send me a message :)</h4>
+		      </div>
+
+		      <div class="modal-body" >
+		        <form class="form-horizontal" method="POST" action="controllers/informationsSRV.php" id="infoForm" autocomplete="on">
+
+		        <!-- ============================ FORM INPUTS ============================================== -->
+		          <!-- NAME - Input -->
+		          <div class="form-group" id="div_log_in">
+		              <p>
+		                <label form="login" class="col-sm-2 control-label">Name:*</label>
+		              	<div class="col-sm-6">  <input name="log_in" type="text" id="log_in" class="form-control" placeholder="First Name/Last Name">  </div>
+		              </p>
+		          </div>
+		          
+		          <!-- Email - Input -->
+		          <div class="form-group" id="div_email">
+		              <p>
+		                <label form="login" class="col-sm-2 control-label">E-Mail:*</label>
+		              <div class="col-sm-6">  <input name="email" type="email" id="email" class="form-control" placeholder="email@some.com" onblur="validateEMail()"> </div>
+		              </p>
+		          </div>
+		              
+		          <!-- Degree - Input -->
+		          <div class="form-group" id="div_degree">
+		              <p>
+		                <label form="login" class="col-sm-2 control-label">Subject:*</label>
+		                <div class="col-sm-6"> 
+		                    <select name="assunto" type="text" id="subject" class="form-control" placeholder="Subject" onblur="validateComboBox()">
+		                        <option value="invalid"></option>
+		                        <option value="msg">Message</option>
+		                        <option value="sug">Sugestion</option>
+		                        <option value="crt">Critics</option>
+		                        <option value="prj">Help me with a Project/Ideia</option>
+		                    </select>
+		                </div>
+		              </p>
+		          </div>
+
+		          <div class="form-group" id="div_log_in">
+		              <p>
+		                <label form="login" class="col-sm-2 control-label">Message:*</label>
+		              	<div class="col-sm-6">  <textarea name="log_in" rows="7" type="textarea" id="log_in" class="form-control" style="resize:none"> </textarea>  </div>
+		              </p>
+		          </div>
+
+
+		          <!-- ====== GOOGLE RECAPTCHA ====== -->
+		            <div class="form-group">
+		              <div class="col-sm-offset-1 col-sm-2">
+		                <div class="g-recaptcha" data-sitekey="6LethhsTAAAAAKBaq1MjU9kVSnrdIZacYd6vcjY5"></div>
+		              </div>
+		            </div>
+		          <!-- ++++++++++++++++++++++++++++++ -->
+
+		        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		        
+		          <!-- ===== Auxiliar Field to send all informations colected in this form to the servlet ==== -->
+		              <div class="form-group">
+		                <div> <input name="allInfo" id="allInfo" class="form-control" style="visibility: hidden"> </div>
+		              </div>
+		          <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+		        </form>
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="submit" id="modal1BtnYes" class="btn btn-primary" onclick="submitForm()">Send</button>
+		        <button type="button" id="modal1BtnNo" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <div class="btn btn-primary bnt-lg FAB_btn" data-toggle="tooltip" title="Contact Me!">
+		<a class="btn btn-primary btn-lg FAB_btn" data-toggle="modal" data-target="#myModal1">
+			<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+		</a>
+	</div>
+
+
+	<!-- ================================================================================================= -->
+		<div class="mini-menu">
+			<a href="#" data-activates="slide-out" class="button-collapse adp_btn_collapse"><i class="material-icons">menu</i></a>
+			<ul id="slide-out" class="side-nav adp_side_nav">
+				<li>
+					<div class="userView">
+						<a class="waves-effect side-item" href="#!user">
+							<img class="profile_img" style="border-radius:50%" src="../foto.jpg">
+							<p class="profile_name">Lucas Lukasavicus</p>
+						</a>
+					</div>
+				</li>
+
+				<li><a class="waves-effect side-item" href="#!">Profile</a></li>
+				<li><a class="waves-effect side-item" href="#!">Projects</a></li>
+				<li><div class="divider"></div></li>
+				<li><a class="subheader">About Me</a></li>
+				<li><a class="waves-effect side-item" href="#!">Extracurricular</a></li>
+				<li><a class="waves-effect side-item" href="#!">Social Engament</a></li>
+				<li><a class="waves-effect side-item" href="#!">Tastes</a></li>
+			</ul>
+		</div>
+  <!-- ================================================================================================= -->
+
+
+	<!--
+	<div class="float_group">
+		<div class="list-group">
+			<button type="button" class="list-group-item">Profile</button>
+			<button type="button" class="list-group-item">Experiences</button>
+			<button type="button" class="list-group-item">Abilities</button>
+			<button type="button" class="list-group-item">Projects</button>
+			<button type="button" class="list-group-item">Contact</button>
+		</div>
+	</div>
+	-->
+
+</body>
+</html>

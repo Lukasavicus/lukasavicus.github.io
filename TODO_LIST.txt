@@ -1,0 +1,4 @@
+TODO LIST:
+
+[] index > experiences > education 		| Check if I do put (or do not) a brief description of my activities;
+[] projects > 					 		| Check if when the screen is resized the elements ((instead of/combined with) resize) are puted on the right places (4 per line -> 3 per line ...);
