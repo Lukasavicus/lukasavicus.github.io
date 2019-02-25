@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/4.1.3/css/bootstrap.min.css" >
+	<script src="bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="script.js"></script>
+	<title>Livros Lidos</title>
+</head>
+<body>
+	<div id="recover" class="container">
+	</div>
+
+	<div id="create-update" class="container">
+		<div class="form-group row">
+			<form>
+			  <div class="col-10">
+			    <label>Cover</label>
+			    <input type="file" class="form-control-file" id="book_cover">
+			  </div>
+			  <div class="col-10">
+			    <label>Book Name</label>
+			    <input type="text" class="form-control" id="book_name" placeholder="Enter book name">
+			  </div>
+			  <div class="col-10">
+			    <label># of pages</label>
+			    <input type="number" class="form-control" id="book_n_pages">
+			  </div>
+			  <div class="col-10">
+			    <label>Book Publisher</label>
+			    <input type="text" class="form-control" id="book_publisher" placeholder="Enter book publisher">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<div>
+		<form>
+		  <div class="form-group">
+		    <label>Data</label>
+		    <textarea class="form-control" id="comment"></textarea>
+		  </div>
+		  <button type="button" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
