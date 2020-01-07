@@ -1,0 +1,118 @@
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+main {
+	width: 940px;
+	margin: 0 auto;
+}
+
+.dashboard {
+	display: inline-flex;
+	text-align: center;
+}
+
+.dashboard > div {
+	display: block;
+	text-align: center;
+	border-radius: 20px;
+	background: rgba(200, 200, 200, 0.25);
+	width: 170px;
+	margin: 0 10px;
+}
+
+.dashboard > div > div {
+	height: 120px;
+}
+
+.dashboard img {
+	width: 40px;
+	height: 40px;
+	margin: 10px;
+}
+
+.record {
+	height: 30px;
+	width: 100px;
+	background-color: white;
+	border-radius: 15px;
+	margin: 10px auto;
+}
+
+#badges {
+	display: flex;
+    justify-content: center;
+    width: 940px;
+    flex-direction: row;
+  	flex-wrap: wrap;
+
+}
+
+.badge {
+
+	display: block;
+    justify-content: flex-start;
+
+	text-align: center;
+	border-radius: 20px;
+	border: dotted 2px rgba(200, 200, 200, 0.45);
+	margin: 10px;	
+	width: 150px;
+	height: auto;
+}
+
+.badge-img {
+	width: 40px;
+	height: 40px;
+	margin: 10px 10px 0 10px;
+}
+
+.badge-description {
+	padding: 5px;
+	margin: 0;
+	width: 150px;
+}
+
+table {
+	margin-top: 30px;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+table td, table th {
+	padding: 0 5px;
+}
+
+table thead th {
+	border: solid 2px white;
+}
+
+table tbody td {
+	margin: 20px;
+}
+
+/* table, thead, tbody, tfoot, th, tr, td {
+	border: none;
+}*/
+
+table thead {
+	background: rgba(200, 200, 200, 0.95);
+	vertical-align: top;
+	/* white-space: nowrap; */
+}
+
+tbody {
+	/* border-style: solid; */
+}
+
+tbody tr:nth-child(even) {
+	background: rgba(200, 200, 200, 0.25);
+}
+
+tbody tr:nth-child(even) td{
+	border: solid 3px rgba(200, 200, 200, 0.25);
+}
+
+tfoot {
+	border-top: double 3px black;
+}

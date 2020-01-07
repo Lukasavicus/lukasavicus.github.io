@@ -1,0 +1,393 @@
+/* ======================================================= CARD ====================================================== */
+	.card {
+	  position: relative;
+	  margin: 0.5rem 0 1rem 0;
+	  background-color: #fff;
+	  transition: box-shadow .25s;
+	  border-radius: 2px;
+	  width:100%;
+	  height: 100%;
+	}
+
+	.card .card-title {
+	  font-size: 1.5em;
+	  font-weight: 300;
+	}
+
+	.card .card-title.activator {
+	  cursor: pointer;
+	}
+
+	.card .card-image {
+	  position: relative;
+	}
+
+	.card .card-image img {
+	  display: block;
+	  border-radius: 2px 2px 0 0;
+	  position: relative;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	  width: 100%;
+	}
+
+	.card .card-image .card-title {
+	  color: #fff;
+	  position: absolute;
+	  bottom: 0;
+	  left: 0;
+	  padding: 1.25em;
+	}
+
+	.card .card-content {
+	  padding: 1.25em;
+	  border-radius: 0 0 2px 2px;
+	}
+
+	.card .card-content p {
+	  margin: 0;
+	  color: inherit;
+	}
+
+	.card .card-content .card-title {
+	  line-height: 3em;
+	}
+
+	.card .card-reveal {
+	  padding: 1.25em;
+	  position: absolute;
+	  background-color: #fff;
+	  width: 100%;
+	  overflow-y: auto;
+	  left: 0;
+	  top: 100%;
+	  height: 100%;
+	  z-index: 3;
+	  display: none;
+	}
+
+	.card .card-reveal .card-title {
+	  cursor: pointer;
+	  display: block;
+	}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
+
+/* ==================================================== CAROUSEL ===================================================== */
+	
+	.carousel {
+	  overflow: hidden;
+	  position: relative;
+	  width: 100%;
+	  height: 400px;
+	  -webkit-perspective: 500px;
+	          perspective: 500px;
+	  -webkit-transform-style: preserve-3d;
+	          transform-style: preserve-3d;
+	  -webkit-transform-origin: 0% 50%;
+	          transform-origin: 0% 50%;
+	}
+
+	.carousel.carousel-slider {
+	  top: 0;
+	  left: 0;
+	  height: 0;
+	}
+
+	.carousel.carousel-slider .carousel-fixed-item {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  bottom: 20px;
+	  z-index: 1;
+	}
+
+	.carousel.carousel-slider .carousel-fixed-item.with-indicators {
+	  bottom: 68px;
+	}
+
+	.carousel.carousel-slider .carousel-item {
+	  width: 100%;
+	  height: 100%;
+	  min-height: 400px;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	}
+
+	.carousel.carousel-slider .carousel-item h2 {
+	  font-size: 24px;
+	  font-weight: 500;
+	  line-height: 32px;
+	}
+
+	.carousel.carousel-slider .carousel-item p {
+	  font-size: 15px;
+	}
+
+	.carousel .carousel-item {
+	  display: none;
+	  width: 200px;
+	  height: 400px;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	}
+
+	.carousel .carousel-item img {
+	  width: 100%;
+	}
+
+	.carousel .indicators {
+	  position: absolute;
+	  text-align: center;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	  margin: 0;
+	}
+
+	.carousel .indicators .indicator-item {
+	  display: inline-block;
+	  position: relative;
+	  cursor: pointer;
+	  height: 8px;
+	  width: 8px;
+	  margin: 24px 4px;
+	  background-color: rgba(255, 255, 255, 0.5);
+	  transition: background-color .3s;
+	  border-radius: 50%;
+	}
+
+	.carousel .indicators .indicator-item.active {
+	  background-color: #fff;
+	}
+
+	.carousel-comments{
+	  display: none;
+	}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
+
+/* =================================================== COLLAPSIBLE =================================================== */
+	.collapsible{
+	  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+	}
+
+	.collapsible .collection {
+	  margin: 0;
+	  border: none;
+	}
+
+	.collapsible span.badge.new {
+	  position: relative;
+	  background-color: transparent;
+	}
+
+	.collapsible span.badge.new::before {
+	  content: '';
+	  position: absolute;
+	  top: 10px;
+	  right: 0;
+	  bottom: 10px;
+	  left: 0;
+	  background-color: #26a69a;
+	  border-radius: 2px;
+	  z-index: -1;
+	}
+
+	.collapsible span.badge.new {
+	  z-index: 1;
+	}
+
+	.collapsible {
+	  border-top: 1px solid #ddd;
+	  border-right: 1px solid #ddd;
+	  border-left: 1px solid #ddd;
+	  margin: 0.5rem 0 1rem 0;
+	}
+
+	.collapsible-header {
+	  display: inline-flex;
+	  cursor: pointer;
+	  min-height: 3rem;
+	  line-height: 1.75rem;
+	  padding: 0 1rem;
+	  background-color: #fff;
+	  border-bottom: 1px solid #ddd;
+	}
+
+	.collapsible-header i {
+	  width: 2rem;
+	  font-size: 1.6rem;
+	  line-height: 3rem;
+	  display: block;
+	  float: left;
+	  text-align: center;
+	  margin-right: 1rem;
+	}
+
+	.collapsible-body {
+	  display: none;
+	  border-bottom: 1px solid #ddd;
+	  box-sizing: border-box;
+	}
+
+	.collapsible-body p {
+	  margin: 0;
+	  padding: 2rem;
+	}
+
+	.collapsible.popout {
+	  border: none;
+	  box-shadow: none;
+	}
+
+	.collapsible.popout > li {
+	  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+	  margin: 0 24px;
+	  transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	}
+
+	.collapsible.popout > li.active {
+	  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+	  margin: 16px 0;
+	}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+
+
+/* ====================================================== WAVES ====================================================== */
+	/*!
+	 * Waves v0.6.0
+	 * http://fian.my.id/Waves
+	 *
+	 * Copyright 2014 Alfiana E. Sibuea and other contributors
+	 * Released under the MIT license
+	 * https://github.com/fians/Waves/blob/master/LICENSE
+	 */
+	.waves-effect {
+	  position: relative;
+	  cursor: pointer;
+	  display: inline-block;
+	  overflow: hidden;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	  -webkit-tap-highlight-color: transparent;
+	  vertical-align: middle;
+	  z-index: 1;
+	  will-change: opacity, transform;
+	  transition: .3s ease-out;
+	}
+
+	.waves-effect .waves-ripple {
+	  position: absolute;
+	  border-radius: 50%;
+	  width: 20px;
+	  height: 20px;
+	  margin-top: -10px;
+	  margin-left: -10px;
+	  opacity: 0;
+	  background: rgba(0, 0, 0, 0.2);
+	  transition: all 0.7s ease-out;
+	  transition-property: opacity, -webkit-transform;
+	  transition-property: transform, opacity;
+	  transition-property: transform, opacity, -webkit-transform;
+	  -webkit-transform: scale(0);
+	          transform: scale(0);
+	  pointer-events: none;
+	}
+
+	.waves-effect.waves-light .waves-ripple {
+	  background-color: rgba(255, 255, 255, 0.45);
+	}
+
+	.waves-effect.waves-red .waves-ripple {
+	  background-color: rgba(244, 67, 54, 0.7);
+	}
+
+	.waves-effect.waves-yellow .waves-ripple {
+	  background-color: rgba(255, 235, 59, 0.7);
+	}
+
+	.waves-effect.waves-orange .waves-ripple {
+	  background-color: rgba(255, 152, 0, 0.7);
+	}
+
+	.waves-effect.waves-purple .waves-ripple {
+	  background-color: rgba(156, 39, 176, 0.7);
+	}
+
+	.waves-effect.waves-green .waves-ripple {
+	  background-color: rgba(76, 175, 80, 0.7);
+	}
+
+	.waves-effect.waves-teal .waves-ripple {
+	  background-color: rgba(0, 150, 136, 0.7);
+	}
+
+	.waves-effect input[type="button"], .waves-effect input[type="reset"], .waves-effect input[type="submit"] {
+	  border: 0;
+	  font-style: normal;
+	  font-size: inherit;
+	  text-transform: inherit;
+	  background: none;
+	}
+
+	.waves-effect img {
+	  position: relative;
+	  z-index: -1;
+	}
+
+	.waves-notransition {
+	  transition: none !important;
+	}
+
+	.waves-circle {
+	  -webkit-transform: translateZ(0);
+	          transform: translateZ(0);
+	  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	}
+
+	.waves-input-wrapper {
+	  border-radius: 0.2em;
+	  vertical-align: bottom;
+	}
+
+	.waves-input-wrapper .waves-button-input {
+	  position: relative;
+	  top: 0;
+	  left: 0;
+	  z-index: 1;
+	}
+
+	.waves-circle {
+	  text-align: center;
+	  width: 2.5em;
+	  height: 2.5em;
+	  line-height: 2.5em;
+	  border-radius: 50%;
+	  -webkit-mask-image: none;
+	}
+
+	.waves-block {
+	  display: block;
+	}
+
+	/* Firefox Bug: link not triggered */
+	.waves-effect .waves-ripple {
+	  z-index: -1;
+	}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
