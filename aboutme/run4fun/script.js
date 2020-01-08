@@ -10,6 +10,7 @@
 
 	console.log(data);
 
+/* === CALCULATION FUNCTIONS FOR DATA ====================================== */
 	function calculate_total_distance(route_distance, no_rounds){
 
 		return route_distance * no_rounds;
@@ -104,9 +105,9 @@
 
 	let table = document.getElementById("records-table");
 	do_calculations(table);
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-	// -------------------
-
+/* === BADGES ============================================================== */
 	let badges = [
 		{"title" : "Good Start, Half Done", "criteria" : ((data) => data.length > 0), "icon" : "icons/svg/041-start.svg", "description" : "Won this badge whem complete your first run!" },
 
@@ -144,7 +145,7 @@
 				div.classList.add(badge.criteria(data));
 				div.innerHTML = `
 					<img src="${badge.icon}"" class="badge-img">
-					<p class="badge-description">${badge.title}</p>
+					<p class="badge-title">${badge.title}</p>
 				`;
 				div.addEventListener('click', function(){ alert(badge.description); });
 				badges_section.appendChild(div);
@@ -153,5 +154,42 @@
 	}
 
 	show_badges(badges, data);
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+/* === COLLECTABLES ======================================================== */
+	let collectables = [];
+
+	function get_collectables(){
+		return [
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
+				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.svg"},
+				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.svg"},
+				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.svg", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
+			];
+	}
+
+	collectables = get_collectables();
+
+	function show_collectables(collectables){
+		let collectables_section = document.getElementById("collectables");
+		collectables.forEach(collectable => {
+			//console.log(collectable);
+			let div = document.createElement("div");
+			div.classList.add("collectable");
+			div.innerHTML = `
+				<p class="collectable-description">${collectable.title}</p>
+				<p class="collectable-description">${collectable.description}</p>
+				<img src="${collectable.icon}"" class="collectable-img">
+				<p class="collectable-description">${collectable.hist}</p>
+			`;
+			div.addEventListener('click', function(){ alert(collectable.description); });
+			collectables_section.appendChild(div);
+		});
+	}
+
+	show_collectables(collectables);
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 })();
