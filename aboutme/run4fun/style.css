@@ -1,5 +1,19 @@
 * {
 	font-family: 'Montserrat', sans-serif;
+	font-size: 15px;
+}
+
+header {
+	background-color: azure;
+	border: solid 1px black;
+	/*position: absolute;*/
+	top: 0;
+	left: 0;
+}
+
+.nav-menu {
+	position: relative;
+	right: 0;
 }
 
 main {
@@ -7,9 +21,16 @@ main {
 	margin: 0 auto;
 }
 
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === DASHBOARD ============================= */
+
 .dashboard {
 	display: inline-flex;
 	text-align: center;
+	margin: 30px 0;
 }
 
 .dashboard > div {
@@ -39,6 +60,60 @@ main {
 	margin: 10px auto;
 }
 
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === COLLECTABLES ========================== */
+#collectables {
+	display: flex;
+    justify-content: center;
+    width: 940px;
+    flex-direction: row;
+  	flex-wrap: wrap;
+
+}
+
+.collectable {
+
+	display: block;
+    justify-content: flex-start;
+
+	text-align: center;
+	border-radius: 20px;
+	border: dotted 2px rgba(200, 200, 200, 0.45);
+	margin: 10px;	
+	width: 150px;
+	height: auto;
+}
+
+.collectable-img {
+	width: 40px;
+	height: 40px;
+	margin: 10px 10px 0 10px;
+}
+
+.collectable-title {
+	padding: 5px;
+	margin: 0;
+}
+
+.collectable-description {
+	padding: 5px;
+	margin: 0;
+	font-size: 12px;
+}
+
+.collectable-hist {
+	padding: 5px;
+	margin: 0;
+	font-size: 9px;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === BADGES ================================ */
 #badges {
 	display: flex;
     justify-content: center;
@@ -67,14 +142,19 @@ main {
 	margin: 10px 10px 0 10px;
 }
 
-.badge-description {
+.badge-title {
 	padding: 5px;
 	margin: 0;
-	width: 150px;
 }
 
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === TABLE ================================= */
+
 table {
-	margin-top: 30px;
+	margin: 40px 0;
 	border-collapse: collapse;
 	font-size: 12px;
 }
@@ -116,3 +196,15 @@ tbody tr:nth-child(even) td{
 tfoot {
 	border-top: double 3px black;
 }
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === FOTOER ================================ */
+footer {
+	height: 50px;
+	background-color: #DDD;
+	text-align: center;
+	vertical-align: middle;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++ */
