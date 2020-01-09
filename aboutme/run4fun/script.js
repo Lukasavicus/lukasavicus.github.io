@@ -4,8 +4,8 @@
 	let distance_unit_str = "km";
 
 	let data = [
-		{ "date" : "01/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:51" },
-		{ "date" : "03/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:45" },
+		{ "date" : "01/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:51", "avg_vlct" : 6.51},
+		{ "date" : "03/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:45", "avg_vlct" : 6.53 },
 	];
 
 	console.log(data);
@@ -100,11 +100,27 @@
 		tds_foot[5].innerText = (Math.round(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), extract_dist(tds_foot[1].innerText), "mts_per_sec") * 100) / 100) + " m/s";
 		tds_foot[6].innerText = (Math.round(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), extract_dist(tds_foot[1].innerText), "km_per_h")) * 100  / 100) + " km/h";
 		tds_foot[7].innerText = time_2_str(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), 100, "ms100mts"));
+
+		return {
+			"total_travelled_dist" : (sum_total_distance + " kms"),
+			"total_travelled_time" : (time_2_str((sum_total_time_secs))),
+			"max_velocity_reached" : (data.map((d) => d["avg_vlct"]).reduce((max, current) => max > current ? max : current, 0)) + " kms/h",
+			"max_one_shoot_dist" : (data.map((d) => d["route_distance"]*d["no_rounds"]).reduce((max, current) => max > current ? max : current, 0)) + " kms",
+			"best_record" : (0)
+		}
 	}
 
+	function set_dash_stats(stats){
+		document.getElementById("total_travelled_dist").innerText = stats.total_travelled_dist;
+		document.getElementById("total_travelled_time").innerText = stats.total_travelled_time;
+		document.getElementById("max_velocity_reached").innerText = stats.max_velocity_reached;
+		document.getElementById("max_one_shoot_dist").innerText = stats.max_one_shoot_dist;
+		document.getElementById("best_record").innerText = stats.best_record;
+	}
 
 	let table = document.getElementById("records-table");
-	do_calculations(table);
+	dash_stats = do_calculations(table);
+	set_dash_stats(dash_stats);
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 /* === BADGES ============================================================== */
@@ -161,12 +177,12 @@
 
 	function get_collectables(){
 		return [
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
-				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.png"},
-				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.png"},
-				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.png", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
-				{"title" : "Lannister's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/lannister.png"},
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png"},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
+				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.svg"},
+				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.svg"},
+				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.svg", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
 			];
 	}
 
