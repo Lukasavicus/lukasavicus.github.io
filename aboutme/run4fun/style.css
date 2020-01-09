@@ -58,6 +58,8 @@ main {
 	background-color: white;
 	border-radius: 15px;
 	margin: 10px auto;
+	vertical-align: middle;
+	padding: 2px;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++ */
@@ -88,8 +90,8 @@ main {
 }
 
 .collectable-img {
-	width: 50px;
-	height: 75px;
+	width: 40px;
+	height: 40px;
 	margin: 10px 10px 0 10px;
 }
 
@@ -199,8 +201,21 @@ tfoot {
 /* +++++++++++++++++++++++++++++++++++++++++++ */
 
 
+/* === FORM ================================== */
 
-/* === FOTOER ================================ */
+.form {
+	text-align: center;
+}
+
+.form-input {
+	margin: 20px;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++ */
+
+
+
+/* === FOOTER ================================ */
 footer {
 	height: 50px;
 	background-color: #DDD;
