@@ -58,8 +58,6 @@ main {
 	background-color: white;
 	border-radius: 15px;
 	margin: 10px auto;
-	vertical-align: middle;
-	padding: 2px;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++ */
@@ -90,8 +88,8 @@ main {
 }
 
 .collectable-img {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 75px;
 	margin: 10px 10px 0 10px;
 }
 
@@ -199,6 +197,7 @@ tfoot {
 	border-top: double 3px black;
 }
 /* +++++++++++++++++++++++++++++++++++++++++++ */
+
 
 
 /* === FORM ================================== */
