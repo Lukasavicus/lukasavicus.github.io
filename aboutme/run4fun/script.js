@@ -100,7 +100,7 @@
 		tds_foot[5].innerText = (Math.round(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), extract_dist(tds_foot[1].innerText), "mts_per_sec") * 100) / 100) + " m/s";
 		tds_foot[6].innerText = (Math.round(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), extract_dist(tds_foot[1].innerText), "km_per_h")) * 100  / 100) + " km/h";
 		tds_foot[7].innerText = time_2_str(calculate_avg_velocity((str_2_time(tds_foot[2].innerText)/3600), 100, "ms100mts"));
-
+		
 		return {
 			"total_travelled_dist" : (sum_total_distance + " kms"),
 			"total_travelled_time" : (time_2_str((sum_total_time_secs))),
@@ -177,12 +177,12 @@
 
 	function get_collectables(){
 		return [
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
-				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.svg"},
-				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.svg"},
-				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.svg", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.svg"},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
+				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.png"},
+				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.png"},
+				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.png", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
+				{"title" : "Lannister's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/lannister.png"},
+				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png"},
 			];
 	}
 
