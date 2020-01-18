@@ -83,13 +83,17 @@ main {
 	border-radius: 20px;
 	border: dotted 2px rgba(200, 200, 200, 0.45);
 	margin: 10px;	
-	width: 150px;
+	width: 170px;
 	height: auto;
 }
 
 .collectable-img {
-	width: 50px;
-	height: 75px;
+	/*
+	width: 75px;
+	height: 110px;
+	*/
+	width: 85%; 
+    object-fit: contain;
 	margin: 10px 10px 0 10px;
 }
 
@@ -203,11 +207,40 @@ tfoot {
 /* === FORM ================================== */
 
 .form {
-	text-align: center;
+	text-align: left;
+	display: block;
+}
+
+.form-block {
+	display: flex;
 }
 
 .form-input {
 	margin: 20px;
+
+}
+
+.form-input * {
+	display: block;
+	width: 200px;
+	margin: 5px;
+}
+
+.route_dist_metric {
+	display: inline !important;
+}
+
+input.route_dist_metric {
+	width: 156px !important;
+}
+
+p.route_dist_metric {
+	width: 20px !important;
+	margin: 0px !important;
+}
+
+.inline {
+	display: inline !important;
 }
 
 /* +++++++++++++++++++++++++++++++++++++++++++ */

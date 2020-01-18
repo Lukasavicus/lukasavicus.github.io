@@ -4,8 +4,9 @@
 	let distance_unit_str = "km";
 
 	let data = [
-		{ "date" : "01/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:51", "avg_vlct" : 6.51},
-		{ "date" : "03/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium academy", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:45", "avg_vlct" : 6.53 },
+		{ "date" : "01/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium gym", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:51", "avg_vlct" : 6.51},
+		{ "date" : "03/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium gym", "route_distance" : 4, "no_rounds" : 1, "time" : "00:36:45", "avg_vlct" : 6.53 },
+		{ "date" : "12/01/2020", "physical_activity" : "Walking/Running", "place" : "condominium gym", "route_distance" : 5, "no_rounds" : 1, "time" : "00:46:59", "avg_vlct" : 6.38 },
 	];
 
 	console.log(data);
@@ -179,10 +180,13 @@
 		return [
 				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png", "hist" : "The Winterfell guard trop thought heard a sound in the deep forest, fast and soft steps. \"It will be possible to be a giant wolf\". And sendly a person jumps out from the next bush surprising him. The fastest person in the North. They call you by \"The Silent Wind\"."},
 				{"title" : "Tully's House", "description" : "Honor, Duty, Family", "value" : 40, "icon" : "collectables/svg/tully.png"},
-				{"title" : "Targaryen's House", "description" : "Rear me Roar", "value" : 40, "icon" : "collectables/svg/targaryen.png"},
+				{"title" : "Targaryen's House", "description" : "Fire & Blood", "value" : 40, "icon" : "collectables/svg/targaryen.png"},
 				{"title" : "Baratheon's House", "description" : "Ours Is the Fury", "value" : 40, "icon" : "collectables/svg/baratheon.png", "hist" : "The battle have reached the apice and the enemys have a strong advantage above us. Tired and desesperated the soldier with the trumpete absorb some air and blows with all. From a long long distance enemy's eyes screwed to see the fastest warrior they ever saw, and by surprise of them all, you are \"running on your foots, not on horse\". The battle is over the \"Swiftly Death\" has come to seal the battle's destiny."},
 				{"title" : "Lannister's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/lannister.png"},
-				{"title" : "Stark's House", "description" : "Winter's comming", "value" : 40, "icon" : "collectables/svg/stark.png"},
+				{"title" : "Arryn's House", "description" : "As High as Honor", "value" : 40, "icon" : "collectables/svg/arryn.png"},
+				{"title" : "Greyjoy's House", "description" : "We Do Not Sow", "value" : 40, "icon" : "collectables/svg/greyjoy.png"},
+				{"title" : "Martell's House", "description" : "Unbowed, Unbent, Unbroken", "value" : 40, "icon" : "collectables/svg/martell.png"},
+				{"title" : "Tyrell's House", "description" : "Growing Strong", "value" : 40, "icon" : "collectables/svg/tyrell.png"},
 			];
 	}
 
@@ -195,8 +199,10 @@
 			let div = document.createElement("div");
 			div.classList.add("collectable");
 			div.innerHTML = `
+				<!--
 				<p class="collectable-description">${collectable.title}</p>
 				<p class="collectable-description">${collectable.description}</p>
+				-->
 				<img src="${collectable.icon}"" class="collectable-img">
 				<p class="collectable-description">${collectable.hist}</p>
 			`;
