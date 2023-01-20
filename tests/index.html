@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Leitor de Produtos - Houpa! </title>
+
+
+</head>
+
+<body>
+
+    <div>
+        <div id="resultado"></div>
+        <div id="camera"></div>
+        <input id="order-id"></input>
+        <input type="button" onclick="search_order()"> Buscar pedido</input>
+        <table id="order-itens-table"></table>
+
+    </div>
+
+    <script src="quagga.min.js"></script>
+
+    <script>
+        let ORDER = null;
+    </script>
+
+    <script>
+        let DETECTION = true;
+
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+            },
+            decoder: {
+                readers: ["code_128_reader"]
+            }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function (data) {
+            console.log(data.codeResult.code);
+            document.querySelector('#resultado').innerText = data.codeResult.code;
+            if(DETECTION){
+                register_read(data);
+            }
+        });
+
+        function register_read(data){
+            console.log("register_read - Order", ORDER);
+            let table = document.getElementById('order-itens-table');
+            const barcode = parseInt(data.codeResult.code);
+            console.log("barcode readed", barcode);
+            const item_idx = ORDER.itens.findIndex(item => item.id === barcode);
+            console.log("index found", item_idx);
+
+            if(item_idx == -1){
+                console.log('[DBG] invalid read');
+                return;
+            }
+
+            const readed_itens_qnt = parseInt(table.rows.item(item_idx).cells[3].innerHTML);
+            console.log('readed qnt', readed_itens_qnt);
+
+            table.rows.item(item_idx).cells[3].innerHTML = readed_itens_qnt + 1;
+            emit_read_sound();
+            lock_read();
+
+            if(table.rows.item(item_idx).cells[2].innerHTML == table.rows.item(item_idx).cells[3].innerHTML){
+                alert('ok');
+            }
+
+            function emit_read_sound(){
+                const audio = new Audio("Barcode-scanner-beep-sound.mp3");
+                audio.play();
+            }
+        }
+
+        /* This should prevent multiple read in a short interval */
+        function lock_read(timeout=2000){
+            console.log('{DBG] locking');
+            DETECTION = false;
+            setTimeout(() => {
+                console.log('[DBG] UNlocking');
+                DETECTION = true;
+            }, timeout);
+        }
+
+    </script>
+
+    <script>
+        orders = [
+            {
+                'id' : 1234,
+                'itens' : [
+                    {'id' : 1, 'desc' : 'calça acetinada verde 38', 'qnt' : 1},
+                    {'id' : 23617, 'desc' : 'calça acetinada azul 40', 'qnt' : 2},
+                    {'id' : 3, 'desc' : 'calça acetinada branca 42', 'qnt' : 1},
+                ],
+            },
+            {
+                'id' : 1235,
+                'itens' : [
+                    {'id' : 4, 'desc' : 'blusa rosa M', 'qnt' : 1},
+                    {'id' : 5, 'desc' : 'calça acetinada azul 40', 'qnt' : 2}
+                ],
+            },
+
+        ]
+
+        function search_order(){
+            const order_id = parseInt(document.getElementById('order-id').value);
+            let order = orders.find(order => order.id === order_id);
+            console.log(orders, order, order_id);
+            if(order === null){
+                console.log("Order not found");
+            }
+            else{
+                load_itens(order);
+                ORDER = order;
+            }
+        }
+
+        function load_itens(order){
+            console.log("Order", order);
+            let table = document.getElementById('order-itens-table');
+            order.itens.forEach(item => {
+                let row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = item.id;
+                cell2.innerHTML = item.desc;
+                cell3.innerHTML = item.qnt;
+                cell4.innerHTML = 0;
+            });
+        }
+    </script>
+
+</body>
+
+</html>
