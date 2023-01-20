@@ -1,0 +1,12 @@
+- Criar um pem file para servir o web app via https (para poder testar local);
+- Subir o node middleware;
+  - make in a such away like a container;
+- Make video div responsive;
+- Add popups messages;
+- Emit a wrong sound when something worng was readed;
+
+
+
+WORK LOG:
+- (19/01/2023) 16:00~19:00 = 3h
+- (20/01/2023) 10:00~11:00 + 15:00 ~ 18:00 = 4h
