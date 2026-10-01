@@ -1,0 +1,155 @@
+<p class="back"><a href="projects.html">&larr; Projects</a></p>
+<h2 class="case-title">Spot: como transformamos duas semanas de revisão manual em 30 minutos de garantia de qualidade</h2>
+<p class="meta">Bain &amp; Company (NPS Prism) · 2023, ~3 meses de desenvolvimento · Data Engineer, idealizador e autor principal (~87,5% do código)<br>Stack: Python, Tableau Server REST API, Tableau Metadata API, pandas, concorrência (stdlib)</p>
+
+<div class="ph ph-wide"><b>Placeholder · Imagem de capa</b><span>Screenshot de um workbook Tableau do NPS Prism, ou uma ilustração de "spot the difference" entre dois dashboards</span></div>
+
+<div class="tldr">
+<p><strong>TL;DR.</strong> No NPS Prism, o negócio de benchmarking de experiência do cliente da Bain, cada entrega trimestral de um workbook Tableau (~150 gráficos) passava por uma revisão manual de 4 pessoas durante 2 semanas, e erros ainda escapavam. Criei o <strong>Spot</strong>, uma ferramenta que compara dois workbooks data point a data point via API do Tableau. Ele virou o <em>Data Quality Gateway</em> oficial antes de toda publicação.</p>
+<ul>
+<li><strong>4 pessoas × 2 semanas → 1 pessoa × 30 minutos</strong> por ciclo de validação</li>
+<li><strong>100% dos data points</strong> verificados, contra uma amostra revisada por humanos</li>
+<li><strong>Runtime 6–8× menor</strong> (3–4 h → 30 min) com paralelismo</li>
+<li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism</li>
+</ul>
+</div>
+
+<h2>1. Contexto: um negócio que vende confiança</h2>
+<p>Em 2003, Fred Reichheld, da Bain &amp; Company, publicou na Harvard Business Review o artigo <em>"The One Number You Need to Grow"</em>, que apresentou ao mundo o <strong>Net Promoter Score (NPS)</strong>. Duas décadas depois, alguma versão do NPS é usada por cerca de dois terços da Fortune 1000.<sup><a href="#fn1">1</a></sup></p>
+<p>Em 2019 a Bain lançou o <strong>NPS Prism</strong>, um negócio próprio de benchmarking competitivo de NPS. Ele mostra, por episódio da jornada do cliente, como uma empresa se compara aos concorrentes nomeados.<sup><a href="#fn2">2</a></sup> Um banco pode descobrir, por exemplo, que está perdendo terreno em experiência digital para um concorrente específico, em um segmento específico de clientes.</p>
+<p>O processo de cada entrega tinha três fases:</p>
+<ol>
+<li><strong>Desenho da pesquisa.</strong> O time de <strong>Client Engagement</strong> (a frente comercial, que acompanha o cliente do levantamento de requisitos à apresentação dos resultados) mapeia com o cliente o que ele quer entender (cartão de crédito, app, atendimento, promoções...) e transforma isso num questionário com ramificações condicionais. O caminho mais longo passa de 120 perguntas.</li>
+<li><strong>Coleta via painéis.</strong> Empresas especializadas ("panelistas") distribuem a pesquisa para <strong>dezenas de milhares de respondentes</strong> por onda, numa amostra diversa em classe social, idade, gênero, região e outras dimensões. A representatividade é monitorada durante toda a coleta.</li>
+<li><strong>Engenharia e entrega.</strong> Os dados são ingeridos das APIs dos panelistas para um data lake em arquitetura medallion (bronze → silver → gold). A camada gold alimenta um <strong>workbook Tableau com ~50 dashboards e ~150 gráficos</strong>, vendido como assinatura.</li>
+</ol>
+
+<div class="ph ph-mid"><b>Placeholder · Diagrama</b><span>Fluxo de entrega do NPS Prism: desenho da pesquisa → coleta via panelistas → data lake medallion (bronze → silver → gold) → workbook Tableau → cliente</span></div>
+
+<p>Por trás de tudo isso havia uma matriz de <strong>indústria × região</strong> (Banking LatAm, Auto Europa, Insurance APAC...), cada célula com analistas especialistas cuidando da qualidade e dos insights.</p>
+<p>A assinatura não era compra única: o ciclo se repetia <strong>a cada trimestre</strong>, tipicamente em contratos anuais de quatro ondas. A lógica é simples. O cliente age sobre os insights (reestrutura o cartão, troca o programa de pontos) e na onda seguinte mede se funcionou.</p>
+<p>É aqui que mora a tese deste case:</p>
+<blockquote><p><strong>O NPS Prism não vende só insight. Vende, principalmente, confiança.</strong></p></blockquote>
+<p>Na palavra do próprio Reichheld, no lançamento do produto: <em>"Finally, there is Net Promoter benchmarking data you can count on."</em><sup><a href="#fn2">2</a></sup> Os clientes tomam decisões de investimento e mudam de rumo estratégico com base nesses números. A Bain tem até um princípio para isso, o <strong>ZD (Zero Defect)</strong>: revisar quantas vezes forem necessárias até que nada chegue errado às mãos do cliente.</p>
+
+<h2>2. O problema: quando o passado muda sem avisar</h2>
+<p>Entre uma onda e outra, o cliente pode mudar quase tudo: o público-alvo, as perguntas, os cortes de análise. Cada mudança traz dois riscos.</p>
+<p><strong>Risco 1: mudança de esquema.</strong> A estrutura da pesquisa muda, e os dados deixam de ter o mesmo formato.</p>
+<p><strong>Risco 2: mudança de regra de negócio que reescreve o histórico.</strong> Esse é o risco mais traiçoeiro. Imagine um banco com três segmentos de renda:</p>
+<table>
+<tr><th>Segmento</th><th>Faixa de renda mensal</th></tr>
+<tr><td>Baixa renda</td><td>até R$ 2 mil</td></tr>
+<tr><td>Média renda</td><td>R$ 2 mil – R$ 15 mil</td></tr>
+<tr><td>Alta renda</td><td>acima de R$ 15 mil</td></tr>
+</table>
+<p>Após uma reestruturação, o banco cria um quarto segmento, <strong>Ultra alta renda (acima de R$ 50 mil)</strong>. Se a regra valer só daqui para frente, as ondas deixam de ser comparáveis: é banana com maçã. Então é preciso <strong>retroagir</strong> a regra. Mas uma retroação errada muda o insight:</p>
+<blockquote><p>Três meses atrás, o cartão de crédito ia bem na alta renda. A nova onda mostra resultado negativo. Você abre o dashboard de três meses atrás para comparar e ele <em>também</em> mostra negativo. O dado histórico foi corrompido, e com ele a confiança.</p></blockquote>
+
+<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>NPS da "alta renda" na onda N-1 antes e depois de uma retroação errada: o mesmo dashboard histórico passa a mostrar outro resultado</span></div>
+
+<p><strong>O processo que existia:</strong> a cada publicação, <strong>3 a 4 pessoas</strong> (Client Engagement + analytics) paravam por <strong>cerca de duas semanas</strong> para revisar data points do workbook: gráficos, tooltips, downloads dos dados subjacentes. Era impossível revisar tudo, e sendo um processo manual, era inevitavelmente sujeito a erro. Erros já tinham escapado antes.</p>
+
+<h2>3. Meu papel</h2>
+<p>Eu era <strong>Data Engineer</strong> no time de engenharia de dados do NPS Prism. O Spot nasceu de uma descoberta minha, e eu o projetei e implementei:</p>
+<ul>
+<li><strong>Idealização:</strong> identifiquei que o Tableau Server expunha, via API, não só metadados mas os <strong>dados por trás de cada sheet</strong>. Isso tornou possível uma comparação automática e granular.</li>
+<li><strong>Arquitetura e implementação:</strong> API wrapper, CLI, motor de comparação, paralelismo e o sistema de plano de execução (dry run).</li>
+<li><strong>Autoria:</strong> cerca de <strong>87,5% do código</strong>. Três colegas contribuíram com validação/testes e com o tratamento de parte dos filtros do Tableau.</li>
+<li><strong>Prazo:</strong> cerca de <strong>3 meses</strong>, em 2023.</li>
+</ul>
+
+<h2>4. A solução: Spot</h2>
+<p><em>(O nome original era METIS. O Spot, de "spot the difference", veio depois, dado pela liderança: mais comercial e mais memorável.)</em></p>
+<p>O Analytics Engineer informa <strong>dois workbooks</strong>, por exemplo o da onda anterior e o candidato à publicação. O Spot:</p>
+<ol>
+<li>Percorre via API a hierarquia <strong>workbook → dashboard → sheet</strong>.</li>
+<li>Extrai os dados de cada sheet nos dois workbooks.</li>
+<li>Compara <strong>cada data point</strong>, com tolerância numérica configurável.</li>
+<li>Reporta <strong>todas</strong> as divergências num relatório Excel, em vários níveis: sheets ausentes ou renomeadas, categorias que aparecem numa versão e não na outra (como um segmento novo), e valores fora da tolerância.</li>
+</ol>
+
+<div class="ph ph-wide"><b>Placeholder · Diagrama de arquitetura</b><span>Workbook onda N-1 + workbook onda N (candidato) → Spot [plano de execução / dry run → workers paralelos por sheet → comparação de estrutura + valores com tolerância] ⇄ Tableau Server (REST + Metadata API) → relatório Excel de divergências → Data Quality Gateway → publicação ao cliente <i>ou</i> correção<br><br>(existe em Mermaid no spot.md; renderizar como imagem)</span></div>
+
+<h3>Decisões-chave</h3>
+<p><strong>1. Previsibilidade: dry run e plano de execução.</strong> <em>(a decisão mais difícil)</em><br>A primeira versão era um CLI que simplesmente rodava. O usuário não sabia, antes de começar, quantas comparações seriam feitas nem quanto tempo levaria. A liderança pediu previsibilidade. Redesenhei o núcleo como um <strong>pipeline encadeável com avaliação preguiçosa (lazy evaluation)</strong>: as etapas são declaradas e só executam quando pedido. Com isso, o Spot passou a:</p>
+<ul>
+<li>gerar um <strong>plano</strong> (quantas sheets, quantas comparações, estimativa de esforço) sem executar nada;</li>
+<li>salvar esse plano e <strong>executá-lo depois</strong>, sem recalcular;</li>
+<li>dar acompanhamento durante a execução.</li>
+</ul>
+
+<div class="ph ph-small"><b>Placeholder · Screenshot</b><span>Terminal com o CLI do Spot exibindo o resumo de um plano (dry run): nº de dashboards, sheets e comparações estimadas</span></div>
+
+<p><strong>2. Duas APIs e <code>requests</code> direto, em vez da biblioteca oficial.</strong><br>A biblioteca oficial (<code>tableauserverclient</code>) não expunha o que eu precisava. Combinei a <strong>REST API</strong> (dados das views) com a <strong>Metadata API</strong> (estrutura dos workbooks), num wrapper próprio sobre <code>requests</code>.</p>
+<p><strong>3. Orientação a objeto em vez de script procedural.</strong><br>O Tech Lead da época preferia uma abordagem procedural, "mais direta". Mantive um desenho orientado a objetos, com classes, herança e polimorfismo. Foi o que permitiu acrescentar o dry run e novos tipos de checagem sem reescrever o núcleo.</p>
+<p><strong>4. Stdlib primeiro.</strong><br>Fora o pandas, tudo com a biblioteca padrão do Python: concorrência, I/O, CLI. Menos dependências, menos atrito para adotar numa área que não era de software.</p>
+<p><strong>5. Paralelismo por sheet.</strong><br>Cada sheet é independente e a comparação é dominada por I/O. Paralelizar as chamadas derrubou o runtime de <strong>3–4 horas para ~30 minutos</strong>.</p>
+
+<h2>5. Resultados</h2>
+<table>
+<tr><th>Métrica</th><th>Antes</th><th>Depois</th></tr>
+<tr><td>Esforço por ciclo de validação</td><td>3–4 pessoas × ~2 semanas</td><td>1 pessoa × ~30 min</td></tr>
+<tr><td>Cobertura</td><td>amostra revisada por humanos</td><td>100% dos data points</td></tr>
+<tr><td>Natureza do processo</td><td>manual, sujeito a erro</td><td>automatizado, reprodutível, auditável (relatório)</td></tr>
+<tr><td>Erros que chegariam ao cliente</td><td>já tinham ocorrido</td><td>ao menos um erro real interceptado antes da publicação</td></tr>
+</table>
+
+<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>Barras antes vs. depois: ~320 pessoa-hora por ciclo → ~0,5 pessoa-hora; runtime 3–4 h → 30 min</span></div>
+
+<ul>
+<li><strong>Ordem de grandeza:</strong> 4 pessoas × 2 semanas ≈ <strong>320 pessoa-hora por ciclo</strong>. Com os 3–6 clientes já atendidos quando saí, em 4 ondas por ano, são <strong>~3.800 a ~7.700 pessoa-hora/ano</strong> liberadas. Com toda a base de clientes, o número multiplica. <em>(estimativa)</em></li>
+<li>Tornou-se o <strong>Data Quality Gateway oficial</strong>: nenhum workbook ia ao cliente sem passar pelo Spot.</li>
+<li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism.</li>
+</ul>
+
+<div class="ph ph-mid"><b>Placeholder · Screenshot</b><span>Relatório Excel de divergências gerado pelo Spot (dados anonimizados): abas por nível: workbook, sheet, dimensão, valor</span></div>
+
+<h2>6. Lições</h2>
+<p><strong>Técnicas</strong></p>
+<ul>
+<li>Conhecer bem a linguagem rende. Lazy evaluation, OO e concorrência não são academicismo: são o que fez uma ferramenta de 3 meses virar infraestrutura.</li>
+<li>Vale olhar o que a plataforma já expõe. A solução não exigiu nenhum sistema novo; bastou ler a fundo a API de algo que a empresa já usava.</li>
+<li>Previsibilidade é feature. O dry run não mudou nenhum resultado, mas mudou a confiança dos usuários na ferramenta.</li>
+</ul>
+<p><strong>Sobre pessoas: o que eu faria diferente</strong></p>
+<p>A liderança me disse, mais de uma vez, que não tinha clareza sobre <em>o que</em> eu estava fazendo nem <em>por quê</em>. Em retrospecto, havia dois motivos. O primeiro: eu tinha certeza das minhas decisões técnicas e não queria abri-las para discussão. Hoje reconheço que isso era arrogância. O segundo: alguns conceitos (paralelismo, OO) não eram familiares ao time, e explicar parecia custoso.</p>
+<p>Se fizesse de novo, eu teria um <strong>plano de comunicação</strong> desde o início: decisões registradas com seus porquês, checkpoints com a liderança e o time envolvido nas discussões técnicas. Uma boa decisão técnica que ninguém entende é, para a organização, uma decisão arriscada.</p>
+
+<h2>Apêndice técnico</h2>
+<p><em>Para leitores técnicos. Os trechos abaixo são <strong>ilustrativos</strong>, escritos para este artigo. Não são o código original.</em></p>
+<h3>A. Pipeline encadeável com avaliação preguiçosa</h3>
+<div class="ph ph-small" style="min-height:0;padding:10px"><b>Placeholder · Trecho de código</b><span>Interface hipotética, escrita sem acesso ao código. Substituir quando o repositório estiver disponível.</span></div>
+<pre><code># PLACEHOLDER: ilustra a ideia do dry run, não a API real.
+plan = (
+    Spot(server)
+    .compare(baseline="wb_2023_q1", candidate="wb_2023_q2")
+    .dashboards(exclude=["Cover", "Methodology"])
+    .tolerance(abs=1e-6)
+    .plan()          # nada foi baixado ainda
+)
+
+print(plan.summary())    # ex.: 48 dashboards, 147 sheets, ~147 comparações
+plan.save("q2_check.plan")
+
+report = Plan.load("q2_check.plan").run(workers=16)
+report.to_excel("q2_diff.xlsx")</code></pre>
+<p>A ideia central: cada chamada encadeada só <strong>registra</strong> a intenção. <code>plan()</code> resolve a hierarquia via Metadata API, que é barata, e <code>run()</code> executa as extrações e comparações, que são caras.</p>
+<h3>B. Níveis de divergência reportados</h3>
+<table>
+<tr><th>Nível</th><th>Exemplo</th></tr>
+<tr><td>Estrutura do workbook</td><td>dashboard presente em só um dos workbooks</td></tr>
+<tr><td>Estrutura da sheet</td><td>sheet renomeada ou ausente</td></tr>
+<tr><td>Dimensão</td><td>categoria nova ("Ultra alta renda") ou removida</td></tr>
+<tr><td>Valor</td><td>métrica fora da tolerância numérica</td></tr>
+</table>
+<h3>C. Limitações conhecidas</h3>
+<ul>
+<li>Nem todos os filtros do Tableau eram manipuláveis via API. Trocar valores de filtro e ler os defaults expostos na UI ficou sem solução completa.</li>
+<li>Não havia mapeamento automático entre esquemas diferentes: a mudança estrutural era <strong>reportada</strong>, não reconciliada.</li>
+</ul>
+
+<div class="footnotes">
+<p id="fn1">1. Reichheld, F. <em>The One Number You Need to Grow</em>. Harvard Business Review, dez. 2003. Ver também <a href="https://en.wikipedia.org/wiki/Net_promoter_score" target="_blank">Net Promoter Score (Wikipedia)</a>.</p>
+<p id="fn2">2. <a href="https://www.bain.com/about/media-center/press-releases/2019/bain-launches-nps-prism/" target="_blank">Bain &amp; Company launches NPS Prism (press release, 6 mar. 2019)</a>; <a href="https://www.npsprism.com/" target="_blank">npsprism.com</a>.</p>
+</div>
+<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>

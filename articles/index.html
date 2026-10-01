@@ -1,0 +1,14 @@
+---
+layout: default
+title: Articles
+---
+<p class="center">Longer-form notes on how I work. New ones land here first.</p>
+<ul class="plain">
+{% for post in site.posts %}
+  <li>
+    <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a>
+    <p class="meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+    {{ post.excerpt }}
+  </li>
+{% endfor %}
+</ul>
