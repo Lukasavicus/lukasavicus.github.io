@@ -1,0 +1,280 @@
+
+/*! Squarespace LESS Compiler  (less.js language v1.3.3)  */
+.main-nav ul li{margin-left:0 !important;margin-right:20px}.main-nav ul li:last-child{margin-right:0}@media (max-width:1000px){.main-nav ul{margin:0 auto}}
+
+/* ---- Replica additions (Lucas) ---- */
+
+/* Case study page (spot.html) */
+#hero .wrapper{text-align:center}
+#hero .page-title{margin:0 0 .5em;color:#444}
+.case .case-title{text-transform:none;letter-spacing:0;font-size:24px;line-height:1.3em;color:#444;margin:.4em 0 .6em}
+.case .back{font:12px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5em}
+.case .meta{font:12px/1.8 "Varela Round",arial,sans-serif !important;letter-spacing:1px;text-transform:uppercase;color:#999 !important;margin-bottom:24px}
+.case h2{margin-top:2.2em;color:#444}
+.case h3{margin-top:2em;color:#555}
+.case .tldr{background:#f7f7f7;border-left:2px solid #517a9e;padding:18px 24px;margin:28px 0}
+.case .tldr p:last-child,.case .tldr ul{margin-bottom:0}
+.case table{width:100%;border-collapse:collapse;margin:20px 0;font-size:15px;line-height:1.5em;color:#444}
+.case th,.case td{border-bottom:1px solid #e5e5e5;padding:8px 10px;text-align:left;vertical-align:top}
+.case th{font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#666;border-bottom:2px solid #ddd}
+.case blockquote{border-left:2px solid #517a9e;margin:28px 0;padding:4px 0 4px 22px;font-style:italic;color:#666}
+.case blockquote p{margin:0}
+.case pre{background:#f7f7f7;border:1px solid #eee;padding:14px 16px;overflow:auto;font-size:13px;line-height:1.6em;white-space:pre;color:#444}
+.case code{font-size:.9em;background:#f3f3f3;padding:1px 4px}
+.case pre code{background:none;padding:0;font-size:inherit}
+.case sup a{color:#517a9e}
+.case .footnotes{border-top:2px solid #ddd;margin-top:48px;padding-top:14px}
+.case .footnotes p{font-size:13px !important;line-height:1.7em;color:#777 !important;margin:0 0 .6em}
+
+/* Labelled grey placeholders for missing media */
+.ph{background:#e4e4e4;border:1px dashed #b5b5b5;color:#777;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;margin:28px 0;font:italic 14px/1.6 Georgia,serif}
+.ph b{display:block;font:11px/1.6 "Varela Round",arial,sans-serif;text-transform:uppercase;letter-spacing:2px;color:#666;margin-bottom:6px}
+.ph span{max-width:620px}
+.ph.ph-wide{min-height:320px}.ph.ph-mid{min-height:220px}.ph.ph-small{min-height:140px}
+
+.ph.ph-logo{min-height:0;padding:14px 8px;margin:0}
+.ph.ph-logo b{margin:0}
+
+/* "Let's grab a coffee" FAB (sits above the "Original" badge) */
+body a.fab{position:fixed;left:16px;bottom:16px;border-radius:999px;z-index:9999;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#fff;background:#517a9e;padding:12px 16px;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+body a.fab:hover{background:#444;color:#fff}
+
+/* ---- v5 global components ---- */
+:root{--accent:#517a9e;--bg:#fff;--fg:#444;--muted:#999;--line:#ddd;--soft:#f7f7f7;--ph:#e4e4e4}
+.sr{position:absolute;left:-9999px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:10001;background:var(--accent);color:#fff;padding:8px 14px;font:12px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
+.skip:focus{left:8px;color:#fff}
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:10000;transition:width .1s linear}
+#totop{position:fixed;right:16px;bottom:44px;width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--fg);font:18px/1 Georgia,serif;cursor:pointer;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+#totop:hover{border-color:var(--accent);color:var(--accent)}
+.orig-badge{position:fixed;right:10px;bottom:10px;z-index:9999;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:1px;color:#999 !important;background:rgba(255,255,255,.92);border:1px solid #ddd;padding:6px 9px;text-decoration:none}
+.lang{position:absolute;right:0;top:0;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#bbb}
+.lang a{color:#444}
+.lang span{cursor:not-allowed}
+
+/* Sticky nav (topNav lives outside #header so it sticks for the whole page) */
+#topNav{position:sticky;top:0;float:none;clear:both;width:100%;background:var(--bg);z-index:1000;text-align:center}
+#topNav .page-divider{border-color:var(--line)}
+
+/* Hero (home) */
+.hero{text-align:center}
+.avatar{width:160px;height:160px;border-radius:50%;display:block;margin:0 auto 24px;object-fit:cover}
+.hero-name{letter-spacing:4px;font-size:24px;margin:.2em 0}
+.hero-headline{font:12px/1.8 "Varela Round",arial,sans-serif !important;letter-spacing:3px;text-transform:uppercase;color:#999 !important;margin:0 0 .6em}
+.motto{font-style:italic;color:#777 !important;margin-bottom:1.4em}
+.ctas{text-align:center;margin:1em 0 1.4em}
+.btn,.sqs-html-content a.btn,button.btn{display:inline-block;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;border:2px solid #444;color:#444;background:transparent;padding:12px 18px;margin:4px;text-decoration:none;cursor:pointer}
+.btn:hover,.sqs-html-content a.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary,.sqs-html-content a.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-primary:hover,.sqs-html-content a.btn-primary:hover{background:#444;border-color:#444;color:#fff}
+.ticker{list-style:none;margin:0;padding:0;min-height:1.8em;text-align:center}
+.ticker li{display:none;font:italic 14px/1.8 Georgia,serif !important;color:#999 !important}
+.ticker li.on{display:block;animation:tick .5s ease}
+.ticker li::before{content:"▸ ";color:var(--accent)}
+@keyframes tick{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Home sections */
+#page section{margin:0 0 56px}
+#page section>h3{text-align:center;margin:0 0 1.2em;padding-top:1.4em}
+#page section>h3::after{content:"";display:block;width:36px;height:2px;background:var(--line);margin:14px auto 0}
+.center{text-align:center}
+.more{text-align:center;font:12px/1.6 "Varela Round",arial,sans-serif !important;letter-spacing:2px;text-transform:uppercase}
+.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:0}
+.badges span{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font:11px/1.4 "Varela Round",arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#666}
+.cols3,.cards,.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cols3 h4,.card h4{font:12px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin:0 0 .5em;color:#444}
+.cols3 p{font-size:15px !important;line-height:1.7em;margin:0}
+.cols3 .ph,.cards .ph,.grid3 .ph{margin:0 0 12px}
+.card{display:block;border:1px solid var(--line);padding:16px;color:#444;text-decoration:none}
+.card:hover{border-color:var(--accent)}
+.card .meta{font:11px/1.6 "Varela Round",arial,sans-serif !important;letter-spacing:1px;text-transform:uppercase;color:#999 !important;margin:0 0 .6em}
+.card p{font-size:15px !important;line-height:1.7em;margin:0 0 .8em}
+.logos{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+.logos .ph span{font-size:11px;line-height:1.3}
+.numbers{display:flex;flex-wrap:wrap;justify-content:center;gap:24px 40px;text-align:center}
+.numbers strong{display:block;font:28px/1.2 "Varela Round",arial,sans-serif;color:var(--accent)}
+.numbers span{font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#777}
+.cta{border-top:2px solid var(--line);padding-top:10px}
+
+/* Horizontal timeline (home teaser) */
+.tl-h-wrap{overflow-x:auto;padding:4px 0}
+.tl-h{position:relative;height:150px;min-width:680px;margin:0 30px}
+.tl-h-line{position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line)}
+.tl-h-year{position:absolute;bottom:0;transform:translateX(-50%);font:10px/1 "Varela Round",arial,sans-serif;letter-spacing:1px;color:#bbb}
+.tl-h-dot{position:absolute;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;color:#444;text-decoration:none}
+.tl-h-dot i{display:block;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--accent);box-sizing:content-box;margin:-1px}
+.tl-h-dot:hover i{background:var(--accent)}
+.tl-h-dot span{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font:10px/1.4 "Varela Round",arial,sans-serif;letter-spacing:1px;text-transform:uppercase}
+.tl-h-dot.up span{bottom:22px}
+.tl-h-dot.dn span{top:22px}
+.tl-h-dot.dn2 span{top:40px}
+.tl-h-dot.dn2 i::after,.tl-h-dot.up i::after,.tl-h-dot.dn i::after{content:"";position:absolute;left:50%;width:1px;background:var(--line)}
+.tl-h-dot.up i::after{bottom:14px;height:8px}
+.tl-h-dot.dn i::after{top:14px;height:8px}
+.tl-h-dot.dn2 i::after{top:14px;height:26px}
+
+/* Vertical timeline (experience page) */
+.tl-v{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--line)}
+.tl-v li{position:relative;margin:0 0 28px;padding-left:18px}
+.tl-v li::before{content:"";position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl-v .when{display:block;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#999}
+.tl-v p{font-size:15px !important;line-height:1.7em;margin:.3em 0 0;color:#666 !important}
+
+/* About */
+.fun{display:block;max-width:340px;width:100%;height:auto;margin:0 auto 28px}
+.langs{font-size:13px !important;color:#999 !important;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0}
+ul.plain{list-style:none;padding:0}
+.skills{list-style:none;padding:0}
+.skills li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:6px 0;font-size:15px !important}
+.skills li span{white-space:nowrap;color:#999}
+.modal{border:2px solid var(--line);padding:28px 32px;max-width:560px;color:#444;background:var(--bg)}
+.modal::backdrop{background:rgba(0,0,0,.45)}
+.modal h3{margin-top:0}
+.modal p,.modal li{font-size:15px !important;line-height:1.7em}
+
+/* Detail pages / share */
+.case .tech{font-size:15px !important;color:#666 !important}
+.share{margin:36px 0 12px;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#999}
+.share a,.share button{font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;border:1px solid var(--line);padding:6px 10px;margin-left:6px;color:#444;cursor:pointer;text-decoration:none}
+.share a:hover,.share button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Code shop */
+.codebox{position:relative}
+.codebox pre{font-size:14px;line-height:1.6em;background:var(--soft);border-left:1px solid #777;padding:1em 1.2em;margin:0 0 1.8em;overflow:auto}
+.copy{position:absolute;right:8px;top:8px;font:10px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--line);background:var(--bg);color:#444;padding:6px 10px;cursor:pointer}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+
+/* FAQ / 404 */
+details{border-bottom:1px solid var(--line);padding:10px 0}
+summary{cursor:pointer;font:12px/1.8 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#444}
+details p{margin:.6em 0 0}
+.big{font:72px/1 "Varela Round",arial,sans-serif !important;letter-spacing:6px;color:var(--accent) !important;margin:0 0 .3em}
+
+/* Contact form */
+.mailform{max-width:520px;margin:0 auto}
+.mailform label{display:block;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#777;margin:0 0 14px}
+.mailform input,.mailform textarea,#sitesearch{display:block;width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:16px/1.5 Georgia,serif;padding:10px 12px;margin-top:4px}
+.mailform input:focus,.mailform textarea:focus,#sitesearch:focus{outline:none;border-color:var(--accent)}
+.hint{font-size:13px !important;color:#999 !important;text-align:center}
+.social-links.center{text-align:center}
+
+/* Footer */
+#footer{text-align:center}
+#footer .explore{margin:0 0 1em}
+#footer .search{max-width:320px;margin:0 auto 24px}
+#footer .search label{display:block}
+#footer .search input{font-size:14px;text-align:center}
+.sitemap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left;max-width:760px;margin:0 auto 24px}
+.sitemap h3{margin:0 0 .6em;color:#bbb}
+.sitemap ul{list-style:none;margin:0;padding:0}
+.sitemap li{margin:0 0 .4em}
+.sitemap a{color:#444}
+.sitemap a:hover{color:var(--accent)}
+.copy-line{color:#999 !important;margin:0}
+.linklike{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--accent);cursor:pointer}
+.nomatch{color:#999 !important}
+
+/* Wider column for grid-heavy pages */
+body.wide #page{width:88%}
+
+/* Mobile */
+@media (max-width:768px){
+  #header #topNav,#topNav{display:none}
+  #mobileMenuLink{margin:0;display:block;visibility:visible;text-align:center;padding:0 0 12px;border-bottom:2px solid var(--line);background:var(--bg)}
+  #mobileMenuLink a{cursor:pointer;display:block;font-size:22px !important;line-height:1;color:#999}
+  #header #mobileNav{position:static;visibility:visible}
+  body #mobileNav.menu-open{height:auto !important;max-height:999px;visibility:visible;overflow:visible;margin:0 0 15px}
+  #mobileNav .wrapper{padding:1em 0;border-bottom:2px solid var(--line)}
+  #mobileNav nav ul li{display:block;text-align:center;float:none !important;margin:0 !important}
+  #mobileNav a{font-size:16px !important;line-height:2em !important;color:#999}
+  #canvas{padding:0 17px}
+  #header{text-align:center}
+  #upper-logo{float:none}
+  .lang{position:static;margin:6px 0 0}
+  .collection-type-page #page,body.wide #page{width:100%}
+  .cols3,.cards,.grid3,.sitemap{grid-template-columns:1fr}
+  .grid3{grid-template-columns:1fr 1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .hero-name{font-size:20px;letter-spacing:3px}
+  body a.fab{width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;font-size:20px;letter-spacing:0}
+  body a.fab span{display:none}
+  #totop{bottom:70px}
+  .skills li{display:block}
+  .tl-h{margin:0 10px}
+}
+
+/* Dark mode (CSS variables only; low priority) */
+html.dark{--bg:#1b1b1d;--fg:#d8d8d8;--muted:#8a8a8a;--line:#3a3a3c;--soft:#26262a;--ph:#2c2c30}
+html.dark body,html.dark #canvas,html.dark #topNav ul,html.dark #mobileNav,html.dark #mobileMenuLink,html.dark .orig-badge{background:var(--bg) !important}
+html.dark body,html.dark p,html.dark li,html.dark h1,html.dark h2,html.dark h3,html.dark h4,html.dark .logo a,html.dark .card,html.dark .sitemap a,html.dark .lang a,html.dark summary,html.dark .cols3 h4,html.dark .case .case-title,html.dark .case h2,html.dark .case h3,html.dark .case table,html.dark .share a,html.dark .share button,html.dark .copy,html.dark .btn{color:var(--fg) !important}
+html.dark #topNav a,html.dark #mobileNav a{color:var(--muted)}
+html.dark #topNav ul>li.active-link>a,html.dark #topNav a:hover{color:var(--fg)}
+html.dark #canvas,html.dark .page-divider,html.dark .card,html.dark .badges span,html.dark .cta,html.dark .langs,html.dark .skills li,html.dark .share a,html.dark .share button,html.dark .copy,html.dark details,html.dark .btn,html.dark #mobileMenuLink,html.dark #mobileNav .wrapper,html.dark .case th,html.dark .case td,html.dark .mailform input,html.dark .mailform textarea,html.dark #sitesearch{border-color:var(--line) !important}
+html.dark .ph{background:var(--ph);border-color:#555;color:#aaa}
+html.dark .ph b{color:#bbb}
+html.dark .case .tldr,html.dark .case pre,html.dark .codebox pre,html.dark .case code{background:var(--soft) !important}
+html.dark .btn-primary{background:var(--accent) !important;color:#fff !important}
+
+/* ---- v6 adjustments ---- */
+/* 1. Smaller footer text (search box untouched) */
+#footer .sitemap h3{font-size:10px !important;letter-spacing:2px}
+#footer .sitemap li,#footer .sitemap a,#footer .copy-line,#footer .nomatch,#footer .linklike{font-size:12px !important;line-height:1.6 !important}
+#footer .sitemap li{margin:0 0 .2em}
+#footer .sitemap{margin-bottom:16px}
+
+/* 2. Home breathes: roughly double the spacing between sections */
+body.homepage #page section{margin:0 0 120px}
+body.homepage #page section>h3{padding-top:2.4em}
+body.homepage #page #facts{margin-bottom:96px}
+body.homepage #page .cta{padding-top:40px}
+
+/* 3. Timeline: every year on the axis, bigger dots and labels */
+.tl-h{height:170px;min-width:760px}
+.tl-h-year{font-size:11px;color:#aaa}
+.tl-h-dot{width:18px;height:18px}
+.tl-h-dot i{width:16px;height:16px}
+.tl-h-dot span{font-size:11.5px;letter-spacing:1.2px}
+.tl-h-dot.up span{bottom:26px}
+.tl-h-dot.dn span{top:26px}
+.tl-h-dot.dn2 span{top:46px}
+.tl-h-dot.up i::after{bottom:18px;height:8px}
+.tl-h-dot.dn i::after{top:18px;height:8px}
+.tl-h-dot.dn2 i::after{top:18px;height:28px}
+
+/* 4. Logo wall: real logos, normalized to ~40px, greyscale until hover */
+.logos{gap:22px 28px;align-items:center}
+.logos .logo{display:flex;align-items:center;justify-content:center;height:48px}
+.logos img{display:block;max-height:40px;max-width:100%;width:auto;height:auto;filter:grayscale(1);opacity:.6;transition:filter .2s,opacity .2s}
+.logos .logo:hover img{filter:none;opacity:1}
+html.dark .logos img{filter:grayscale(1) invert(1)}
+html.dark .logos .logo:hover img{filter:none}
+
+/* 5. Skills grouped by class — subtle colored left border per group */
+.skill-group{border-left:3px solid var(--g,var(--line));padding-left:16px;margin:0 0 28px}
+.skill-group h4{font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--g,#666);margin:0 0 4px}
+.skill-group .skills li:last-child{border-bottom:0}
+
+/* 6. Full role text on experience.html and detail pages */
+.cv{margin:.4em 0 0;padding-left:1.2em}
+.cv li{font-size:15px !important;line-height:1.7em;color:#666 !important;margin:0 0 .2em}
+.tl-v .tech{font-size:13px !important;color:#999 !important;margin:.5em 0 0}
+
+/* 7. Carousel (home featured + projects.html): scroll-snap track, arrows, dots */
+.carousel{position:relative;padding:0 44px}
+.car-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding:2px}
+.car-track::-webkit-scrollbar{display:none}
+.car-track>.card{flex:0 0 calc((100% - 48px)/3);scroll-snap-align:start;box-sizing:border-box}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:#444;font:22px/1 Georgia,serif;cursor:pointer;padding:0}
+.car-btn.prev{left:0}.car-btn.next{right:0}
+.car-btn:hover{border-color:var(--accent);color:var(--accent)}
+.car-btn[disabled]{opacity:.3;cursor:default}
+.car-dots{display:flex;justify-content:center;gap:8px;margin:18px 0 0}
+.car-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer}
+.car-dots button[aria-selected="true"]{background:var(--accent)}
+@media (max-width:768px){.car-track>.card{flex-basis:100%}.carousel{padding:0 36px}.car-btn{width:30px;height:30px}}
+
+/* Breathing room under the sticky nav */
+body #hero{padding-top:40px}
+@media (max-width:768px){#hero .page-title,#hero .wrapper .page-title{font-size:22px;letter-spacing:2px}}
+body #page{margin-top:60px}
+body #hero+#page{margin-top:36px}

@@ -1,0 +1,196 @@
+/* theme.css — Lucas's layer on top of the Astro build (surinder.design palette kept).
+   Rule of thumb: never edit _astro/*.css; override or add here. */
+
+/* ---------- 1. Fonts ----------------------------------------------------
+   The generated CSS hard-codes Inter / Mukta / "Playfair Display" in ~40 scoped
+   rules. Instead of rewriting them, those family names are aliased to the free
+   fonts: Geist (UI/body) and Fraunces (display). fonts-free/fonts.css still
+   registers the real names for the rules written here. */
+@font-face{font-family:Inter;font-weight:100 900;font-display:swap;src:url(../fonts-free/geist-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-weight:100 900;font-display:swap;src:url(../fonts-free/geist-latin.woff2) format('woff2')}
+@font-face{font-family:Mukta;font-weight:100 900;font-display:swap;src:url(../fonts-free/geist-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Mukta;font-weight:100 900;font-display:swap;src:url(../fonts-free/geist-latin.woff2) format('woff2')}
+@font-face{font-family:"Playfair Display";font-style:italic;font-weight:100 900;font-display:swap;src:url(../fonts-free/fraunces-italic-latin.woff2) format('woff2')}
+@font-face{font-family:"Playfair Display";font-weight:100 900;font-display:swap;src:url(../fonts-free/fraunces-latin.woff2) format('woff2')}
+
+/* Display type: Fraunces on every title (generated rules use high-specificity scoped selectors, hence !important). */
+h1,h2,.h1,#about-name,.ha-month,.result b,.facts b{font-family:Fraunces,Georgia,serif!important;font-weight:600!important;letter-spacing:-.015em!important}
+
+/* Hero glow: the generated CSS points at /assets (site root); the prototype lives in a subfolder. */
+.glow[data-astro-cid-awbhzh6u]{background-image:url(v2/hero2027/hero-glow.webp)!important}
+
+/* ---------- 2. Placeholders --------------------------------------------- */
+.ph{background:#e9e6df;border:1px dashed #b5b0a6;color:#6b6358;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;margin:28px 0;font:12px/1.6 sans-serif;letter-spacing:.5px}
+.ph b{font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ph-wide{width:100%;aspect-ratio:16/9}
+.ph-mid{aspect-ratio:4/3}
+.ph-small{aspect-ratio:1}
+.ph.tight{margin:0}
+.ph-logo{margin:0;width:100%;height:52px;padding:6px 10px;font:600 12px/1.25 Geist,sans-serif;letter-spacing:0;border-radius:10px}
+.ph-avatar{display:inline-block;width:40px;height:40px;border-radius:50%;background:#e9e6df;border:1px dashed #b5b0a6;flex:none}
+
+/* ---------- 3. Global components (decisions C9, C15, C18) --------------- */
+.skip{position:absolute;left:12px;top:-60px;z-index:200;padding:10px 14px;border-radius:10px;background:#1a1714;color:#fff;font:600 14px/20px Geist,sans-serif;text-decoration:none;transition:top .15s}
+.skip:focus{top:12px}
+#progress{position:fixed;left:0;top:0;height:3px;width:0;z-index:150;pointer-events:none;background:linear-gradient(90deg,#3ade7e,#ffb454,#5fa8ff,#b99cff,#da9b73)}
+#totop{position:fixed;right:24px;bottom:24px;z-index:60;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(26,23,20,.15);background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#1a1714;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 8px 24px rgba(26,23,20,.12)}
+#totop.show{opacity:1;pointer-events:auto}
+#totop:hover{transform:translateY(-2px)}
+@media (max-width:1023px){#totop{right:16px;bottom:104px}}
+
+/* ---------- 4. Home · hero ---------------------------------------------- */
+.hero .pills{align-items:center}
+.hero-face{width:40px;height:40px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px rgba(255,255,255,.25)}
+.facts{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:1024px){.facts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.facts li{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:rgba(255,255,255,.05)}
+.facts b{font-size:19px;line-height:23px;color:#fff}
+.facts span{font:500 11.5px/15px Geist,sans-serif;color:rgba(227,219,204,.72);letter-spacing:.02em}
+/* journey: every year on the axis (Jan 2017 → Dec 2026, ten equal segments; ticks mark 1 Jan) */
+.years{list-style:none;margin:0;padding:0;position:absolute;left:0;right:0;bottom:2px;z-index:1;display:grid;grid-template-columns:repeat(10,1fr);pointer-events:none}
+.years li{padding-top:6px;border-left:1px solid rgba(227,219,204,.16);text-align:center;font:600 11px/14px Geist,sans-serif;letter-spacing:.08em;color:rgba(227,219,204,.55)}
+.years li:first-child{border-left:0}
+@media (max-width:699px){.years li:nth-child(even){color:transparent}}
+
+/* ---------- 5. Home · pillars (reuses the "who" card shell) -------------- */
+.who .cards.three{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1000px}
+.pic.pillar{aspect-ratio:16/9;display:grid;place-items:center;background:linear-gradient(135deg,#fdf7ee,#efe3d2)}
+.pic.pillar svg{width:38%;height:auto;color:#b0552f}
+.who .body .problem{font-size:19px;line-height:25px}
+
+/* ---------- 6. Home · projects (dark cards) ----------------------------- */
+.pj-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.08);font:700 13px/1 Geist,sans-serif;letter-spacing:.04em;color:#fff}
+.pj-ico.sm{width:40px;height:40px;font-size:12px}
+.pj-dl{margin:0;display:grid;gap:10px}
+.pj-dl dt{font:600 11px/14px Geist,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D5C79B}
+.pj-dl dd{margin:2px 0 0;font:400 15px/22px Geist,sans-serif;color:rgba(255,255,255,.85)}
+.pj-more{display:inline-block;margin-top:8px;font:600 15px/22px Geist,sans-serif;color:#D5C79B;text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
+
+/* ---------- 7. Home · experience & education timeline ------------------- */
+.ha-in .ha-body{grid-template-columns:minmax(0,1fr);max-width:none;align-items:start}
+.ha-grid.years-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+.years-grid .ha-cell{height:112px}
+@media (min-width:1024px){.ha-grid.years-grid{grid-template-columns:repeat(9,minmax(0,1fr))}.years-grid .ha-cell{height:150px}}
+.ha-chip.ha-c-call{display:flex} /* the Astro CSS hides the 'call' chip below desktop; here it is a company */
+.ha-chip.row2{bottom:33px}
+.ha-chip.row3{bottom:59px}
+@media (min-width:1024px){.ha-chip.row2{bottom:46px}.ha-chip.row3{bottom:82px}}
+.ha[data-hl] .ha-chip.lit{opacity:1;box-shadow:0 0 0 2px #fff,0 0 0 4px #1a17142e}
+.ha-agenda{gap:4px}
+@media (min-width:1024px){.ha-agenda{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}}
+.ha-agenda .ha-step{padding:10px 14px}
+.ha-more{margin:22px 0 0;text-align:center}
+.ha-more a{font:600 16px/24px Geist,sans-serif;color:#1a1714;text-decoration:underline;text-decoration-style:dashed;text-underline-offset:5px}
+.ha-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin:14px 0 0;padding:0;list-style:none;font:500 13px/18px Geist,sans-serif;color:#6b6358}
+.ha-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* ---------- 8. Home · logo wall, testimonials, about, stats, teaser ------ */
+.kick{margin:0;text-align:center;font:600 12px/16px Geist,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#6b6358}
+.logowall{background:#fbf9f4;padding:40px 0 24px}
+.logowall .wall{margin-top:22px}
+.logowall .wall li{height:64px}
+.reviews .cards .card .text{font:400 15px/22px Geist,sans-serif;color:#6b6358;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 0;padding:0;list-style:none}
+.badges li{padding:6px 11px;border-radius:999px;border:1px solid rgba(26,23,20,.14);background:#fff;font:600 12px/16px Geist,sans-serif;color:#1a1714}
+.badges li.aw{background:#fff6f0;border-color:#b0552f;color:#8a4323}
+.lang-line{margin:14px 0 0;font:500 13px/19px Geist,sans-serif;color:#6b6358}
+.more-link{display:inline-block;margin-top:14px;font:600 15px/22px Geist,sans-serif;color:#1a1714;text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
+@media (max-width:1023px){.badges{justify-content:center}}
+.stats .kick{margin-bottom:14px}
+.offclock{background:#fbf9f4;padding:8px 20px 56px}
+.offclock .in{display:flex;gap:28px;align-items:center;max-width:1140px;margin:0 auto;padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(26,23,20,.1)}
+.offclock img{width:120px;height:160px;object-fit:cover;object-position:50% 20%;border-radius:14px;flex:none}
+.offclock h2{margin:0 0 8px}
+.home-2027 .offclock h2:not(#quote-title){font-size:28px;line-height:34px}
+.offclock p{margin:0;font:400 17px/26px Geist,sans-serif;color:#6b6358;max-width:760px}
+@media (max-width:699px){.offclock .in{flex-direction:column;text-align:center}}
+
+/* ---------- 9. Footer sitemap -------------------------------------------- */
+.sitemap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:620px}
+.sitemap h4{margin:0 0 8px;font:600 11px/14px Geist,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#D5C79B}
+.sitemap a{display:block;font:400 15px/26px Geist,sans-serif;color:rgba(255,255,255,.72);text-decoration:none}
+.sitemap a:hover{color:#fff}
+
+/* ---------- 10. Inner pages ---------------------------------------------- */
+.page-hero{padding:120px 20px 40px;text-align:center;background:#fff}
+@media (min-width:1024px){.page-hero{padding:150px 20px 56px}}
+.page-hero h1{margin:0 auto;max-width:820px;font-size:40px;line-height:46px;color:#1a1714}
+@media (min-width:1024px){.page-hero h1{font-size:56px;line-height:62px}}
+.page-hero p{margin:14px auto 0;max-width:640px;font:400 17px/26px Geist,sans-serif;color:#6b6358}
+.page{max-width:960px;margin:0 auto;padding:0 20px}
+.page section{padding:40px 0}
+.page section+section{border-top:1px solid rgba(26,23,20,.08)}
+.page h2{margin:0 0 18px;font-size:30px;line-height:36px;color:#1a1714}
+.page h3{margin:0;font:600 18px/24px Geist,sans-serif;color:#1a1714}
+.page p,.page li{font:400 16px/26px Geist,sans-serif;color:#2b2723}
+.page p{margin:0 0 12px}
+.muted{color:#6b6358}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid #1a1714;background:#1a1714;color:#fff;font:600 15px/20px Geist,sans-serif;text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:#1a1714}
+.btn.sm{min-height:36px;padding:0 14px;font-size:13px}
+.card{border:1px solid rgba(26,23,20,.1);border-radius:18px;background:#fff;padding:22px}
+.card .ph{margin:0 0 16px}
+.grid2{display:grid;gap:16px}
+.grid3{display:grid;gap:16px}
+@media (min-width:700px){.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.about-grid{display:grid;gap:28px;align-items:start}
+@media (min-width:800px){.about-grid{grid-template-columns:minmax(0,1fr) 260px}}
+.about-grid img{width:100%;border-radius:18px;object-fit:cover;aspect-ratio:3/4}
+/* experience: executive summary */
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid #e8e1d4}
+.tl>li{position:relative;padding:0 0 28px 26px}
+.tl>li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#b0552f;box-shadow:0 0 0 3px #fbf9f4}
+.tl>li.edu::before{background:#fff;border:2px solid #b0552f;width:8px;height:8px;left:-5px}
+.tl .meta{margin:2px 0 8px;font:500 13px/18px Geist,sans-serif;color:#6b6358}
+.tl .meta b{color:#1a1714;font-weight:600}
+.tl ul{margin:0;padding-left:18px}
+.tl ul li{margin:0 0 4px;font-size:15px;line-height:23px}
+.tl .tech{margin:8px 0 0;font:500 13px/18px Geist,sans-serif;color:#6b6358}
+/* skills */
+.skills{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+@media (min-width:700px){.skills{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px}}
+.skills li{display:grid;gap:6px}
+.skills .sk{display:flex;justify-content:space-between;gap:12px;font:500 15px/20px Geist,sans-serif}
+.skills .sk b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.skills .bar{height:4px;border-radius:999px;background:#e8e4da}
+/* dialog */
+dialog.modal{position:fixed;inset:0;margin:auto;border:0;border-radius:20px;padding:28px;width:calc(100% - 40px);max-width:600px;max-height:calc(100% - 40px);overflow:auto;background:#fff;color:#1a1714;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+dialog.modal::backdrop{background:rgba(7,10,19,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+dialog.modal h2{margin:0 0 10px;font-size:28px;line-height:34px}
+dialog.modal p{margin:0 0 10px;font:400 15px/23px Geist,sans-serif;color:#2b2723}
+.axes{display:grid;gap:12px;margin:16px 0}
+@media (min-width:600px){.axes{grid-template-columns:1fr 1fr}}
+.axes div{padding:14px;border-radius:14px;background:#f8f3ed;border:1px solid #efe3ce}
+.axes b{display:block;margin-bottom:4px;font:600 18px/24px Fraunces,Georgia,serif}
+.axes span{font:400 14px/21px Geist,sans-serif;color:#6b6358}
+.calc{margin-top:16px;padding-top:14px;border-top:1px solid #f2f0e9}
+.calc label{display:block;margin-bottom:6px;font:600 12px/16px Geist,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b6358}
+.calc select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(26,23,20,.2);background:#fff;font:500 14px/20px Geist,sans-serif;color:#1a1714}
+.calc table{width:100%;margin-top:10px;border-collapse:collapse}
+.calc td{padding:8px 0;border-bottom:1px solid #f2f0e9;font:500 14px/20px Geist,sans-serif}
+.calc td:last-child{text-align:right;font-weight:600;color:#35810f}
+.calc tr.sum td{font-weight:700}
+.dialog-foot{display:flex;justify-content:flex-end;margin-top:16px}
+/* contact */
+.form{display:grid;gap:14px;max-width:560px}
+.form label{display:grid;gap:6px;font:600 13px/18px Geist,sans-serif;color:#6b6358}
+.form input,.form textarea{padding:12px 14px;border-radius:12px;border:1px solid rgba(26,23,20,.2);background:#fff;color:#1a1714;font:400 15px/22px Geist,sans-serif}
+.form textarea{min-height:140px;resize:vertical}
+.social{display:flex;flex-wrap:wrap;gap:10px}
+/* faq */
+details.faq{margin-bottom:12px;padding:0 20px;border:1px solid rgba(26,23,20,.1);border-radius:16px;background:#fff}
+details.faq summary{display:flex;justify-content:space-between;gap:16px;padding:18px 0;cursor:pointer;list-style:none;font:600 16px/22px Geist,sans-serif;color:#1a1714}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";color:#9a7500;font-weight:400}
+details.faq[open] summary::after{content:"–"}
+details.faq p{margin:0 0 18px}
+/* code shop */
+pre.code{margin:0;overflow:auto;padding:16px;border-radius:12px;border:1px solid rgba(26,23,20,.1);background:#1a1714;color:#e3dbcc;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
+.snip-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.snip-head h3{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+/* personal */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.chips li{padding:8px 14px;border-radius:999px;border:1px solid rgba(26,23,20,.14);background:#fff;font:500 14px/20px Geist,sans-serif}
+/* 404 */
+.big{font-size:120px;line-height:1;color:#b0552f;margin:0}

@@ -1,0 +1,156 @@
+Machine-readable version of lukasavicus.github.io
+
+# Lucas Lukasavicus
+AI Leader & Tech Innovator — Often studying, sometimes teaching, always learning.
+
+## About
+I believe two things can truly change a person's reality: education and God. Thankfully, I had access to education, and it let me find my way into the world of technology.
+
+Today I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy.
+
+I thrive in challenging environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet. More and more, I enjoy being around people who challenge my views, who push me to keep studying and improving, and who are highly skilled and talented. I've had the privilege of leading people like that.
+
+Simply put, I'm living my golden age.
+
+## Experience
+- **GenAI Manager** — TELUS Digital (WillowTree / Poatek) — Oct 2026 – Present
+  - [PLACEHOLDER — not in the CV yet]
+  Tech: [PLACEHOLDER]
+- **Data & AI Manager** — TELUS Digital (WillowTree / Poatek) — Jun 2024 – Sep 2026
+  - Leading data engineering and AI initiatives to drive business innovation.
+  - Managing data infrastructure and implementing machine learning solutions for advanced analytics.
+  - Overseeing team development, data governance, and strategic technology adoption.
+  - Implemented data pipelines using gitlab, and AWS suit for a large Telecom company.
+  - Leading P&D project and implementation of Data Engineering best practices and Data Platform.
+  Tech: AWS, GitLab, Python, PySpark, Terraform
+- **Senior Data Engineer** — Bain & Company — Apr 2023 – Jun 2024
+  - Developed batch data ingestion pipelines using Microsoft Azure.
+  - Built and maintained Dash Enterprise applications for data analysis.
+  - Designed and implemented a Quality Assurance Framework for data pipelines.
+  - Integrated Databricks with Tableau for enhanced data visualization.
+  - Established data architecture for business intelligence and analytics projects.
+  - Infrastructure to projects related to fraud detection and text analysis solutions.
+  Tech: Azure, Databricks, Tableau, Dash Enterprise
+- **Data Engineer & Team Leader** — BTG Pactual — Jun 2021 – Dec 2022
+  - Managed data modeling and governance for business intelligence initiatives.
+  - Developed batch and real-time ingestion pipelines using AWS services.
+  - Designed a custom ingestion framework with PySpark and AWS EMR.
+  - Implemented Lambda architecture for payment processing, integrating batch and near real-time data.
+  - Led cross-functional data teams, coordinating engineering, governance, and visualization efforts.
+  - Developed a business intelligence portal using AWS and Angular.
+  - Used data observability systems integrating Datadog, and AWS.
+  Tech: AWS (EMR, Lambda), PySpark, Angular, Datadog, Kubernetes
+- **Data Engineer** — Safra — Nov 2019 – Jul 2021
+  - Designed data models and developed data visualization tools.
+  - Built and optimized an ETL job scheduler for data transformation.
+  - Led the internal budget system project for financial planning.
+  - Served as Product Owner for a money laundering prevention system using Red Hat Process Automation Manager and Apache Camel.
+  - Managed the fraud prevention ecosystem, deploying Feedzai's risk assessment suite.
+  Tech: Red Hat PAM, Apache Camel, Feedzai
+- **Trainee** — Safra — Jan 2019 – Oct 2019
+  - Rotated through key departments, including Credit, Risk, Audit, Back Office, and IT.
+  - Developed data-driven projects in business intelligence, PMO, and machine learning.
+  Tech: [PLACEHOLDER]
+- **Market Intelligence Analyst** — B2W Digital — Oct 2018 – Dec 2018
+  - Automated business intelligence processes and improved reporting structures.
+  Tech: [PLACEHOLDER]
+- **Advanced Analytics Consultant** — Deloitte — Feb 2017 – Oct 2018
+  - Applied PMBOK and Lean Six Sigma methodologies to optimize business processes.
+  - Conducted process mapping and technology integration for multinational clients.
+  - Developed executive dashboards in Tableau, connected to Amazon Big Data environments.
+  - Led robotic process automation (RPA) training and proof-of-concept initiatives.
+  Tech: Qlik, Tableau, AWS, RPA
+- **Full-Stack Developer** — Squid — Jan 2017 – Feb 2017
+  - Developed web applications using the MEAN stack (MongoDB, Express.js, AngularJS, Node.js).
+  - Applied data analytics to social media insights.
+  Tech: MongoDB, Express, Angular, Node, React
+- **Growth Hacking Intern** — InstaCarro.com — Jun 2016 – Aug 2016
+  - Managed marketing data and implemented customer acquisition strategies.
+  - Led customer service automation projects (NPS, SMS, WhatsApp, email).
+  Tech: AdWords, Google Analytics, Facebook Ads
+
+## Education
+- **M.Sc. Data Science** — Instituto Tecnológico de Aeronáutica (ITA) — 2022 – 2024
+- **MBA, Business Intelligence & Business Analytics** — PUC Minas — 2021 – 2023
+- **MBA, Data Science** — Universidade de São Paulo (USP) — 2020 – 2021
+- **B.Sc. Computer Science** — Federal University of São Carlos (UFSCar) — 2013 – 2017
+- **Technical Degree, Information Technology** — ETE Prof. Basilides de Godoy — 2011 – 2012
+- **Technical Degree, Electronics & Electrotechnics** — SENAI — 2010 – 2011
+
+## Skills
+Scored 0–10 using the "How It's Calculated" heuristic. Scores are [PLACEHOLDER].
+### Leadership & product
+- Technical leadership & team management — [PLACEHOLDER]/10
+- Product ownership (PMBOK, Lean Six Sigma) — [PLACEHOLDER]/10
+- AI-driven product development — [PLACEHOLDER]/10
+
+### Data engineering & cloud
+- Data engineering (batch & real-time pipelines, data architecture) — [PLACEHOLDER]/10
+- Cloud: AWS, Microsoft Azure, Databricks — [PLACEHOLDER]/10
+- DevOps & observability: Terraform, Kubernetes, Datadog — [PLACEHOLDER]/10
+
+### Data science & ML
+- Machine Learning & Data Science (fraud detection, text analysis) — [PLACEHOLDER]/10
+- Competitive programming / algorithms — [PLACEHOLDER]/10
+
+### Languages & code
+- Python / PySpark — [PLACEHOLDER]/10
+- SQL — [PLACEHOLDER]/10
+- JavaScript / Angular / HTML / CSS — [PLACEHOLDER]/10
+- C / C++ / Java — [PLACEHOLDER]/10
+
+### BI & visualization
+- BI & visualization: Tableau, Dash Enterprise, Qlik — [PLACEHOLDER]/10
+
+### How It's Calculated
+Each skill's score (0–10) combines two axes:
+1. **Time** — how long I've actually worked with or studied the subject.
+2. **Coverage** — every topic in the domain is listed and each one is checked as mastered or not.
+Proven time plus the share of topics mastered gives the score.
+
+## Projects
+- **Mission Control** — personal
+  A platform for managing my own ideas and projects, with full visibility across the development lifecycle. It captures ideas with almost no friction and runs "skills" on top of projects, almost like a harness. AI isn't used to write the code; it helps decide where each project should go next.
+  Tech: [PLACEHOLDER]
+- **Spot** — Bain & Company (NPS Prism) · 2023
+  A data-quality gateway that compares two Tableau workbooks data point by data point via API: 4 people × 2 weeks → 1 person × 30 minutes per validation cycle, covering 100% of data points instead of a sample. It became the NPS Prism data team's largest product.
+  Tech: Python, Tableau REST + Metadata API, pandas, stdlib concurrency
+- **Data Platform** — TELUS Digital / Poatek · 2024 – 2026
+  R&D project to set up data engineering best practices and a data platform.
+  Tech: AWS, GitLab, Python, PySpark, Terraform
+- **In-house ingestion framework** — BTG Pactual · 2021 – 2022
+  PySpark + EMR ingestion framework and Lambda architecture for BTG+ Digital payment channels.
+  Tech: AWS EMR, Lambda, PySpark
+
+## Interests
+- Competitive programming
+- AI-based product development
+- Cooking
+- Reading (a book list will come later)
+- Going to new places with my wife
+- Spending time with my son — playing and watching him learn
+
+## Travel
+**Been there:** Rio de Janeiro (Brazil), Foz do Iguaçu (Brazil), Buenos Aires (Argentina), Los Angeles (USA)
+**Bucket list:**
+- **Europe:** Italy, Portugal, Spain, France, Lithuania (where my family comes from), Poland, Czech Republic
+- **Africa:** South Africa, Egypt
+- **Asia & Oceania:** South Korea, China, Australia
+- **North America:** more of the USA, Canada
+- **Central America & Caribbean:** Mexico, the Caribbean
+- **South America:** Uruguay, Paraguay, Chile, Ecuador, Venezuela
+
+## Honors & Awards
+- 4th place — Brazilian Olympiad in Informatics (OBI), regional phase
+- Honorable Mention — OBMEP (Brazilian Public Schools Math Olympiad) [to confirm]
+- Poetry award — Barueri, SP
+- Courses (Alura): HTML5 & CSS3 II (40h), JavaScript (20h), Angular 2 part 2 (18h), Linux I (4h), Linux II (8h)
+- Professional certifications: none yet (on the roadmap)
+
+## Languages
+Portuguese (native) · English (full professional) · Korean (beginner) · Spanish, Italian (interested)
+
+## Contact
+- Email: lukasavicus@gmail.com
+- GitHub: https://github.com/Lukasavicus
+- LinkedIn: https://www.linkedin.com/in/lucas-lukasavicus-silva
