@@ -7,4 +7,5 @@ markdown: kramdown
 # Jekyll drops underscore folders by default; version B (b/) ships its Astro bundle in _astro/.
 include: ["_astro"]
 # prototypes/ and LUCAS_LUKASAVICUS_SITE are local-only (gitignored); excluded so a local build does not copy them.
-exclude: ["_build", "README.md", "node_modules", "Gemfile", "Gemfile.lock", "prototypes", "LUCAS_LUKASAVICUS_SITE"]
+# docs/ holds working notes about the site itself (not published).
+exclude: ["_build", "docs", "README.md", "node_modules", "Gemfile", "Gemfile.lock", "prototypes", "LUCAS_LUKASAVICUS_SITE"]

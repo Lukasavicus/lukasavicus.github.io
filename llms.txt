@@ -70,7 +70,6 @@ Simply put, I'm living my golden age.
   Tech: AdWords, Google Analytics, Facebook Ads
 
 ## Education
-- **M.Sc. Data Science** — Instituto Tecnológico de Aeronáutica (ITA) — 2022 – 2024
 - **MBA, Business Intelligence & Business Analytics** — PUC Minas — 2021 – 2023
 - **MBA, Data Science** — Universidade de São Paulo (USP) — 2020 – 2021
 - **B.Sc. Computer Science** — Federal University of São Carlos (UFSCar) — 2013 – 2017
