@@ -15,26 +15,27 @@ const ABOUT = [
   "Today I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy.",
   "I thrive in challenging environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet. More and more, I enjoy being around people who challenge my views, who push me to keep studying and improving, and who are highly skilled and talented. I've had the privilege of leading people like that.",
   "Simply put, I'm living my golden age."];
+// start/end: decimal years (Jan=.0 … Dec=.9; 'Present' = 2026.75) for the home timeline bars.
 // body: description from content.md. cvText (optional, array of bullets from ../cv-experience.md): when present it replaces body on experience.html and the detail page.
 const EXP = [
-  { slug: 'genai-manager-telus-digital', role: 'GenAI Manager', co: 'TELUS Digital (WillowTree / Poatek)', short: 'TELUS Digital', period: 'Oct 2026 – Present', start: 2026.75, line: '[PLACEHOLDER] One-line summary.', body: ['[PLACEHOLDER — not in the CV yet]'], tech: '[PLACEHOLDER]' },
-  { slug: 'data-ai-manager-telus-digital', role: 'Data & AI Manager', co: 'TELUS Digital (WillowTree / Poatek)', short: 'TELUS Digital', period: 'Jun 2024 – Sep 2026', start: 2024.5, line: 'Led data engineering and AI initiatives for a large telecom client.', body: ['Led data engineering and AI initiatives: data infrastructure, ML solutions, team development, data governance and technology adoption. Built data pipelines on GitLab + AWS for a large telecom client, and led an R&D project to set up data engineering best practices and a data platform.'], tech: 'AWS, GitLab, Python, PySpark, Terraform',
+  { slug: 'genai-manager-telus-digital', role: 'GenAI Manager', co: 'TELUS Digital (WillowTree / Poatek)', short: 'TELUS Digital', period: 'Oct 2026 – Present', start: 2026.75, end: 2026.75, line: '[PLACEHOLDER] One-line summary.', body: ['[PLACEHOLDER — not in the CV yet]'], tech: '[PLACEHOLDER]' },
+  { slug: 'data-ai-manager-telus-digital', role: 'Data & AI Manager', co: 'TELUS Digital (WillowTree / Poatek)', short: 'TELUS Digital', period: 'Jun 2024 – Sep 2026', start: 2024.5, end: 2026.75, line: 'Led data engineering and AI initiatives for a large telecom client.', body: ['Led data engineering and AI initiatives: data infrastructure, ML solutions, team development, data governance and technology adoption. Built data pipelines on GitLab + AWS for a large telecom client, and led an R&D project to set up data engineering best practices and a data platform.'], tech: 'AWS, GitLab, Python, PySpark, Terraform',
     cvText: ['Leading data engineering and AI initiatives to drive business innovation.', 'Managing data infrastructure and implementing machine learning solutions for advanced analytics.', 'Overseeing team development, data governance, and strategic technology adoption.', 'Implemented data pipelines using gitlab, and AWS suit for a large Telecom company.', 'Leading P&D project and implementation of Data Engineering best practices and Data Platform.'] },
-  { slug: 'senior-data-engineer-bain', role: 'Senior Data Engineer', co: 'Bain & Company', short: 'Bain', period: 'Apr 2023 – Jun 2024', start: 2023.25, line: 'Batch ingestion on Azure, Dash Enterprise data apps and a QA framework for analytics pipelines.', body: ['Batch ingestion pipelines on Azure, Dash Enterprise data apps, a QA framework for analytics pipelines, Databricks ↔ Tableau integration, and infrastructure for fraud detection and text analysis projects.'], tech: 'Azure, Databricks, Tableau, Dash Enterprise',
+  { slug: 'senior-data-engineer-bain', role: 'Senior Data Engineer', co: 'Bain & Company', short: 'Bain', period: 'Apr 2023 – Jun 2024', start: 2023.25, end: 2024.5, line: 'Batch ingestion on Azure, Dash Enterprise data apps and a QA framework for analytics pipelines.', body: ['Batch ingestion pipelines on Azure, Dash Enterprise data apps, a QA framework for analytics pipelines, Databricks ↔ Tableau integration, and infrastructure for fraud detection and text analysis projects.'], tech: 'Azure, Databricks, Tableau, Dash Enterprise',
     cvText: ['Developed batch data ingestion pipelines using Microsoft Azure.', 'Built and maintained Dash Enterprise applications for data analysis.', 'Designed and implemented a Quality Assurance Framework for data pipelines.', 'Integrated Databricks with Tableau for enhanced data visualization.', 'Established data architecture for business intelligence and analytics projects.', 'Infrastructure to projects related to fraud detection and text analysis solutions.'] },
-  { slug: 'data-engineer-team-leader-btg-pactual', role: 'Data Engineer & Team Leader', co: 'BTG Pactual', short: 'BTG Pactual', period: 'Jun 2021 – Dec 2022', start: 2021.5, line: 'Batch and real-time ingestion on AWS; co-led the data engineering, governance and visualization teams.', body: ["Batch and real-time ingestion on AWS, an in-house ingestion framework (PySpark + EMR), a Lambda architecture for BTG+ Digital payment channels, the bank's BI portal, and pipeline observability. Co-led the data engineering, governance and visualization teams."], tech: 'AWS (EMR, Lambda), PySpark, Angular, Datadog, Kubernetes',
+  { slug: 'data-engineer-team-leader-btg-pactual', role: 'Data Engineer & Team Leader', co: 'BTG Pactual', short: 'BTG Pactual', period: 'Jun 2021 – Dec 2022', start: 2021.5, end: 2023, line: 'Batch and real-time ingestion on AWS; co-led the data engineering, governance and visualization teams.', body: ["Batch and real-time ingestion on AWS, an in-house ingestion framework (PySpark + EMR), a Lambda architecture for BTG+ Digital payment channels, the bank's BI portal, and pipeline observability. Co-led the data engineering, governance and visualization teams."], tech: 'AWS (EMR, Lambda), PySpark, Angular, Datadog, Kubernetes',
     cvText: ['Managed data modeling and governance for business intelligence initiatives.', 'Developed batch and real-time ingestion pipelines using AWS services.', 'Designed a custom ingestion framework with PySpark and AWS EMR.', 'Implemented Lambda architecture for payment processing, integrating batch and near real-time data.', 'Led cross-functional data teams, coordinating engineering, governance, and visualization efforts.', 'Developed a business intelligence portal using AWS and Angular.', 'Used data observability systems integrating Datadog, and AWS.'] },
-  { slug: 'data-engineer-safra', role: 'Data Engineer', co: 'Safra', short: 'Safra', period: 'Nov 2019 – Jul 2021', start: 2019.85, line: 'ETL job-scheduler framework; Product Owner of the anti-money-laundering rules engine.', body: ['Data modeling for visualization and an ETL job-scheduler framework. Tech lead of the internal budgeting system. Product Owner of the anti-money-laundering rules engine (Red Hat PAM + Apache Camel) and of the fraud-prevention ecosystem (Feedzai).'], tech: 'Red Hat PAM, Apache Camel, Feedzai',
+  { slug: 'data-engineer-safra', role: 'Data Engineer', co: 'Safra', short: 'Safra', period: 'Nov 2019 – Jul 2021', start: 2019.85, end: 2021.6, line: 'ETL job-scheduler framework; Product Owner of the anti-money-laundering rules engine.', body: ['Data modeling for visualization and an ETL job-scheduler framework. Tech lead of the internal budgeting system. Product Owner of the anti-money-laundering rules engine (Red Hat PAM + Apache Camel) and of the fraud-prevention ecosystem (Feedzai).'], tech: 'Red Hat PAM, Apache Camel, Feedzai',
     cvText: ['Designed data models and developed data visualization tools.', 'Built and optimized an ETL job scheduler for data transformation.', 'Led the internal budget system project for financial planning.', 'Served as Product Owner for a money laundering prevention system using Red Hat Process Automation Manager and Apache Camel.', "Managed the fraud prevention ecosystem, deploying Feedzai's risk assessment suite."] },
-  { slug: 'trainee-safra', role: 'Trainee', co: 'Safra', short: 'Safra', period: 'Jan 2019 – Oct 2019', start: 2019, line: 'Job rotation across Credit, Back Office, Risk & Audit, Trading, Products and IT.', body: ['Job rotation across Credit, Back Office, Risk & Audit, Trading, Products and IT. Delivered data visualization, PMO and marketing machine-learning projects presented to the board, and ran workshops on banking products and programming logic.'], tech: '[PLACEHOLDER]',
+  { slug: 'trainee-safra', role: 'Trainee', co: 'Safra', short: 'Safra', period: 'Jan 2019 – Oct 2019', start: 2019, end: 2019.85, line: 'Job rotation across Credit, Back Office, Risk & Audit, Trading, Products and IT.', body: ['Job rotation across Credit, Back Office, Risk & Audit, Trading, Products and IT. Delivered data visualization, PMO and marketing machine-learning projects presented to the board, and ran workshops on banking products and programming logic.'], tech: '[PLACEHOLDER]',
     cvText: ['Rotated through key departments, including Credit, Risk, Audit, Back Office, and IT.', 'Developed data-driven projects in business intelligence, PMO, and machine learning.'] },
-  { slug: 'market-intelligence-analyst-b2w', role: 'Market Intelligence Analyst', co: 'B2W Digital', short: 'B2W', period: 'Oct 2018 – Dec 2018', start: 2018.75, line: 'Business process automation and data structuring for commercial reports and KPIs.', body: ['Business process automation and data structuring for commercial reports and KPIs.'], tech: '[PLACEHOLDER]',
+  { slug: 'market-intelligence-analyst-b2w', role: 'Market Intelligence Analyst', co: 'B2W Digital', short: 'B2W', period: 'Oct 2018 – Dec 2018', start: 2018.75, end: 2019, line: 'Business process automation and data structuring for commercial reports and KPIs.', body: ['Business process automation and data structuring for commercial reports and KPIs.'], tech: '[PLACEHOLDER]',
     cvText: ['Automated business intelligence processes and improved reporting structures.'] },
-  { slug: 'advanced-analytics-consultant-deloitte', role: 'Advanced Analytics Consultant', co: 'Deloitte', short: 'Deloitte', period: 'Feb 2017 – Oct 2018', start: 2017.1, line: 'Process optimization for a telecom M&A, RPA POCs and Tableau executive dashboards.', body: ['Process mapping and optimization (PMBOK, Lean Six Sigma) for a multinational telecom going through M&A, Qlik insights, RPA training and POCs, and Tableau executive dashboards on AWS big data for a pharma company.'], tech: 'Qlik, Tableau, AWS, RPA',
+  { slug: 'advanced-analytics-consultant-deloitte', role: 'Advanced Analytics Consultant', co: 'Deloitte', short: 'Deloitte', period: 'Feb 2017 – Oct 2018', start: 2017.1, end: 2018.85, line: 'Process optimization for a telecom M&A, RPA POCs and Tableau executive dashboards.', body: ['Process mapping and optimization (PMBOK, Lean Six Sigma) for a multinational telecom going through M&A, Qlik insights, RPA training and POCs, and Tableau executive dashboards on AWS big data for a pharma company.'], tech: 'Qlik, Tableau, AWS, RPA',
     cvText: ['Applied PMBOK and Lean Six Sigma methodologies to optimize business processes.', 'Conducted process mapping and technology integration for multinational clients.', 'Developed executive dashboards in Tableau, connected to Amazon Big Data environments.', 'Led robotic process automation (RPA) training and proof-of-concept initiatives.'] },
-  { slug: 'full-stack-developer-squid', role: 'Full-Stack Developer', co: 'Squid', short: 'Squid', period: 'Jan 2017 – Feb 2017', start: 2017, line: 'MEAN stack (later React), social-media data analysis and self-service BI tools.', body: ['MEAN stack (later React), plus social-media data analysis and self-service BI tools.'], tech: 'MongoDB, Express, Angular, Node, React',
+  { slug: 'full-stack-developer-squid', role: 'Full-Stack Developer', co: 'Squid', short: 'Squid', period: 'Jan 2017 – Feb 2017', start: 2017, end: 2017.15, line: 'MEAN stack (later React), social-media data analysis and self-service BI tools.', body: ['MEAN stack (later React), plus social-media data analysis and self-service BI tools.'], tech: 'MongoDB, Express, Angular, Node, React',
     cvText: ['Developed web applications using the MEAN stack (MongoDB, Express.js, AngularJS, Node.js).', 'Applied data analytics to social media insights.'] },
-  { slug: 'growth-hacking-intern-instacarro', role: 'Growth Hacking Intern', co: 'InstaCarro.com', short: 'InstaCarro', period: 'Jun 2016 – Aug 2016', start: 2016.45, line: 'KPIs across AdWords, Analytics and Facebook Ads; led an 8-person customer service team.', body: ['KPIs crossing AdWords, Analytics, Facebook Ads and internal data. Led an 8-person customer service team, and implemented NPS and referral acquisition.'], tech: 'AdWords, Google Analytics, Facebook Ads',
+  { slug: 'growth-hacking-intern-instacarro', role: 'Growth Hacking Intern', co: 'InstaCarro.com', short: 'InstaCarro', period: 'Jun 2016 – Aug 2016', start: 2016.45, end: 2016.65, line: 'KPIs across AdWords, Analytics and Facebook Ads; led an 8-person customer service team.', body: ['KPIs crossing AdWords, Analytics, Facebook Ads and internal data. Led an 8-person customer service team, and implemented NPS and referral acquisition.'], tech: 'AdWords, Google Analytics, Facebook Ads',
     cvText: ['Managed marketing data and implemented customer acquisition strategies.', 'Led customer service automation projects (NPS, SMS, WhatsApp, email).'] },
 ];
 // Full role text as HTML: CV bullets when present, else the content.md paragraphs.
@@ -42,9 +43,9 @@ const roleHtml = e => e.cvText ? `<ul class="cv">${e.cvText.map(b => `<li>${esc(
 const EDU = [
   // ITA M.Sc. Data Science (started 2022) is NOT concluded. Kept here, commented out, so it is never presented as a degree.
   // { slug: 'msc-data-science-ita', degree: 'M.Sc. Data Science', school: 'Instituto Tecnológico de Aeronáutica (ITA)', short: 'ITA', period: '2022 – (in progress)', start: 2022 },
-  { slug: 'mba-business-intelligence-puc-minas', degree: 'MBA, Business Intelligence & Business Analytics', school: 'PUC Minas', short: 'PUC Minas', period: '2021 – 2023', start: 2021 },
-  { slug: 'mba-data-science-usp', degree: 'MBA, Data Science', school: 'Universidade de São Paulo (USP)', short: 'USP', period: '2020 – 2021', start: 2020 },
-  { slug: 'bsc-computer-science-ufscar', degree: 'B.Sc. Computer Science', school: 'Federal University of São Carlos (UFSCar)', short: 'UFSCar', period: '2013 – 2017', start: 2013 },
+  { slug: 'mba-business-intelligence-puc-minas', degree: 'MBA, Business Intelligence & Business Analytics', school: 'PUC Minas', short: 'PUC Minas', period: '2021 – 2023', start: 2021, end: 2023 },
+  { slug: 'mba-data-science-usp', degree: 'MBA, Data Science', school: 'Universidade de São Paulo (USP)', short: 'USP', period: '2020 – 2021', start: 2020, end: 2021 },
+  { slug: 'bsc-computer-science-ufscar', degree: 'B.Sc. Computer Science', school: 'Federal University of São Carlos (UFSCar)', short: 'UFSCar', period: '2013 – 2017', start: 2013, end: 2017 },
   { slug: 'technical-it-ete-basilides-de-godoy', degree: 'Technical Degree, Information Technology', school: 'ETE Prof. Basilides de Godoy', short: 'ETE', period: '2011 – 2012', start: 2011 },
   { slug: 'technical-electronics-senai', degree: 'Technical Degree, Electronics & Electrotechnics', school: 'SENAI', short: 'SENAI', period: '2010 – 2011', start: 2010 },
 ];
@@ -63,10 +64,10 @@ const BUCKET = [['Europe', 'Italy, Portugal, Spain, France, Lithuania (where my 
 const FUN = ['My family comes from Lithuania.', '4th place at the Brazilian Olympiad in Informatics (OBI), regional phase.', 'I once won a poetry award in Barueri, SP.', "Currently learning Korean (a little)."];
 const TICKER = ['Been to Foz do Iguaçu', '4th place at OBI regionals', 'Currently learning Korean', 'Often studying, sometimes teaching, always learning', 'Been to Buenos Aires', 'Lithuania is on the bucket list — my family comes from there', 'Cooking is a serious hobby', 'Been to Los Angeles', '[PLACEHOLDER] musing', 'Watching my son learn is the best part of the day'];
 // Real logos live in /assets/logos (shared by versions A and B); sources in /assets/logos/SOURCES.md. file:null → labelled grey placeholder.
-const LOGOS = [['TELUS Digital', 'telus-digital.svg'], ['Bain & Company', 'bain.svg'], ['BTG Pactual', 'btg-pactual.svg'], ['Banco Safra', 'safra.svg'], ['B2W Digital', 'b2w.png'], ['Deloitte', 'deloitte.svg'], ['Squid', 'squid.png'], ['InstaCarro', 'instacarro.svg'], ['ITA', 'ita.svg'], ['PUC Minas', 'puc-minas.png'], ['USP', 'usp.svg'], ['UFSCar', 'ufscar.png'], ['OBI', 'obi.svg'], ['OBMEP', 'obmep.png']];
-// Derived numbers (from content.md): first job Jun 2016 → today (Sep 2026) = 10 years; 8 distinct companies; 5 degrees (ITA M.Sc. in progress, not counted); 3 countries; 3 languages spoken/learning.
+const LOGOS = [['TELUS Digital', 'telus-digital.svg'], ['Bain & Company', 'bain.svg'], ['BTG Pactual', 'btg-pactual.svg'], ['Banco Safra', 'safra.svg'], ['B2W Digital', 'b2w.png'], ['Deloitte', 'deloitte.svg'], ['Squid', 'squid.png'], ['InstaCarro', 'instacarro.svg'], ['ITA', 'ita.svg'], ['PUC Minas', 'puc-minas.png'], ['USP', 'usp.svg'], ['UFSCar', 'ufscar.png']];
+// Derived numbers (from content.md): first job Jun 2016 → today (Sep 2026) = 10 years; 8 distinct companies; 5 degrees (ITA M.Sc. in progress, not counted); 3 countries; 2 languages (PT, EN).
 const COMPANIES = [...new Set(EXP.map(e => e.short))];
-const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['3', 'languages (one still beginner)']];
+const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['2', 'languages']];
 const PROJECTS = [
   { title: 'Mission Control', meta: 'personal', href: 'projects/mission-control.html', text: 'A platform for managing my own ideas and projects, with full visibility across the development lifecycle. It captures ideas with almost no friction and runs "skills" on top of projects, almost like a harness. AI isn\'t used to write the code; it helps decide where each project should go next.', tech: '[PLACEHOLDER]' },
   { title: 'Spot', meta: 'Bain & Company (NPS Prism) · 2023', href: 'spot.html', text: 'A data-quality gateway that compares two Tableau workbooks data point by data point via API: 4 people × 2 weeks → 1 person × 30 minutes per validation cycle, covering 100% of data points instead of a sample. It became the NPS Prism data team\'s largest product.', tech: 'Python, Tableau REST + Metadata API, pandas, stdlib concurrency' },
@@ -164,18 +165,27 @@ const share = `<div class="share"><span>Share:</span> <button type="button" data
 const write = (file, html) => { const f = path.join(OUT, file); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); console.log('wrote', file); };
 
 // ---------------- home ----------------
-const tlYears = Array.from({ length: 11 }, (_, i) => 2016 + i);
-const pct = y => ((y - 2016) / (2027 - 2016) * 100).toFixed(1);
-const tiers = { InstaCarro: 'dn', Squid: 'up', Deloitte: 'dn2', B2W: 'up', Safra: 'dn', 'BTG Pactual': 'up', Bain: 'dn', 'TELUS Digital': 'up' };
-const firstByCo = COMPANIES.map(c => EXP.filter(e => e.short === c).sort((a, b) => a.start - b.start)[0]);
+// Gantt-style bars: axis 2016 → 2027 (so the "Present" bar, ending 2026.75, has room). One bar per company
+// (roles merged: first start → last end), linking to the first role there. Stints under 6 months go to a thin
+// strip below the main lane, labels alternating below/above so InstaCarro and Squid don't collide.
+const T0 = 2016, T1 = 2027, tlYears = Array.from({ length: T1 - T0 }, (_, i) => T0 + i);
+const pct = y => ((Math.max(y, T0) - T0) / (T1 - T0) * 100).toFixed(2);
+const bar = (cls, href, title, label, s, e) => `<a role="listitem" class="tl-bar ${cls}" style="left:${pct(s)}%;width:${(pct(e) - pct(s)).toFixed(2)}%" href="${href}" title="${esc(title)}"><span>${esc(label)}</span></a>`;
+const byCo = COMPANIES.map(c => { const rs = EXP.filter(e => e.short === c).sort((a, b) => a.start - b.start), last = rs[rs.length - 1]; return { short: c, first: rs[0], start: rs[0].start, end: Math.max(...rs.map(r => r.end)), title: `${rs.map(r => r.role).join(' → ')} · ${rs[0].period.split(' – ')[0]} – ${last.period.split(' – ')[1]}` }; });
+const edus = EDU.filter(e => e.end > T0);
+const isShort = c => c.end - c.start < 0.5;
+const workBar = (c, cls) => bar(cls, `experience/${c.first.slug}.html`, c.title, c.short, c.start, c.end);
 const timelineH = `<div class="tl-h-wrap"><div class="tl-h" role="list" aria-label="Career timeline 2016–2026">
-  <div class="tl-h-line"></div>
-  ${tlYears.map(y => `<span class="tl-h-year" style="left:${pct(y)}%">${y}</span>`).join('')}
-  ${firstByCo.map(e => `<a role="listitem" class="tl-h-dot ${tiers[e.short]}" style="left:${pct(e.start)}%" href="experience/${e.slug}.html" title="${esc(e.role)} · ${esc(e.period)}"><i></i><span>${esc(e.short)}</span></a>`).join('')}
+  ${tlYears.map(y => `<i class="tl-h-grid" style="left:${pct(y)}%"></i>`).join('')}
+  <div class="tl-lane"><b>Schools</b>${edus.map(e => bar('edu', `education/${e.slug}.html`, `${e.degree} · ${e.period}`, e.short, e.start, e.end)).join('')}</div>
+  <div class="tl-lane"><b>Companies</b>${byCo.filter(c => !isShort(c)).map(c => workBar(c, 'work')).join('')}</div>
+  <div class="tl-lane tl-lane-thin">${byCo.filter(isShort).map((c, i) => workBar(c, i % 2 ? 'thin up' : 'thin dn')).join('')}</div>
+  <div class="tl-axis">${tlYears.map(y => `<span style="left:${pct(y)}%">${y}</span>`).join('')}</div>
 </div></div>`;
+const SHOW_TESTIMONIALS = false; // false → the section is still emitted, but inside an HTML comment
 const homeBody = `
 <section id="hero-sec" class="hero">
-  <img class="avatar" src="assets/lucas-avatar.jpg" width="160" height="160" alt="Lucas Lukasavicus">
+  <img class="avatar" src="assets/lucas-pro.jpg" width="160" height="160" alt="Lucas Lukasavicus">
   <h2 class="hero-name">Lucas Lukasavicus</h2>
   <p class="hero-headline">AI Leader &amp; Tech Innovator</p>
   <p class="motto">Often studying, sometimes teaching, always learning.</p>
@@ -183,15 +193,11 @@ const homeBody = `
   <ul class="ticker" aria-live="polite" aria-label="Loading-screen style fun facts">${TICKER.map((t, i) => `<li${i ? '' : ' class="on"'}>${esc(t)}</li>`).join('')}</ul>
 </section>
 <section id="facts">
-  <p class="badges"><span>2 MBAs</span><span>3 languages</span><span>4th place · OBI regionals</span><span>${COMPANIES.length} companies</span><span>10 years in tech</span><span>Poetry award · Barueri</span></p>
+  <p class="badges"><span>2 MBAs</span><span>2 languages</span><span>${COMPANIES.length} companies</span><span>10 years in tech</span></p>
 </section>
 <section id="pillars">
   <h3>What I'm about</h3>
-  <div class="cols3">
-    <div><h4>AI Leader</h4><p>More and more, I enjoy being around highly skilled people who challenge my views — and I've had the privilege of leading people like that.</p></div>
-    <div><h4>Tech Innovator</h4><p>I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy.</p></div>
-    <div><h4>Lifelong Learner</h4><p>I thrive in environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet.</p></div>
-  </div>
+  <p class="pillars-p">As an <strong>AI Leader</strong>, I enjoy being around highly skilled people who challenge my views — and I've had the privilege of leading people like that. As a <strong>Tech Innovator</strong>, I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy. And as a <strong>Lifelong Learner</strong>, I thrive in environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet.</p>
 </section>
 <section id="featured">
   <h3>Featured projects</h3>
@@ -205,7 +211,7 @@ const homeBody = `
   <p class="more"><a href="experience.html">Full timeline &rarr;</a></p>
 </section>
 <section id="logos">
-  <h3>Companies, schools &amp; olympiads</h3>
+  <h3>Companies &amp; schools</h3>
   <div class="logos">${LOGOS.map(([l, f]) => f ? `<span class="logo" title="${esc(l)}"><img src="assets/logos/${f}" alt="${esc(l)}" loading="lazy"></span>` : `<div class="ph ph-logo"><b>Logo</b><span>${esc(l)}</span></div>`).join('')}</div>
 </section>
 <section id="numbers">
@@ -217,10 +223,10 @@ const homeBody = `
   <p class="center">Competitive programming, cooking, reading, going to new places with my wife, and watching my son learn.</p>
   <p class="more"><a href="personal.html">Get to know me better &rarr;</a></p>
 </section>
-<section id="testimonials">
+${SHOW_TESTIMONIALS ? '' : '<!-- testimonials: hidden until there are real quotes (SHOW_TESTIMONIALS in _build/build.js)\n'}<section id="testimonials">
   <h3>Testimonials</h3>
   <div class="cols3">${[1, 2, 3].map(() => ph('ph-small', 'Placeholder · Depoimento', '[PLACEHOLDER] quote, name and role')).join('')}</div>
-</section>
+</section>${SHOW_TESTIMONIALS ? '' : '\n-->'}
 <section id="cta" class="cta">
   <h3>Let's grab a coffee and talk ideas.</h3>
   <p class="ctas"><a class="btn btn-primary" href="contact.html">Get in touch</a></p>
@@ -230,7 +236,7 @@ write('index.html', shell({ file: 'index.html', nav: 'index.html', bodyClass: 'w
 // ---------------- about ----------------
 const aboutBody = `
 <section id="story">
-  <img class="fun" src="assets/lucas-fun.jpg" width="675" height="900" alt="Lucas doing a dab">
+  <img class="fun" src="assets/lucas-casual.jpg" width="640" height="640" alt="Lucas, casual portrait">
   ${ABOUT.map(p => `<p>${esc(p)}</p>`).join('')}
   <p class="langs">Portuguese (native) · English (full professional) · Korean (beginner) · Spanish &amp; Italian (interested)</p>
 </section>
@@ -267,12 +273,9 @@ const expBody = `
 <section id="work">
   <h3>Work</h3>
   ${tlV(EXP.map(e => `<li><span class="when">${esc(e.period)}</span><a href="experience/${e.slug}.html"><strong>${esc(e.role)}</strong></a> · ${esc(e.co)}${roleHtml(e)}<p class="tech"><strong>Tech:</strong> ${esc(e.tech)}</p></li>`))}
-</section>
-<section id="education">
-  <h3>Education</h3>
-  ${tlV(EDU.map(e => `<li><span class="when">${esc(e.period)}</span><a href="education/${e.slug}.html"><strong>${esc(e.degree)}</strong></a> · ${esc(e.school)}</li>`))}
+  <p class="more"><a href="about.html#education">Education &rarr;</a></p>
 </section>`;
-write('experience.html', shell({ file: 'experience.html', title: 'Experience', nav: 'experience.html', heroTitle: 'Experience & Education', bodyClass: 'wide', body: expBody }));
+write('experience.html', shell({ file: 'experience.html', title: 'Experience', nav: 'experience.html', heroTitle: 'Experience', bodyClass: 'wide', body: expBody }));
 
 // ---------------- detail pages ----------------
 function detail({ file, title, meta, paras, html, tech, back, backLabel, nav, phDesc }) {
@@ -288,7 +291,7 @@ ${share}
   write(file, shell({ file, title, nav, pageClass: 'case', depth: 1, body }));
 }
 EXP.forEach(e => detail({ file: `experience/${e.slug}.html`, title: e.role, meta: `${e.co} · ${e.period}`, html: roleHtml(e), tech: e.tech, back: '../experience.html', backLabel: 'Experience', nav: 'experience.html', phDesc: `Logo of ${e.short} or a photo from this period` }));
-EDU.forEach(e => detail({ file: `education/${e.slug}.html`, title: e.degree, meta: `${e.school} · ${e.period}`, paras: ['[PLACEHOLDER] What I studied, thesis or final project, and what stayed with me.'], tech: '[PLACEHOLDER]', back: '../experience.html', backLabel: 'Experience & Education', nav: 'experience.html', phDesc: `Logo of ${e.short}` }));
+EDU.forEach(e => detail({ file: `education/${e.slug}.html`, title: e.degree, meta: `${e.school} · ${e.period}`, paras: ['[PLACEHOLDER] What I studied, thesis or final project, and what stayed with me.'], tech: '[PLACEHOLDER]', back: '../about.html#education', backLabel: 'About · Education', nav: 'about.html', phDesc: `Logo of ${e.short}` }));
 // Project detail pages (Spot has its own case study, spot.html). New ones carry a [PLACEHOLDER] detail paragraph until written.
 PROJECTS.filter(pr => pr.href.startsWith('projects/')).forEach(pr => detail({ file: pr.href, title: pr.title, meta: pr.meta === 'personal' ? 'Personal project' : pr.meta, paras: [pr.text].concat(pr.phDesc ? ['[PLACEHOLDER] Full write-up: context, what was built, results.'] : []), tech: pr.tech, back: '../projects.html', backLabel: 'Projects', nav: 'projects.html', phDesc: pr.phDesc || 'Screenshot of the Mission Control board' }));
 

@@ -42,8 +42,17 @@ Skip link, barra de progresso de scroll, back to top, FAB "Let's grab a coffee",
 | Projetos | carrossel | cards expansíveis |
 | Mensagens no hero | ticker de fun facts | typing + toggle Now/Studied |
 | Nav mobile | hamburger | tab dock |
-| Timeline | horizontal na home, vertical na Experience | curva da jornada + régua de anos |
+| Timeline | barras Gantt na home (empresas + escolas, 2016–2026), vertical na Experience | curva da jornada + régua de anos (a régua continua mostrando os diplomas) |
+| "What I'm about" / "What I bring" | um parágrafo com os ganchos em negrito (AI Leader, Tech Innovator, Lifelong Learner) | três cards com ícone |
 | Assunto do mailto | `[A]` | `[B]` |
+
+## Ajustes da issue #4 (branch `home-about-quick-fixes`, 2026-10-01) — iguais em A e B
+
+- Badges do hero: "2 languages"; sem OBI nem prêmio de poesia (ficam só em Honors, no About).
+- Logo wall: só empresas e escolas ("Companies & schools"); `obi.svg` e `obmep.png` removidos de `/assets/logos`.
+- Testimonials: a seção continua no código, mas dentro de um comentário HTML na home (A: flag `SHOW_TESTIMONIALS` no `build.js`; B: comentário direto no `b/index.html`).
+- Education só no About: `experience.html` lista só cargos nas duas versões; as páginas `education/*.html` continuam e voltam pro `about.html#education`.
+- Fotos: `assets/lucas-pro.jpg` (nav/hero/avatares) e `assets/lucas-casual.jpg` (About e "Off the clock"); `lucas-avatar.jpg` e `lucas-fun.jpg` apagados.
 
 ## Bug encontrado na passada
 
