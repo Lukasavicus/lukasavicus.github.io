@@ -15,7 +15,7 @@ Exatamente as 7 que o Lucas vê. Nav de `index.html`: Home · About · Experienc
 | Home | `index.html` | hero-sec, facts, pillars, featured, career, logos, numbers, interests-teaser, testimonials (placeholder), cta |
 | About | `about.html` | hero, story, education, skills, howcalc (modal `<dialog>`), honors, resume (placeholder) |
 | Experience | `experience.html` | hero, work |
-| Projects | `projects.html` | carrossel com 4 projetos (Mission Control, Spot, Data Platform, Ingestion framework) |
+| Projects | `projects.html` | carrossel com 8 projetos (Mission Control, PhYnances, Baby Health, Spot, SOS, Red Hat AML onboarding, Address-resolution RPA, Data lake for BTG+ payments; branch `featured-projects`) |
 | Articles | `articles/index.html` (Jekyll) | lista `site.posts` |
 | Personal | `personal.html` | hero, interests, travel, photography, musings, fun-facts |
 | Contact | `contact.html` | hero, contact-form (mailto), elsewhere |
@@ -26,7 +26,7 @@ Exatamente as 7 que o Lucas vê. Nav de `index.html`: Home · About · Experienc
 |---|---|---|
 | `experience/` | 10 | advanced-analytics-consultant-deloitte, data-ai-manager-telus-digital, data-engineer-safra, data-engineer-team-leader-btg-pactual, full-stack-developer-squid, genai-manager-telus-digital, growth-hacking-intern-instacarro, market-intelligence-analyst-b2w, senior-data-engineer-bain, trainee-safra |
 | `education/` | 5 | bsc-computer-science-ufscar, mba-business-intelligence-puc-minas, mba-data-science-usp, technical-electronics-senai, technical-it-ete-basilides-de-godoy (o M.Sc. ITA ficou fora, commit `bd24f60`; `docs/ab-parity.md` ainda diz "6") |
-| `projects/` | 3 | mission-control, data-platform, ingestion-framework |
+| `projects/` | 7 | mission-control, phynances, baby-health, sos-safra-budgeting, aml-onboarding-safra, address-rpa-deloitte, btg-payments-data-lake (branch `featured-projects`; antes eram 3: mission-control, data-platform, ingestion-framework) |
 | Case study | 1 | `spot.html` (case Spot em PT, corpo em `_build/spot-body.html`; ligado ao card Spot) |
 
 ### 1.3 Páginas de footer ("Explore the site")
@@ -72,7 +72,7 @@ Também no footer: busca que filtra o sitemap (`#sitesearch`), ícones sociais (
 | | A (`/`) | B (`/b/`) |
 |---|---|---|
 | HTML de topo (7 nav + Code Shop + FAQ + Spot + 404) | 10 | 10 |
-| Detalhe (experience 10 + education 5 + projects 3) | 18 | 18 |
+| Detalhe (experience 10 + education 5 + projects 7) | 22 | 22 |
 | Jekyll (articles 2 + research 5) | 7 | 0, usa os da raiz (links absolutos `/articles/`, `/llms.txt`) |
 | Utilitário | `llms.txt` | nenhum (aponta para `/llms.txt`) |
 | **Total de URLs navegáveis** | **35 páginas + llms.txt** | **28 páginas** (+ compartilha 7 + llms.txt com A) |
