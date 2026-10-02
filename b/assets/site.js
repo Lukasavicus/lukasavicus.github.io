@@ -1,8 +1,19 @@
 /* site.js — Lucas's small layer: scroll progress, back to top, keyboard navigation,
-   timeline hover, copy buttons, contact form (mailto), dialogs. No dependencies. */
+   timeline hover, copy buttons, contact form (mailto), dialogs, dark mode, share, footer search. No dependencies. */
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+
+  /* dark mode: same localStorage key as version A ('theme'), so the choice follows the visitor across A/B.
+     ?theme=dark|light applies for this load only (handy for screenshots). */
+  var root = document.documentElement, q = /[?&]theme=(dark|light)\b/.exec(location.search);
+  if ((q ? q[1] : localStorage.getItem('theme')) === 'dark') root.classList.add('dark');
+  var dark = $('#darktoggle');
+  if (dark) {
+    var sync = function () { var on = root.classList.contains('dark'); dark.setAttribute('aria-pressed', on); dark.textContent = on ? 'Light mode' : 'Dark mode'; };
+    dark.addEventListener('click', function () { root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light'); sync(); });
+    sync();
+  }
 
   /* progress bar (C18, horizontal) + back to top (C9) */
   var bar = $('#progress'), top = $('#totop');
@@ -15,8 +26,8 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* keyboard (C19): ↑/↓ = sections of this page, ←/→ = pages in nav order */
-  var PAGES = ['index.html', 'about.html', 'experience.html', 'projects.html', 'personal.html', 'contact.html'];
+  /* keyboard (C19): ↑/↓ = sections of this page, ←/→ = pages in nav order (Articles is Jekyll, at the site root) */
+  var PAGES = ['index.html', 'about.html', 'experience.html', 'projects.html', '/articles/', 'personal.html', 'contact.html'];
   document.addEventListener('keydown', function (e) {
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
     var t = e.target;
@@ -85,6 +96,27 @@
     var d = new FormData(f);
     location.href = 'mailto:lukasavicus@gmail.com?subject=' + encodeURIComponent('[B] Hello from your site — ' + d.get('name')) +
       '&body=' + encodeURIComponent(d.get('message') + '\n\n— ' + d.get('name') + ' <' + d.get('email') + '>');
+  });
+
+  /* share (detail pages, spot): copy link, LinkedIn, X */
+  var url = location.href, title = document.title;
+  $$('[data-share]').forEach(function (el) {
+    var kind = el.dataset.share;
+    if (kind === 'linkedin') el.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+    else if (kind === 'x') el.href = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title);
+    else if (kind === 'copy') el.addEventListener('click', function () {
+      var done = function () { var t = el.textContent; el.textContent = 'Copied!'; setTimeout(function () { el.textContent = t; }, 1500); };
+      if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, done); else done();
+    });
+  });
+
+  /* footer search: filters the sitemap links while typing; a column hides when none of its links match */
+  var search = $('#sitesearch'), sitemap = $('.sitemap'), nomatch = $('#nomatch');
+  if (search && sitemap) search.addEventListener('input', function () {
+    var qs = search.value.trim().toLowerCase(), any = false;
+    $$('a', sitemap).forEach(function (a) { var hit = !qs || a.textContent.toLowerCase().indexOf(qs) > -1; a.hidden = !hit; any = any || hit; });
+    $$(':scope > div', sitemap).forEach(function (col) { col.hidden = !$$('a:not([hidden])', col).length; });
+    if (nomatch) nomatch.hidden = any;
   });
 
   /* dialogs (How it's calculated) */

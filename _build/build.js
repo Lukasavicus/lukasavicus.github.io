@@ -40,7 +40,8 @@ const EXP = [
 // Full role text as HTML: CV bullets when present, else the content.md paragraphs.
 const roleHtml = e => e.cvText ? `<ul class="cv">${e.cvText.map(b => `<li>${esc(b)}</li>`).join('')}</ul>` : e.body.map(p => `<p>${esc(p)}</p>`).join('');
 const EDU = [
-  { slug: 'msc-data-science-ita', degree: 'M.Sc. Data Science', school: 'Instituto Tecnológico de Aeronáutica (ITA)', short: 'ITA', period: '2022 – 2024', start: 2022 },
+  // ITA M.Sc. Data Science (started 2022) is NOT concluded. Kept here, commented out, so it is never presented as a degree.
+  // { slug: 'msc-data-science-ita', degree: 'M.Sc. Data Science', school: 'Instituto Tecnológico de Aeronáutica (ITA)', short: 'ITA', period: '2022 – (in progress)', start: 2022 },
   { slug: 'mba-business-intelligence-puc-minas', degree: 'MBA, Business Intelligence & Business Analytics', school: 'PUC Minas', short: 'PUC Minas', period: '2021 – 2023', start: 2021 },
   { slug: 'mba-data-science-usp', degree: 'MBA, Data Science', school: 'Universidade de São Paulo (USP)', short: 'USP', period: '2020 – 2021', start: 2020 },
   { slug: 'bsc-computer-science-ufscar', degree: 'B.Sc. Computer Science', school: 'Federal University of São Carlos (UFSCar)', short: 'UFSCar', period: '2013 – 2017', start: 2013 },
@@ -63,7 +64,7 @@ const FUN = ['My family comes from Lithuania.', '4th place at the Brazilian Olym
 const TICKER = ['Been to Foz do Iguaçu', '4th place at OBI regionals', 'Currently learning Korean', 'Often studying, sometimes teaching, always learning', 'Been to Buenos Aires', 'Lithuania is on the bucket list — my family comes from there', 'Cooking is a serious hobby', 'Been to Los Angeles', '[PLACEHOLDER] musing', 'Watching my son learn is the best part of the day'];
 // Real logos live in /assets/logos (shared by versions A and B); sources in /assets/logos/SOURCES.md. file:null → labelled grey placeholder.
 const LOGOS = [['TELUS Digital', 'telus-digital.svg'], ['Bain & Company', 'bain.svg'], ['BTG Pactual', 'btg-pactual.svg'], ['Banco Safra', 'safra.svg'], ['B2W Digital', 'b2w.png'], ['Deloitte', 'deloitte.svg'], ['Squid', 'squid.png'], ['InstaCarro', 'instacarro.svg'], ['ITA', 'ita.svg'], ['PUC Minas', 'puc-minas.png'], ['USP', 'usp.svg'], ['UFSCar', 'ufscar.png'], ['OBI', 'obi.svg'], ['OBMEP', 'obmep.png']];
-// Derived numbers (from content.md): first job Jun 2016 → today (Sep 2026) = 10 years; 8 distinct companies; 6 degrees; 3 countries; 3 languages spoken/learning.
+// Derived numbers (from content.md): first job Jun 2016 → today (Sep 2026) = 10 years; 8 distinct companies; 5 degrees (ITA M.Sc. in progress, not counted); 3 countries; 3 languages spoken/learning.
 const COMPANIES = [...new Set(EXP.map(e => e.short))];
 const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['3', 'languages (one still beginner)']];
 const PROJECTS = [
@@ -182,7 +183,7 @@ const homeBody = `
   <ul class="ticker" aria-live="polite" aria-label="Loading-screen style fun facts">${TICKER.map((t, i) => `<li${i ? '' : ' class="on"'}>${esc(t)}</li>`).join('')}</ul>
 </section>
 <section id="facts">
-  <p class="badges"><span>M.Sc. Data Science · ITA</span><span>3 languages</span><span>4th place · OBI regionals</span><span>${COMPANIES.length} companies</span><span>10 years in tech</span><span>Poetry award · Barueri</span></p>
+  <p class="badges"><span>2 MBAs</span><span>3 languages</span><span>4th place · OBI regionals</span><span>${COMPANIES.length} companies</span><span>10 years in tech</span><span>Poetry award · Barueri</span></p>
 </section>
 <section id="pillars">
   <h3>What I'm about</h3>
@@ -235,6 +236,7 @@ const aboutBody = `
 </section>
 <section id="education">
   <h3>Education</h3>
+  <!-- M.Sc. Data Science · ITA · 2022 – (in progress; intentionally not listed until concluded) -->
   <ul class="plain">${EDU.map(e => `<li><a href="education/${e.slug}.html"><strong>${esc(e.degree)}</strong></a> — ${esc(e.school)} — ${esc(e.period)}</li>`).join('')}</ul>
 </section>
 <section id="skills">
