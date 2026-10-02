@@ -54,6 +54,15 @@ Skip link, barra de progresso de scroll, back to top, FAB "Let's grab a coffee",
 - Education só no About: `experience.html` lista só cargos nas duas versões; as páginas `education/*.html` continuam e voltam pro `about.html#education`.
 - Fotos: `assets/lucas-pro.jpg` (nav/hero/avatares) e `assets/lucas-casual.jpg` (About e "Off the clock"); `lucas-avatar.jpg` e `lucas-fun.jpg` apagados.
 
+## Featured projects (branch `featured-projects`, 2026-10-02) — iguais em A e B
+
+Fonte: `docs/featured-projects-content.md` do lab (texto EN usado literalmente, com as ressalvas "about", "estimated", "a partner platform", "an RPA tool", "a Central Bank rule"; nenhum nome de cliente/fornecedor não confirmado entra no repo público). A: `PROJECTS` em `_build/build.js` (card = `text`, página = `page` + `tech` + `links`). B: `b/_build/patchB.py` seção 3 (`BCARDS` com a divisão problem / delivery / numbers; linha Numbers omitida quando a fonte não traz número).
+
+- Ordem (8): Mission Control, PhYnances, Baby Health, Spot, SOS: Safra's budgeting system, Red Hat AML onboarding, Address-resolution RPA, Data lake for BTG+ payments. Home (A: carrossel, 6 posições a 1440px; B: acordeão mobile + 8 botões desktop, todos com link "Read more →"/"Full case study →") e `projects.html` nas duas versões.
+- Páginas adicionadas (A `projects/` e B `b/projects/`, mesmos slugs): `phynances`, `baby-health`, `sos-safra-budgeting`, `aml-onboarding-safra`, `address-rpa-deloitte`, `btg-payments-data-lake`. `mission-control` reescrita com o texto novo.
+- Páginas removidas nas duas versões: `projects/data-platform.html`, `projects/ingestion-framework.html` (os bullets do CV continuam nas páginas de cargo TELUS e BTG). Referências corrigidas em `docs/page-inventory.md` e `docs/2016-ideas-review.md`; `llms.txt` regenerado lista os 8.
+- Detalhe: bullets da "Page (EN)" como parágrafos com lead-in em negrito, depois Tech (= Stack), depois Links (org `Mission-Control-Hub` e repo `baby-health`, `rel="noopener"`). Spot segue intocado (card e `spot.html`).
+
 ## Bug encontrado na passada
 
 B tinha um `index.md`, que o Jekyll converteria em `b/index.html` por cima da home. Removido; o footer da B aponta pro `/llms.txt` da raiz.
