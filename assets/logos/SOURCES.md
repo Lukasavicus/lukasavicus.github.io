@@ -16,5 +16,3 @@ Fetched 2026-09-30 with `curl`. Trademarks belong to their owners; used here onl
 | puc-minas.png | PUC Minas | https://www.pucminas.br/Style%20Library/STATIC/img/2025/brasao-pucminas-2025-versao-positiva.png (official site header) |
 | usp.svg | USP — Universidade de São Paulo | https://commons.wikimedia.org/wiki/File:Webysther_20160310_-_Logo_USP.svg |
 | ufscar.png | UFSCar | https://commons.wikimedia.org/wiki/File:Ufscar-logo.png |
-| obi.svg | OBI — Olimpíada Brasileira de Informática | https://olimpiada.ic.unicamp.br/static/assets/img/logo-obi2026.svg (official site header) |
-| obmep.png | OBMEP | http://www.obmep.org.br/images/logo-master.png (official site header) |
