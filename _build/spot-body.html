@@ -82,7 +82,7 @@
 
 <p><strong>2. Duas APIs e <code>requests</code> direto, em vez da biblioteca oficial.</strong><br>A biblioteca oficial (<code>tableauserverclient</code>) não expunha o que eu precisava. Combinei a <strong>REST API</strong> (dados das views) com a <strong>Metadata API</strong> (estrutura dos workbooks), num wrapper próprio sobre <code>requests</code>.</p>
 <p><strong>3. Orientação a objeto em vez de script procedural.</strong><br>O Tech Lead da época preferia uma abordagem procedural, "mais direta". Mantive um desenho orientado a objetos, com classes, herança e polimorfismo. Foi o que permitiu acrescentar o dry run e novos tipos de checagem sem reescrever o núcleo.</p>
-<p><strong>4. Stdlib primeiro.</strong><br>Fora o pandas, tudo com a biblioteca padrão do Python: concorrência, I/O, CLI. Menos dependências, menos atrito para adotar numa área que não era de software.</p>
+<p><strong>4. Stdlib primeiro.</strong><br>Fora o pandas e o <code>requests</code>, as duas exceções, tudo com a biblioteca padrão do Python: concorrência, I/O, CLI. Menos dependências, menos atrito para adotar numa área que não era de software.</p>
 <p><strong>5. Paralelismo por sheet.</strong><br>Cada sheet é independente e a comparação é dominada por I/O. Paralelizar as chamadas derrubou o runtime de <strong>3–4 horas para ~30 minutos</strong>.</p>
 
 <h2>5. Resultados</h2>

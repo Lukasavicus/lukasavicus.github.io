@@ -52,15 +52,21 @@ body a.fab:hover{background:#444;color:#fff}
 .lang a{color:#444}
 .lang span{cursor:not-allowed}
 
+/* Header name is a plain <div class="logo"> (one H1 per page); same look as Squarespace's h1.logo */
+.site-title .logo{text-transform:uppercase;font-weight:400;letter-spacing:3px;font-size:20px;font-family:"Varela Round",arial,sans-serif;line-height:1.2em;font-style:normal}
+.canvas-style-normal.site-title .logo a{margin-right:-3px}
+.hero-name{line-height:1.4em}
+
 /* Sticky nav (topNav lives outside #header so it sticks for the whole page) */
 #topNav{position:sticky;top:0;float:none;clear:both;width:100%;background:var(--bg);z-index:1000;text-align:center}
+body #topNav a{color:#555} /* was #999 (2.85:1); active/hover keep #111 */
 #topNav .page-divider{border-color:var(--line)}
 
 /* Hero (home) */
 .hero{text-align:center}
 .avatar{width:160px;height:160px;border-radius:50%;display:block;margin:0 auto 24px;object-fit:cover}
 .hero-name{letter-spacing:4px;font-size:24px;margin:.2em 0}
-.hero-headline{font:12px/1.8 "Varela Round",arial,sans-serif !important;letter-spacing:3px;text-transform:uppercase;color:#999 !important;margin:0 0 .6em}
+.hero-headline{font:12px/1.8 "Varela Round",arial,sans-serif !important;letter-spacing:3px;text-transform:uppercase;color:#767676 !important;margin:0 0 .6em}
 .motto{font-style:italic;color:#777 !important;margin-bottom:1.4em}
 .ctas{text-align:center;margin:1em 0 1.4em}
 .btn,.sqs-html-content a.btn,button.btn{display:inline-block;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;border:2px solid #444;color:#444;background:transparent;padding:12px 18px;margin:4px;text-decoration:none;cursor:pointer}
@@ -68,7 +74,7 @@ body a.fab:hover{background:#444;color:#fff}
 .btn-primary,.sqs-html-content a.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
 .btn-primary:hover,.sqs-html-content a.btn-primary:hover{background:#444;border-color:#444;color:#fff}
 .ticker{list-style:none;margin:0;padding:0;min-height:1.8em;text-align:center}
-.ticker li{display:none;font:italic 14px/1.8 Georgia,serif !important;color:#999 !important}
+.ticker li{display:none;font:italic 14px/1.8 Georgia,serif !important;color:#767676 !important}
 .ticker li.on{display:block;animation:tick .5s ease}
 .ticker li::before{content:"▸ ";color:var(--accent)}
 @keyframes tick{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -127,11 +133,11 @@ body a.fab:hover{background:#444;color:#fff}
 
 /* About */
 #page .fun{display:block;max-width:240px;width:100%;height:auto;margin:0 auto 28px} /* #page: outranks site.css ".sqs-layout .html-block.sqs-block img{max-width:100%}" */
-.langs{font-size:13px !important;color:#999 !important;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0}
+.langs{font-size:13px !important;color:#767676 !important;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 0}
 ul.plain{list-style:none;padding:0}
 .skills{list-style:none;padding:0}
 .skills li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #eee;padding:6px 0;font-size:15px !important}
-.skills li span{white-space:nowrap;color:#999}
+.skills li span{white-space:nowrap;color:#767676}
 .modal{border:2px solid var(--line);padding:28px 32px;max-width:560px;color:#444;background:var(--bg)}
 .modal::backdrop{background:rgba(0,0,0,.45)}
 .modal h3{margin-top:0}
@@ -160,7 +166,7 @@ details p{margin:.6em 0 0}
 .mailform label{display:block;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#777;margin:0 0 14px}
 .mailform input,.mailform textarea,#sitesearch{display:block;width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:16px/1.5 Georgia,serif;padding:10px 12px;margin-top:4px}
 .mailform input:focus,.mailform textarea:focus,#sitesearch:focus{outline:none;border-color:var(--accent)}
-.hint{font-size:13px !important;color:#999 !important;text-align:center}
+.hint{font-size:13px !important;color:#767676 !important;text-align:center}
 .social-links.center{text-align:center}
 
 /* Footer */
@@ -169,15 +175,15 @@ details p{margin:.6em 0 0}
 #footer .search{max-width:320px;margin:0 auto 24px}
 #footer .search label{display:block}
 #footer .search input{font-size:14px;text-align:center}
-.sitemap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:left;max-width:760px;margin:0 auto 24px}
+.sitemap{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px;text-align:left;max-width:760px;margin:0 auto 24px} /* 3 columns by default; a 4th ("Pages") appears while searching */
 .sitemap h3{margin:0 0 .6em;color:#bbb}
 .sitemap ul{list-style:none;margin:0;padding:0}
 .sitemap li{margin:0 0 .4em}
 .sitemap a{color:#444}
 .sitemap a:hover{color:var(--accent)}
-.copy-line{color:#999 !important;margin:0}
+.copy-line{color:#767676 !important;margin:0}
 .linklike{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--accent);cursor:pointer}
-.nomatch{color:#999 !important}
+.nomatch{color:#767676 !important}
 
 /* Wider column for grid-heavy pages */
 body.wide #page{width:88%}
@@ -186,12 +192,13 @@ body.wide #page{width:88%}
 @media (max-width:768px){
   #header #topNav,#topNav{display:none}
   #mobileMenuLink{margin:0;display:block;visibility:visible;text-align:center;padding:0 0 12px;border-bottom:2px solid var(--line);background:var(--bg)}
-  #mobileMenuLink a{cursor:pointer;display:block;font-size:22px !important;line-height:1;color:#999}
+  #mobileMenuLink a{cursor:pointer;display:block;font-size:22px !important;line-height:1;color:#555}
   #header #mobileNav{position:static;visibility:visible}
   body #mobileNav.menu-open{height:auto !important;max-height:999px;visibility:visible;overflow:visible;margin:0 0 15px}
   #mobileNav .wrapper{padding:1em 0;border-bottom:2px solid var(--line)}
   #mobileNav nav ul li{display:block;text-align:center;float:none !important;margin:0 !important}
-  #mobileNav a{font-size:16px !important;line-height:2em !important;color:#999}
+  #mobileNav a{font-size:16px !important;line-height:2em !important;color:#555}
+  #mobileNav .active-link a{color:#111}
   #canvas{padding:0 17px}
   #header{text-align:center}
   #upper-logo{float:none}
@@ -253,7 +260,7 @@ html.dark .logos .logo:hover img{filter:none}
 /* 6. Full role text on experience.html and detail pages */
 .cv{margin:.4em 0 0;padding-left:1.2em}
 .cv li{font-size:15px !important;line-height:1.7em;color:#666 !important;margin:0 0 .2em}
-.tl-v .tech{font-size:13px !important;color:#999 !important;margin:.5em 0 0}
+.tl-v .tech{font-size:13px !important;color:#767676 !important;margin:.5em 0 0}
 
 /* 7. Carousel (home featured + projects.html): scroll-snap track, arrows, dots */
 .carousel{position:relative;padding:0 44px}
