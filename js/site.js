@@ -88,12 +88,12 @@
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done); else done();
   }
 
-  // Footer search: filters sitemap links
+  // Footer search: filters sitemap links; the "Pages" column (every detail page) only shows while a query is typed
   var search = $('#sitesearch'), sitemap = $('#sitemap'), nomatch = $('#nomatch');
   if (search && sitemap) search.addEventListener('input', function () {
     var q = search.value.trim().toLowerCase(), any = false;
     $$('li', sitemap).forEach(function (li) { var hit = !q || li.textContent.toLowerCase().indexOf(q) > -1; li.hidden = !hit; any = any || hit; });
-    $$('div', sitemap).forEach(function (col) { col.hidden = !$$('li:not([hidden])', col).length; });
+    $$('div', sitemap).forEach(function (col) { col.hidden = !$$('li:not([hidden])', col).length || (!q && col.classList.contains('pages')); });
     if (nomatch) nomatch.hidden = any;
   });
 

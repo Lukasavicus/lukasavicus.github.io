@@ -63,6 +63,18 @@ Fonte: `docs/featured-projects-content.md` do lab (texto EN usado literalmente, 
 - Páginas removidas nas duas versões: `projects/data-platform.html`, `projects/ingestion-framework.html` (os bullets do CV continuam nas páginas de cargo TELUS e BTG). Referências corrigidas em `docs/page-inventory.md` e `docs/2016-ideas-review.md`; `llms.txt` regenerado lista os 8.
 - Detalhe: bullets da "Page (EN)" como parágrafos com lead-in em negrito, depois Tech (= Stack), depois Links (org `Mission-Control-Hub` e repo `baby-health`, `rel="noopener"`). Spot segue intocado (card e `spot.html`).
 
+## Review fixes (branch `review-fixes`, 2026-10-02) — issue #8 + dois itens da #4, iguais em A e B
+
+- **Busca do footer acha tudo**: 4ª coluna "Pages" no sitemap (Spot, 8 projetos, 10 cargos, 5 cursos, artigos de `_posts`), `hidden` por padrão e mostrada só enquanto há texto na busca (A: `footer()` em `build.js` + `js/site.js`; B: `PAGES_COL` em `patchB.py` + `b/assets/site.js`). Footer vazio continua igual.
+- **Contraste**: A nav `#999` → `#555` (`body #topNav a`, `#mobileNav a`; ativo/hover intocados), textos de corpo que usavam `#999` (headline do hero, ticker, langs, hint, nomatch, tech da timeline, nota dos skills, linha de copyright) → `#767676`. B já passava (pílula `#1A1714`, footer branco 72%, dock `#A9A29A` sobre escuro).
+- **Um H1 por página**: A: o nome no header virou `<div class="logo">` (CSS replicado em `custom.css`), H1 da home é o `.hero-name`, páginas de detalhe e layout Jekyll usam `<h1 class="case-title">`. B: `spot.html` ganhou `<h1 class="case-title">` (seletor `.case .case-title` em `theme.css`); o resto já tinha um só.
+- **CV (texto literal, só erros de língua)**: "AWS suit" → "AWS suite", "P&D" → "R&D", bullet da Bain sobre infraestrutura virou frase completa. B lê os mesmos textos via `data.js`.
+- **Linhas editoriais internas da B**: Contact e Experience reescritas pro visitante (a nota "cities will be added" também saiu).
+- **404 da A**: piada nova sem enfatizar ausência; B já tinha outro texto.
+- **Spot (PT, compartilhado)**: "Stdlib primeiro" agora cita pandas e `requests` como as duas exceções.
+- **Cargo ↔ projeto**: `PROJECTS[].role` (slug do EXP) em `build.js` é a única fonte; a página do projeto mostra "Role: …" e a do cargo "Related project(s): …" (Bain ↔ Spot; Safra ↔ SOS e AML; Deloitte ↔ RPA; BTG ↔ data lake). B gera o mesmo em `patchB.py` (`role_of` / `projects_of`).
+- **A few numbers**: + "3 personal projects" e "5 professional projects" derivados de `PROJECTS` (A: `NUMBERS`; B: `b/index.html` à mão, grid de 7 colunas ≥ 900px em `theme.css`). B dizia "3 languages" na seção de números; corrigido pra 2 (paridade com a #7).
+
 ## Bug encontrado na passada
 
 B tinha um `index.md`, que o Jekyll converteria em `b/index.html` por cima da home. Removido; o footer da B aponta pro `/llms.txt` da raiz.

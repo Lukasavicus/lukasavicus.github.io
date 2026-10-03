@@ -114,6 +114,8 @@ footer .lang,footer .lang a{color:rgba(255,255,255,.72)}
 .more-link{display:inline-block;margin-top:14px;font:600 15px/22px Geist,sans-serif;color:var(--t-ink);text-decoration:underline;text-decoration-style:dashed;text-underline-offset:4px}
 @media (max-width:1023px){.badges{justify-content:center}}
 .stats .kick{margin-bottom:14px}
+@media (min-width:900px){ul[data-astro-cid-e4wdbv2j]{grid-template-columns:repeat(7,minmax(0,1fr))}li[data-astro-cid-e4wdbv2j]{padding:0 16px}} /* 7 numbers (personal + professional projects added) */
+li[data-astro-cid-e4wdbv2j]:last-child b[data-astro-cid-e4wdbv2j]{font-size:26px} /* the Astro rule shrank the last number */
 .offclock{background:var(--t-bg);padding:8px 20px 56px}
 .offclock .in{display:flex;gap:28px;align-items:center;max-width:1140px;margin:0 auto;padding:24px;border-radius:20px;background:var(--t-surface);border:1px solid var(--t-line)}
 .offclock img{width:120px;height:160px;object-fit:cover;object-position:50% 20%;border-radius:14px;flex:none}
@@ -237,8 +239,8 @@ pre.code{margin:0;overflow:auto;padding:16px;border-radius:12px;border:1px solid
 /* ---------- 12. Case study (spot.html; body shared with A, PT) ----------- */
 .case{max-width:820px;padding-top:120px;padding-bottom:40px}
 @media (min-width:1024px){.case{padding-top:150px}}
-.case h2.case-title{margin:0 0 14px;font-size:38px;line-height:44px}
-@media (min-width:1024px){.case h2.case-title{font-size:46px;line-height:52px}}
+.case .case-title{margin:0 0 14px;font-size:38px;line-height:44px;color:var(--t-ink)} /* an h1 on spot.html (one H1 per page) */
+@media (min-width:1024px){.case .case-title{font-size:46px;line-height:52px}}
 .case h2{margin:44px 0 14px;font-size:28px;line-height:34px}
 .case h3{margin:26px 0 10px}
 .case p,.case li{font-size:17px;line-height:28px}

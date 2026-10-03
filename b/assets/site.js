@@ -110,12 +110,13 @@
     });
   });
 
-  /* footer search: filters the sitemap links while typing; a column hides when none of its links match */
+  /* footer search: filters the sitemap links while typing; a column hides when none of its links match;
+     the "Pages" column (every detail page) only shows while a query is typed */
   var search = $('#sitesearch'), sitemap = $('.sitemap'), nomatch = $('#nomatch');
   if (search && sitemap) search.addEventListener('input', function () {
     var qs = search.value.trim().toLowerCase(), any = false;
     $$('a', sitemap).forEach(function (a) { var hit = !qs || a.textContent.toLowerCase().indexOf(qs) > -1; a.hidden = !hit; any = any || hit; });
-    $$(':scope > div', sitemap).forEach(function (col) { col.hidden = !$$('a:not([hidden])', col).length; });
+    $$(':scope > div', sitemap).forEach(function (col) { col.hidden = !$$('a:not([hidden])', col).length || (!qs && col.classList.contains('pages')); });
     if (nomatch) nomatch.hidden = any;
   });
 

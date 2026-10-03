@@ -64,6 +64,19 @@ for p in PAGES:
     f = f'{B}/{p}.html'; s = rd(f); s2 = patch_shell(s)
     if s2 != s: wr(f, s2)
 
+# footer sitemap, 4th column "Pages": every detail page, so the search finds Spot, roles, projects, schools and articles.
+# Hidden by default; assets/site.js shows it only while a query is typed. Same list as build.js footer().
+POSTS = [('/articles/' + re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f)[:-3] + '/', re.search(r'^title:\s*"?(.+?)"?\s*$', rd(f'{ROOT}/_posts/{f}'), re.M).group(1))
+         for f in sorted(os.listdir(ROOT + '/_posts')) if f.endswith('.md')]
+PAGE_LINKS = ([(pr['href'], pr['title']) for pr in D['PROJECTS']] + [(f'experience/{e["slug"]}.html', f'{e["role"]} · {e["short"]}') for e in D['EXP']]
+              + [(f'education/{e["slug"]}.html', f'{e["degree"]} · {e["short"]}') for e in D['EDU']] + POSTS)
+PAGES_COL = '<div class="pages" hidden><h4>Pages</h4>' + ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in PAGE_LINKS) + '</div>'
+for p in PAGES:
+    f = f'{B}/{p}.html'; s = rd(f)
+    if 'class="pages"' in s: continue
+    i = s.index('<nav aria-label="Footer" class="sitemap"'); j = s.index('</nav>', i)
+    wr(f, s[:j] + PAGES_COL + s[j:])
+
 # links from the lists to the detail pages
 s = rd(f'{B}/experience.html')
 if 'experience/' not in s:
@@ -127,10 +140,17 @@ def detail(file, parent, kick, title, meta, body_html, tech, back, back_label, p
     page(file, parent, title, meta, main)
 
 role_html = lambda e: '<ul class="cv">' + ''.join(f'<li>{esc(b)}</li>' for b in e['cvText']) + '</ul>' if e.get('cvText') else ''.join(f'<p>{esc(p)}</p>' for p in e['body'])
+# role ↔ project cross-links (PROJECTS[].role = EXP slug), same as build.js roleOf / projectsOf
+def role_of(pr, r):
+    e = next((x for x in D['EXP'] if x['slug'] == pr.get('role')), None)
+    return f'<p class="links"><strong>Role:</strong> <a href="{r}experience/{e["slug"]}.html">{esc(e["role"])} · {esc(e["short"])}</a></p>' if e else ''
+def projects_of(e):
+    ps = [p for p in D['PROJECTS'] if p.get('role') == e['slug']]
+    return (f'<p class="links"><strong>Related project{"s" if len(ps) > 1 else ""}:</strong> ' + ' · '.join(f'<a href="../{p["href"]}">{esc(p["title"])}</a>' for p in ps) + '</p>') if ps else ''
 for e in D['EXP']:
     d = duration(e['period'])
     detail(f'experience/{e["slug"]}.html', 'experience', 'Experience', e['role'], ' · '.join(filter(None, [e['co'], e['period'], d])),
-           role_html(e), e['tech'], '../experience.html', 'Experience', f'Logo of {e["short"]} or a photo from this period')
+           role_html(e), e['tech'], '../experience.html', 'Experience', f'Logo of {e["short"]} or a photo from this period', after=projects_of(e))
 for e in D['EDU']:
     detail(f'education/{e["slug"]}.html', 'experience', 'Education', e['degree'], ' · '.join([e['school'], e['period'], duration(e['period'])]),
            '<p>[PLACEHOLDER] What I studied, thesis or final project, and what stayed with me.</p>', '[PLACEHOLDER]',
@@ -221,11 +241,13 @@ for pr in D['PROJECTS']:
     if not pr['href'].startswith('projects/'): continue
     links = f'<p class="links"><strong>Links:</strong> {linkify(pr["links"])}</p>' if pr.get('links') else ''
     detail(pr['href'], 'projects', 'Project', pr['title'], 'Personal project' if pr['meta'] == 'personal' else pr['meta'],
-           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr['phDesc'], after=links)
+           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr['phDesc'], after=links + role_of(pr, '../'))
 
-# spot: body verbatim (PT), share before the closing back link, same as build.js
+# spot: body verbatim (PT), role line + share before the closing back link, same as build.js; the title is the page's H1
 spot = rd(ROOT + '/_build/spot-body.html').strip()
-spot = sub1(spot, r'<p class="back"><a href="projects\.html">&larr; Back to Projects</a></p>\s*$', SHARE + '\n<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>', name='spot back')
+spot = sub1(spot, r'<h2 class="case-title">(.*?)</h2>', r'<h1 class="case-title">\1</h1>', name='spot h1')
+spot = sub1(spot, r'<p class="back"><a href="projects\.html">&larr; Back to Projects</a></p>\s*$',
+            role_of(next(p for p in D['PROJECTS'] if p['href'] == 'spot.html'), '') + '\n' + SHARE + '\n<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>', name='spot back')
 page('spot.html', 'projects', 'Spot — case study', 'Spot: a data-quality gateway that compares two Tableau workbooks data point by data point (case study, in Portuguese).',
      '<div class="page case">' + spot + '</div>')
 print('ok')

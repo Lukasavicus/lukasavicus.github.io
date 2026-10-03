@@ -17,11 +17,11 @@ Simply put, I'm living my golden age.
   - [PLACEHOLDER — not in the CV yet]
   Tech: [PLACEHOLDER]
 - **Data & AI Manager** — TELUS Digital (WillowTree / Poatek) — Jun 2024 – Sep 2026
-  - Leading data engineering and AI initiatives to drive business innovation.
-  - Managing data infrastructure and implementing machine learning solutions for advanced analytics.
-  - Overseeing team development, data governance, and strategic technology adoption.
-  - Implemented data pipelines using gitlab, and AWS suit for a large Telecom company.
-  - Leading P&D project and implementation of Data Engineering best practices and Data Platform.
+  - Led data engineering and AI initiatives to drive business innovation.
+  - Managed data infrastructure and implemented machine learning solutions for advanced analytics.
+  - Oversaw team development, data governance, and strategic technology adoption.
+  - Implemented data pipelines using GitLab and the AWS suite for a large telecom company.
+  - Led an R&D project and the implementation of data engineering best practices and a data platform.
   Tech: AWS, GitLab, Python, PySpark, Terraform
 - **Senior Data Engineer** — Bain & Company — Apr 2023 – Jun 2024
   - Developed batch data ingestion pipelines using Microsoft Azure.
@@ -29,7 +29,7 @@ Simply put, I'm living my golden age.
   - Designed and implemented a Quality Assurance Framework for data pipelines.
   - Integrated Databricks with Tableau for enhanced data visualization.
   - Established data architecture for business intelligence and analytics projects.
-  - Infrastructure to projects related to fraud detection and text analysis solutions.
+  - Provided infrastructure for fraud-detection and text-analysis projects.
   Tech: Azure, Databricks, Tableau, Dash Enterprise
 - **Data Engineer & Team Leader** — BTG Pactual — Jun 2021 – Dec 2022
   - Managed data modeling and governance for business intelligence initiatives.
@@ -38,7 +38,7 @@ Simply put, I'm living my golden age.
   - Implemented Lambda architecture for payment processing, integrating batch and near real-time data.
   - Led cross-functional data teams, coordinating engineering, governance, and visualization efforts.
   - Developed a business intelligence portal using AWS and Angular.
-  - Used data observability systems integrating Datadog, and AWS.
+  - Used data observability systems integrating Datadog and AWS.
   Tech: AWS (EMR, Lambda), PySpark, Angular, Datadog, Kubernetes
 - **Data Engineer** — Safra — Nov 2019 – Jul 2021
   - Designed data models and developed data visualization tools.
