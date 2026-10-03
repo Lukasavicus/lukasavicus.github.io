@@ -43,7 +43,7 @@ Skip link, barra de progresso de scroll, back to top, FAB "Let's grab a coffee",
 | Mensagens no hero | ticker de fun facts | typing + toggle Now/Studied |
 | Nav mobile | hamburger | tab dock |
 | Timeline | barras Gantt na home (empresas + escolas, 2016–2026), vertical na Experience | curva da jornada + régua de anos (a régua continua mostrando os diplomas) |
-| "What I'm about" / "What I bring" | um parágrafo com os ganchos em negrito (AI Leader, Tech Innovator, Lifelong Learner) | três cards com ícone |
+| "What I'm about" / "What I bring" | um parágrafo com os ganchos em negrito (Data & AI Engineering Leader, Tech Innovator, Lifelong Learner) | três cards com ícone |
 | Assunto do mailto | `[A]` | `[B]` |
 
 ## Ajustes da issue #4 (branch `home-about-quick-fixes`, 2026-10-01) — iguais em A e B
@@ -74,6 +74,18 @@ Fonte: `docs/featured-projects-content.md` do lab (texto EN usado literalmente, 
 - **Spot (PT, compartilhado)**: "Stdlib primeiro" agora cita pandas e `requests` como as duas exceções.
 - **Cargo ↔ projeto**: `PROJECTS[].role` (slug do EXP) em `build.js` é a única fonte; a página do projeto mostra "Role: …" e a do cargo "Related project(s): …" (Bain ↔ Spot; Safra ↔ SOS e AML; Deloitte ↔ RPA; BTG ↔ data lake). B gera o mesmo em `patchB.py` (`role_of` / `projects_of`).
 - **A few numbers**: + "3 personal projects" e "5 professional projects" derivados de `PROJECTS` (A: `NUMBERS`; B: `b/index.html` à mão, grid de 7 colunas ≥ 900px em `theme.css`). B dizia "3 languages" na seção de números; corrigido pra 2 (paridade com a #7).
+
+## Career content (branch `career-content`, 2026-10-02) — iguais em A e B
+
+Fonte: `docs/trajetoria-profissional.md` e `docs/telus-scope-and-recommendations.md` do lab (privados; nada deles é copiado literalmente, e nomes de cliente dos EUA, produtos internos da TELUS, clientes da TELUS e colegas ficam de fora). Fonte única de dados é o `_build/build.js`; `b/_build/data.js` agora também exporta `ABOUT`, `QA`, `RECS`, `HEADLINE`, `SCOPE`, `MOTTO`, `CV_PDF`, `CV_TITLE`.
+
+- **Headline**: "Data & AI Engineering Leader" + linha de escopo ("I lead data and AI teams at TELUS Digital for US clients…") antes do motto. A: `HEADLINE`/`SCOPE`/`MOTTO` no `build.js` (hero, meta description padrão, `llms.txt`, `_config.yml`); hook do "What I'm about" virou "Data & AI Engineering Leader". B: pílula, header aberto, `<title>`, linha do footer, card "What I bring", linha "role" do about-intro e `b/about.html` trocados in place nas 9 páginas-shell (as de detalhe herdam); linha de escopo `<p class="scope">` sob as pílulas do hero (`.hero .scope` em `theme.css`). O grep por "AI Leader" no repo público dá zero.
+- **Páginas de cargo**: `EXP[].story` = pares `[label, texto]` (primeira pessoa), renderizados antes dos bullets do CV, que ficam sob o título "From the CV" (`storyHtml` no `build.js`, `story_html` no `patchB.py`; `.from-cv` nos dois CSS). `inline()` dos dois geradores aceita `[texto](href)` (links pra Spot, projetos e repo WindMill). `experience.html` continua só com os bullets do CV; `cvText` segue nos dados. GenAI Manager ganhou `line`, `body` e `tech` reais (antes placeholder).
+- **Timeline da home (A)**: a barra de cada empresa aponta pro cargo mais recente (TELUS → GenAI Manager, Safra → Data Engineer). B: a jornada e a régua não linkam cargos; a coluna "Pages" já lista os dois da TELUS.
+- **About**: intro = versão EN dos dois parágrafos finais da trajetória (`ABOUT`), seção "Questions I keep asking myself" (`QA`, 4 perguntas, marcada com `<!-- drafted from trajetoria-profissional.md; Lucas to review -->`), Résumé apontando pro PDF. B: seção 4 do `patchB.py` reescreve "Who I am", o botão do résumé e a seção `#questions` a partir dos mesmos dados (idempotente).
+- **Recommendations** (`recommendations.html` e `b/recommendations.html`, shell do FAQ na B): cards por empresa a partir de `RECS` (nome, `[ROLE]`, `[Lucas's words about this person]`, `[LinkedIn]`; `data-status="to confirm"` + "(to confirm)" visível pra Deloitte e Bain). Link na coluna "More" do footer, na coluna oculta "Pages" (agora reescrita a cada run na B) e no `llms.txt`.
+- **Résumé**: footer "Résumé (PDF)" e About → `/assets/lucas-lukasavicus-cv-en.pdf` (`title="English, Feb 2025"`), com nota de que a versão PT vem depois. O PDF é adicionado pelo Lucas; até lá o link check acusa o arquivo.
+- **Projetos**: página do RPA (Deloitte) com "93% of addresses corrected" e "R$700k+ in revenue for Deloitte" no Result (B: também na linha Numbers do card); página do SOS com o time "1 senior backend, 1 junior backend, 2 mid-level frontend developers, plus DB, business and infra teams". Spot intocado.
 
 ## Bug encontrado na passada
 

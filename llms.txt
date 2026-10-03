@@ -1,37 +1,66 @@
 Machine-readable version of lukasavicus.github.io
 
 # Lucas Lukasavicus
-AI Leader & Tech Innovator — Often studying, sometimes teaching, always learning.
+Data & AI Engineering Leader — Often studying, sometimes teaching, always learning.
+I lead data and AI teams at TELUS Digital for US clients: cloud data platforms, applied AI for customer experience, teams of up to 22 people.
 
 ## About
-I believe two things can truly change a person's reality: education and God. Thankfully, I had access to education, and it let me find my way into the world of technology.
+I started out building a strong academic base in computer science: fundamentals, algorithms and analytical thinking. Early on I realized that technology by itself is not an end but a means to solve real problems, so I went looking for experiences closer to the business. I worked in startups, consultancies and retail, exploring marketing, operations and analytics, always using software and data as tools for decision-making and value creation.
 
-Today I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy.
+Over time that combination evolved into more technical roles with more responsibility at large financial institutions and global companies, where I worked as a data engineer and built cloud data platforms.
 
-I thrive in challenging environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet. More and more, I enjoy being around people who challenge my views, who push me to keep studying and improving, and who are highly skilled and talented. I've had the privilege of leading people like that.
+In ten years of professional experience I have worked at 8 companies, from startups, global consultancies and retail to telecom and large banks, trying to understand different operating models, levels of technological maturity and regulatory contexts, always applying software and data to concrete problems.
 
-Simply put, I'm living my golden age.
+That path took me from individual contributor to technical manager, leading international teams of up to 22 people, with direct involvement in projects that generated revenue above US$1.2M/year, recurring savings above US$13M/year and infrastructure cost reductions of up to 70%. I kept a deep involvement with architecture and code while taking on responsibility for delivery, people and strategy: a pragmatic profile that connects technical execution, scale and measurable results.
+
+### Questions I keep asking myself
+- **What motivates me?** Changing project every 6 to 12 months and learning everything from zero: understanding a new scenario and using everything I have learned so far to solve a problem I have not seen before. And being somewhere I look at my peers and my leaders and think "I still have a lot to learn here". When that stops happening, I take it as a sign to look for the next challenge.
+- **What did I learn about myself?** That the hybrid of technology and business I set out to build at the start of my career is in fact my differential: I am the person between the data and the people who need it. And, since NPS Prism, that data products sell trust: reliability, governance and historical consistency matter as much as the insights.
+- **How do I stay current?** By studying ahead of the job: I was learning cloud on my own before any role required it, because I could see where the large US companies were going. Competitive programming kept my algorithms sharp since university. And when I do not know a tool, I build one: at Safra I wrote WindMill, an Airflow-like job scheduler, from scratch, before I knew Airflow existed.
+- **What is my differential?** Connecting architecture, code and people. I kept a deep involvement with architecture and code while taking on responsibility for delivery, people and strategy, and I try to stay pragmatic and impact-oriented: deliver what the client needs, even when it is not what they first asked for.
 
 ## Experience
 - **GenAI Manager** — TELUS Digital (WillowTree / Poatek) — Oct 2026 – Present
-  - [PLACEHOLDER — not in the CV yet]
-  Tech: [PLACEHOLDER]
+  - **Scope.** Two projects in parallel at TELUS Digital, with a team of 4 engineers plus a PM and a PO. I am a hands-on manager: I take tasks and write code.
+  - **Project 1.** A data lake with a CQRS strategy that consolidates three product systems, served through a medallion Gold layer and an API layer.
+  - **Project 2.** Generic, multi-client versions of two internal analytics tools: one annotates data against a taxonomy for quality, standardization and new KPIs; the other answers natural-language questions over the data, no analyst or SQL needed. I built the admin portal for both and I am integrating it with ingestion and data redaction.
+  - **Also.** Inputs for executive reporting to C-levels, and RFPs for generative-AI projects.
+  - Two projects in parallel: a data lake with a CQRS strategy consolidating three product systems, and generic, multi-client versions of two internal analytics tools. Team of 4 engineers plus a PM and a PO; hands-on.
+  Tech: Data lake (CQRS, medallion Gold layer, API layer), data annotation and natural-language analytics tools, admin portal, data redaction
 - **Data & AI Manager** — TELUS Digital (WillowTree / Poatek) — Jun 2024 – Sep 2026
+  - **Scope.** My first formal people-management role. A manager here wears four hats: people manager, tech and project lead, hands-on contributor, and practice development in the Data, AI and Cloud practice (DAIC). I led up to 22 people, directly and in projects; promoted team members, one of them to manager; ran coaching plans and offboardings; and went through the formal manager training programmes.
+  - **Data platform.** The project had not been sold yet and the architecture lived in the heads of a few senior engineers. I extracted that knowledge into a specification (close to an RFP), a client deck and a POC. The project was sold; the whitepaper I co-wrote became showcase material for other clients.
+  - **US telecom account.** Staff augmentation for one of the largest US telecom operators. I joined one of the client teams first and documented where the data was, the daily processes, the key people and the pains. From there I grew the team to 11 direct reports, 8 data analysts and 3 data engineers, mostly senior and staff: about US$1.2M/year in revenue. I organized the work on three pillars: delivery; communication and collaboration (short daily reports, structured weekly reviews, internal deep dives); and innovation through POCs and MVPs. That is how the client got its first end-to-end Python pipelines on AWS EMR, custom observability alerts with Datadog and an adoption plan for Airflow.
+  - **Data Strategy.** A GCP platform with heavy tech debt and little documentation. More than ten pipeline patterns were unified into two or three, infrastructure cost came down about 70% from about US$7.5k/month, and I ran the full handover to a team in India, with recorded tutorials and documentation. BigQuery at the center, with Datastream, Workflows, Dataproc, Cloud Run and GCS.
+  - **Domo migration.** The client had used Domo for about 10 years; a pricing change would raise the cost up to 100×. I took the project over at about 80% done, after the previous manager left, and wrote a delivery report of everything done so far. Then I built tooling on the Domo API that mapped about 40k datasets and 16k flows, built the dependency graph and automated the backups. About 95% was migrated on time; the remaining ~2 TB were extracted to GCP without extending the Domo contract. Estimated savings: about US$13M/year. I led 10 people plus a PM.
+  - **AI copilots analytics.** A full data platform on GCP, with ingestion, enrichment, validation, data quality and observability, to measure the rollout of AI copilots with call-center agents. A team of 11 built it, along with two analytics products and two internal tools: one for annotating data against a taxonomy, one for asking questions over the data in natural language.
+  - **Practice.** Co-wrote the Data Engineering career rubric and wrote the Data Analyst one from scratch; set up the bench programme; mapped and redesigned the hiring process; and organized internal data-product initiatives for people between allocations.
   - Led data engineering and AI initiatives to drive business innovation.
   - Managed data infrastructure and implemented machine learning solutions for advanced analytics.
   - Oversaw team development, data governance, and strategic technology adoption.
   - Implemented data pipelines using GitLab and the AWS suite for a large telecom company.
   - Led an R&D project and the implementation of data engineering best practices and a data platform.
-  Tech: AWS, GitLab, Python, PySpark, Terraform
+  Tech: GCP (BigQuery, Datastream, Workflows, Dataproc, Cloud Run, GCS), AWS (EMR), Python, PySpark, Datadog, Airflow, GitLab, Terraform
 - **Senior Data Engineer** — Bain & Company — Apr 2023 – Jun 2024
+  - **Context.** NPS Prism is Bain's benchmark product on Net Promoter Score: panel surveys with 60+ dynamic questions, handled by a tech team of about 11–12 people across data, development, design and infrastructure, with hubs in Brazil, Poland, India and the US. Clients across finance, automotive, oil & gas and airlines, Itaú, Nubank and Toyota among them, on a subscription model with quarterly waves.
+  - **Stack.** Databricks with a medallion architecture (raw, refined, gold); the gold layer fed the Tableau dashboards built by the BI team.
+  - **The problem.** Questionnaires changed between waves, so historical data was sometimes reprocessed, and numbers already delivered to a client could change. NPS Prism does not sell insights, it sells trust; if the history moves, the product is in question.
+  - **Panelist APIs.** Replaced the Excel micro-batches with direct ingestion from the panelists' APIs: a few hundred dollars a month saved in processing and a much bigger gain in efficiency.
+  - **Spot.** The dashboard QA tool. Each workbook had about 150 sheets, and comparing two versions took 3 weeks × 4 people per client, for about 20 clients. Over 8 months I built a Python tool, heavily parallel, that compares two workbooks sheet by sheet in 20–30 minutes. It became the team's main internal IP. [Case study](../spot.html).
+  - **Learning.** In data products, reliability, governance and historical consistency matter as much as the insights.
   - Developed batch data ingestion pipelines using Microsoft Azure.
   - Built and maintained Dash Enterprise applications for data analysis.
   - Designed and implemented a Quality Assurance Framework for data pipelines.
   - Integrated Databricks with Tableau for enhanced data visualization.
   - Established data architecture for business intelligence and analytics projects.
   - Provided infrastructure for fraud-detection and text-analysis projects.
-  Tech: Azure, Databricks, Tableau, Dash Enterprise
+  Tech: Databricks, Azure, Python, Tableau, Dash Enterprise
 - **Data Engineer & Team Leader** — BTG Pactual — Jun 2021 – Dec 2022
+  - **Scope.** Data engineering full time, on AWS: the transactional events of the digital bank, processed by Pismo and sent to us (Pix, TED, DOC, boleto payments, card authorizations). I learned the cloud hands-on here, and in about 6 months I was one of the technical references of the area.
+  - **Pipelines.** SNS/SQS with Lambda for serverless processing; S3 in bronze, silver and gold layers; a Postgres on the gold layer, later replaced by Glue + Athena for cost and performance; Python 3 and CloudFormation for the IaC; containers on Kubernetes/Rancher consuming Kafka and RabbitMQ; PySpark on EMR for the large volumes, with clusters we sized ourselves. See the [BTG+ payments data lake](../projects/btg-payments-data-lake.html).
+  - **Team.** Scrum Master for some months; later led the data governance front with another engineer: a DataHub POC, with Amundsen planned next.
+  - **BI portal.** Designed the bank's new BI portal with the BI and UX teams and built it in Angular 10, deployed with Route 53, CloudTrail, EKS and OpenSearch alongside the cloud infrastructure team.
+  - **Observability & CI/CD.** Datadog over AWS for monitoring and alerts; CI/CD pipelines on Azure DevOps integrated with the internal change-management and ticketing system.
   - Managed data modeling and governance for business intelligence initiatives.
   - Developed batch and real-time ingestion pipelines using AWS services.
   - Designed a custom ingestion framework with PySpark and AWS EMR.
@@ -39,35 +68,59 @@ Simply put, I'm living my golden age.
   - Led cross-functional data teams, coordinating engineering, governance, and visualization efforts.
   - Developed a business intelligence portal using AWS and Angular.
   - Used data observability systems integrating Datadog and AWS.
-  Tech: AWS (EMR, Lambda), PySpark, Angular, Datadog, Kubernetes
+  Tech: AWS (SNS, SQS, Lambda, S3, Glue, Athena, EMR, EKS), PySpark, Python, CloudFormation, Kubernetes/Rancher, Kafka, RabbitMQ, Angular, Datadog, Azure DevOps
 - **Data Engineer** — Safra — Nov 2019 – Jul 2021
+  - **Scope.** SafraPay, the bank's acquirer: millions of transactions a day, processed by Postillion and sent to us. My area built the pipeline behind operational control (are all transactions settled within the Central Bank's time limits, is the infrastructure holding the volume, is any client failing to transact) and managerial analytics: pricing, client quality, credit portfolios, variable compensation for the sales force, comparison with the market.
+  - **Tooling I built.** A SQL Server query parser with a graph visualizer of our data mesh; a code-quality analyzer for the legacy report code; Git for queries, stored procedures and reports; a new portal in Angular 8; and **Safra WindMill**, an Airflow-like job scheduler written from scratch in Python before I knew Airflow existed ([public repo](https://github.com/Arrow-Head-Tech/WindMill)).
+  - **SOS budgeting system.** Tech lead of the system that replaced budgeting spreadsheets bank-wide. Team of 4 working directly with me (1 senior backend, 1 junior backend, 2 mid-level frontend developers), plus the DB, business and infra teams. Node + Express, Angular 8, TypeORM. [Project page](../projects/sos-safra-budgeting.html).
+  - **Product owner.** Focal point for Red Hat on the AML onboarding project under Central Bank Circular 3.978/2020, covering every channel of the bank ([project page](../projects/aml-onboarding-safra.html)), and for Feedzai on the infrastructure of Feedzai Pulse, the fraud-rules engine.
+  - **Cloud.** I pushed for cloud in a bank whose slogan was "secular tradition of security". By the time I left, the new data area was running a Databricks POC.
   - Designed data models and developed data visualization tools.
   - Built and optimized an ETL job scheduler for data transformation.
   - Led the internal budget system project for financial planning.
   - Served as Product Owner for a money laundering prevention system using Red Hat Process Automation Manager and Apache Camel.
   - Managed the fraud prevention ecosystem, deploying Feedzai's risk assessment suite.
-  Tech: Red Hat PAM, Apache Camel, Feedzai
+  Tech: Python, SQL Server, Angular 8, Node.js, TypeORM, Red Hat PAM, Apache Camel, Feedzai
 - **Trainee** — Safra — Jan 2019 – Oct 2019
+  - **Programme.** The 2019 class: about 50k candidates for just under 40 spots. A banking-market course first, then rotations through acquiring, the credit desk, the insurance desk, AML, the ombudsman, procurement, back and middle office, asset recovery and legal, plus time at a branch and projects presented to the board.
   - Rotated through key departments, including Credit, Risk, Audit, Back Office, and IT.
   - Developed data-driven projects in business intelligence, PMO, and machine learning.
   Tech: [PLACEHOLDER]
 - **Market Intelligence Analyst** — B2W Digital — Oct 2018 – Dec 2018
+  - **Scope.** Client side after consulting. Starting with the commercial and logistics areas: map the processes, define and measure the KPIs, build the board reports for each business unit, and work with the data teams on data quality, granularity and timeliness.
+  - **Why it mattered.** It was the technology-plus-business hybrid I had set out to become at the start of my career.
   - Automated business intelligence processes and improved reporting structures.
   Tech: [PLACEHOLDER]
 - **Advanced Analytics Consultant** — Deloitte — Feb 2017 – Oct 2018
+  - **Context.** Advanced Analytics consulting at one of the Big Four. Promoted after 5 months.
+  - **Claro process mapping.** Mapping the processes of the Claro group after the Claro / Embratel / NET merger. Lean Six Sigma and PMBOK used as technologies for transformation; I was the technologist in a team of administrators, engineers, statisticians and mathematicians.
+  - **Address RPA.** Python and pandas over Oracle via ODBC, with string rules that went from expanding abbreviations to Levenshtein similarity; an RPA tool applied the corrections and a Qlik dashboard monitored the operation. 93% of addresses corrected, about R$1M/year saved for the client, R$700k+ in revenue for Deloitte. [Project page](../projects/address-rpa-deloitte.html).
+  - **Johnson & Johnson.** Sold as the "data visualization specialist" with no Tableau experience; first dashboards delivered in under 2 weeks. Strategic, managerial and operational dashboards in an infographic format for desktop and mobile, over Redshift data warehouses, plus a design-thinking workshop with the directors and managers.
   - Applied PMBOK and Lean Six Sigma methodologies to optimize business processes.
   - Conducted process mapping and technology integration for multinational clients.
   - Developed executive dashboards in Tableau, connected to Amazon Big Data environments.
   - Led robotic process automation (RPA) training and proof-of-concept initiatives.
-  Tech: Qlik, Tableau, AWS, RPA
+  Tech: Python, pandas, Oracle, Qlik, Tableau, AWS Redshift, RPA
 - **Full-Stack Developer** — Squid — Jan 2017 – Feb 2017
+  - **Short version.** A micro-influencer marketing platform and my first developer role. I applied what until then was university theory, took classes on the stack the company used, and sat in on contract negotiations with partner companies.
   - Developed web applications using the MEAN stack (MongoDB, Express.js, AngularJS, Node.js).
   - Applied data analytics to social media insights.
   Tech: MongoDB, Express, Angular, Node, React
 - **Growth Hacking Intern** — InstaCarro.com — Jun 2016 – Aug 2016
+  - **Short version.** An online car auction that inspected about 500 points per vehicle. I supported a one-person marketing team in measuring campaigns: AIDA, CPM, CAC, conversion rate, A/B tests. Working directly with the CEO, I ended up running the 8-person Customer Success team: processes, task split, training, people.
   - Managed marketing data and implemented customer acquisition strategies.
   - Led customer service automation projects (NPS, SMS, WhatsApp, email).
   Tech: AdWords, Google Analytics, Facebook Ads
+
+## Recommendations
+The inverse of testimonials: people I worked with and would vouch for, in my own words. Short, honest, and only with their OK.
+- **Deloitte:** Ramiz (to confirm), Ana Silvia (to confirm), Karin (to confirm)
+- **Bain & Company:** Guilherme (to confirm), Danilo (to confirm), Marcão (to confirm)
+- **Safra:** Douglas Oliveira, Fabiano de Lima
+- **BTG Pactual:** Renan
+
+## Résumé
+/assets/lucas-lukasavicus-cv-en.pdf (English, Feb 2025; a Portuguese version is coming)
 
 ## Education
 - **MBA, Business Intelligence & Business Analytics** — PUC Minas — 2021 – 2023

@@ -38,7 +38,8 @@ Footer de qualquer página de A, 3 colunas:
 | Main | Home, About, Experience, Projects, Articles, Personal, Contact | as 7 acima | ok |
 | More | Code Shop | `code-shop.html` (2 snippets: `retry_with_backoff.py`, `debounce.ts`, botão Copy) | ok |
 | More | FAQ | `faq.html` (5 perguntas: Can I hire you? / What's Mission Control? / What is Spot? / Which stack? / Can we grab that coffee remotely?) | ok |
-| More | Résumé (PDF) | `href="#"`, `title="PDF coming soon"` | **placeholder** |
+| More | Recommendations | `recommendations.html` (branch `career-content`: cards por empresa, Deloitte 3 + Bain 3 "(to confirm)", Safra 2, BTG 1; texto e LinkedIn ainda `[placeholder]`) | ok, conteúdo pendente |
+| More | Résumé (PDF) | `/assets/lucas-lukasavicus-cv-en.pdf` (`title="English, Feb 2025"`; branch `career-content`) | link ok, **PDF a enviar pelo Lucas** |
 | More | Tip jar | `href="#"`, `title="coming soon"` | **placeholder** |
 | More | This site as markdown | `/llms.txt` | ok |
 | More | Research | `/research/` (Jekyll) | ok |
@@ -71,7 +72,7 @@ Também no footer: busca que filtra o sitemap (`#sitesearch`), ícones sociais (
 
 | | A (`/`) | B (`/b/`) |
 |---|---|---|
-| HTML de topo (7 nav + Code Shop + FAQ + Spot + 404) | 10 | 10 |
+| HTML de topo (7 nav + Code Shop + FAQ + Recommendations + Spot + 404) | 11 | 11 |
 | Detalhe (experience 10 + education 5 + projects 7) | 22 | 22 |
 | Jekyll (articles 2 + research 5) | 7 | 0, usa os da raiz (links absolutos `/articles/`, `/llms.txt`) |
 | Utilitário | `llms.txt` | nenhum (aponta para `/llms.txt`) |
