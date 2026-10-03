@@ -60,22 +60,37 @@ def patch_shell(s):
     s = sub1(s, r'© 2026 Lucas Lukasavicus Silva\. All rights reserved\. ', r'© 2026 Lucas Lukasavicus Silva. All rights reserved. · ' + DARK + ' · ' + LANG + ' ', name='copy')
     return s
 
+HEADLINE = esc(D['HEADLINE'])  # 'Data &amp; AI Engineering Leader'
+RESUME = f'<a href="{D["CV_PDF"]}" title="{D["CV_TITLE"]}">Résumé (PDF)</a>'
+def patch_career(s):
+    """branch career-content: Recommendations + Résumé in the footer 'More' column. (The old tagline was replaced by HEADLINE in place, in the 9 shell pages: pill, open header, footer line, pillar card, About.)"""
+    return s.replace('<a href="faq.html">FAQ</a><a href="#">Résumé</a>', f'<a href="faq.html">FAQ</a><a href="recommendations.html">Recommendations</a>{RESUME}')
+
 for p in PAGES:
-    f = f'{B}/{p}.html'; s = rd(f); s2 = patch_shell(s)
+    f = f'{B}/{p}.html'; s = rd(f); s2 = patch_career(patch_shell(s))
     if s2 != s: wr(f, s2)
 
+# home hero: scope line under the identity pills, before the motto (the H1); same text as build.js SCOPE
+s = rd(f'{B}/index.html')
+if 'class="scope' not in s:
+    s = sub1(s, r'(<span class="pill" data-astro-cid-awbhzh6u>' + re.escape(HEADLINE) + r'</span> </div>)', r'\1' + f'<p class="scope">{esc(D["SCOPE"])}</p>', name='hero scope')
+    wr(f'{B}/index.html', s)
+
 # footer sitemap, 4th column "Pages": every detail page, so the search finds Spot, roles, projects, schools and articles.
-# Hidden by default; assets/site.js shows it only while a query is typed. Same list as build.js footer().
+# Hidden by default; assets/site.js shows it only while a query is typed. Same list as build.js footer(). Rewritten on every run.
 POSTS = [('/articles/' + re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f)[:-3] + '/', re.search(r'^title:\s*"?(.+?)"?\s*$', rd(f'{ROOT}/_posts/{f}'), re.M).group(1))
          for f in sorted(os.listdir(ROOT + '/_posts')) if f.endswith('.md')]
 PAGE_LINKS = ([(pr['href'], pr['title']) for pr in D['PROJECTS']] + [(f'experience/{e["slug"]}.html', f'{e["role"]} · {e["short"]}') for e in D['EXP']]
-              + [(f'education/{e["slug"]}.html', f'{e["degree"]} · {e["short"]}') for e in D['EDU']] + POSTS)
+              + [(f'education/{e["slug"]}.html', f'{e["degree"]} · {e["short"]}') for e in D['EDU']] + POSTS + [('recommendations.html', 'Recommendations')])
 PAGES_COL = '<div class="pages" hidden><h4>Pages</h4>' + ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in PAGE_LINKS) + '</div>'
 for p in PAGES:
     f = f'{B}/{p}.html'; s = rd(f)
-    if 'class="pages"' in s: continue
-    i = s.index('<nav aria-label="Footer" class="sitemap"'); j = s.index('</nav>', i)
-    wr(f, s[:j] + PAGES_COL + s[j:])
+    if 'class="pages"' in s:
+        i = s.index('<div class="pages" hidden>'); j = s.index('</div>', i) + 6
+    else:
+        i = j = s.index('</nav>', s.index('<nav aria-label="Footer" class="sitemap"'))
+    s2 = s[:i] + PAGES_COL + s[j:]
+    if s2 != s: wr(f, s2)
 
 # links from the lists to the detail pages
 s = rd(f'{B}/experience.html')
@@ -140,6 +155,12 @@ def detail(file, parent, kick, title, meta, body_html, tech, back, back_label, p
     page(file, parent, title, meta, main)
 
 role_html = lambda e: '<ul class="cv">' + ''.join(f'<li>{esc(b)}</li>' for b in e['cvText']) + '</ul>' if e.get('cvText') else ''.join(f'<p>{esc(p)}</p>' for p in e['body'])
+# inline markup for page bullets and role stories: **bold**, `code`, [text](href); same as build.js inline()
+inline = lambda t: re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', r'<a href="\2">\1</a>', re.sub(r'`(.+?)`', r'<code>\1</code>', re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', esc(t))))
+# role detail: story first, then the CV bullets under "From the CV" (experience.html keeps the CV bullets only); same as build.js storyHtml()
+def story_html(e):
+    if not e.get('story'): return role_html(e)
+    return ''.join(f'<p><strong>{esc(l)}</strong> {inline(t)}</p>' for l, t in e['story']) + (f'<h3 class="from-cv">From the CV</h3>{role_html(e)}' if e.get('cvText') else '')
 # role ↔ project cross-links (PROJECTS[].role = EXP slug), same as build.js roleOf / projectsOf
 def role_of(pr, r):
     e = next((x for x in D['EXP'] if x['slug'] == pr.get('role')), None)
@@ -150,7 +171,7 @@ def projects_of(e):
 for e in D['EXP']:
     d = duration(e['period'])
     detail(f'experience/{e["slug"]}.html', 'experience', 'Experience', e['role'], ' · '.join(filter(None, [e['co'], e['period'], d])),
-           role_html(e), e['tech'], '../experience.html', 'Experience', f'Logo of {e["short"]} or a photo from this period', after=projects_of(e))
+           story_html(e), e['tech'], '../experience.html', 'Experience', f'Logo of {e["short"]} or a photo from this period', after=projects_of(e))
 for e in D['EDU']:
     detail(f'education/{e["slug"]}.html', 'experience', 'Education', e['degree'], ' · '.join([e['school'], e['period'], duration(e['period'])]),
            '<p>[PLACEHOLDER] What I studied, thesis or final project, and what stayed with me.</p>', '[PLACEHOLDER]',
@@ -181,7 +202,7 @@ BCARDS = {  # title: (color, icon, short line, problem, delivery, numbers or Non
         'As product owner, I got eight channels, five teams and Red Hat to deliver it.', '8 channels · 5 teams · just under three months.'),
     'Address-resolution RPA': ('#5fa8ff', 'RPA', 'Fixing bad customer addresses before invoices went to the post.',
         'Bad customer addresses meant returned mail for Claro, a Brazilian telecom operator.',
-        'A rules engine plus RPA that fixed addresses before invoices went to the post.', 'An estimated R$1M a year saved in returned mail.'),
+        'A rules engine plus RPA that fixed addresses before invoices went to the post.', '93% of addresses corrected · an estimated R$1M a year saved in returned mail · R$700k+ in revenue for Deloitte.'),
     'Data lake for BTG+ payments': ('#b99cff', 'BTG', 'An AWS Kappa-style pipeline for BTG+ payment events.',
         'Most of the pipeline existed when I arrived: no documentation, little observability, and a daily load slowed by thousands of tiny files.',
         'I documented it end to end, brought observability in, and proposed the file consolidation that made the daily load viable.',
@@ -229,7 +250,6 @@ s = sub1(s, r'<meta name="description" content="[^"]*">', f'<meta name="descript
 wr(f'{B}/projects.html', s)
 
 # detail pages: page bullets as bold lead-in paragraphs (**bold**, `code`), then Tech (stack), then Links (URLs auto-linked), same as build.js
-inline = lambda t: re.sub(r'`(.+?)`', r'<code>\1</code>', re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', esc(t)))
 linkify = lambda t: re.sub(r'https?://[^\s<]+', lambda m: f'<a href="{m.group(0)}" rel="noopener">{re.sub(r"^https?://", "", m.group(0))}</a>', esc(t))
 def project_html(pr):
     out = ''
@@ -250,4 +270,25 @@ spot = sub1(spot, r'<p class="back"><a href="projects\.html">&larr; Back to Proj
             role_of(next(p for p in D['PROJECTS'] if p['href'] == 'spot.html'), '') + '\n' + SHARE + '\n<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>', name='spot back')
 page('spot.html', 'projects', 'Spot — case study', 'Spot: a data-quality gateway that compares two Tableau workbooks data point by data point (case study, in Portuguese).',
      '<div class="page case">' + spot + '</div>')
+
+# ---------------------------------------------------------------- 4. career content (branch career-content): About intro + Q&A from build.js, Recommendations page
+s = rd(f'{B}/about.html')
+who = ('<h2>Who I am</h2>' + ''.join(f'<p>{esc(p)}</p>' for p in D['ABOUT'])
+       + f'<p class="muted">Lucas Lukasavicus Silva · {HEADLINE} · GenAI Manager at TELUS Digital (WillowTree / Poatek).</p>'
+       + f'<div class="row"><a class="btn ghost" href="{D["CV_PDF"]}" title="{D["CV_TITLE"]}">Résumé (PDF) · English</a><a class="btn" href="mailto:lukasavicus@gmail.com?subject=[B]%20Hello%20from%20your%20site">Let\'s grab a coffee</a></div>'
+       + '<p class="muted" style="margin:10px 0 0;font-size:13px">A Portuguese version of the résumé is coming.</p>')
+s = replace_between(s, '<h2>Who I am</h2>', '</div><img src="../assets/lucas-casual.jpg"', who)
+QA_START = '<!-- drafted from trajetoria-profissional.md; Lucas to review --><section id="questions">'
+qa = QA_START + '<h2>Questions I keep asking myself</h2>' + ''.join(f'<p><strong>{esc(q)}</strong> {esc(a)}</p>' for q, a in D['QA']) + '</section>'
+s = replace_between(s, QA_START, '<section id="education">', qa) if QA_START in s else s.replace('<section id="education">', qa + '<section id="education">')
+wr(f'{B}/about.html', s)
+
+def rec_card(co, p):
+    name, status = (p + [None])[:2]
+    attr, note = (f' data-status="{status}"', f' <small>({status})</small>') if status else ('', '')
+    return (f'<article class="card rec"{attr}><h4>{esc(name)}{note}</h4><p class="muted" style="margin:0 0 8px;font-size:13px">{esc(co)} · [ROLE]</p>'
+            f'<p>[Lucas\'s words about this person]</p><p style="margin:0"><a href="#" class="more-link" style="margin:0">[LinkedIn]</a></p></article>')
+rec_main = ('<section class="page-hero"><h1>Recommendations.</h1><p>The inverse of testimonials: people I worked with and would vouch for, in my own words. Short, honest, and only with their OK.</p></section><div class="page">'
+            + ''.join(f'<section class="rec-group"><h3>{esc(co)}</h3><div class="grid2">{"".join(rec_card(co, p) for p in people)}</div></section>' for co, people in D['RECS']) + '</div>')
+page('recommendations.html', 'faq', 'Recommendations', 'People Lucas worked with and would vouch for, in his own words.', rec_main)
 print('ok')

@@ -67,6 +67,7 @@ body #topNav a{color:#555} /* was #999 (2.85:1); active/hover keep #111 */
 .avatar{width:160px;height:160px;border-radius:50%;display:block;margin:0 auto 24px;object-fit:cover}
 .hero-name{letter-spacing:4px;font-size:24px;margin:.2em 0}
 .hero-headline{font:12px/1.8 "Varela Round",arial,sans-serif !important;letter-spacing:3px;text-transform:uppercase;color:#767676 !important;margin:0 0 .6em}
+.hero-scope{font-size:15px !important;line-height:1.7em;color:#555 !important;max-width:600px;margin:0 auto .5em}
 .motto{font-style:italic;color:#777 !important;margin-bottom:1.4em}
 .ctas{text-align:center;margin:1em 0 1.4em}
 .btn,.sqs-html-content a.btn,button.btn{display:inline-block;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;border:2px solid #444;color:#444;background:transparent;padding:12px 18px;margin:4px;text-decoration:none;cursor:pointer}
@@ -261,6 +262,11 @@ html.dark .logos .logo:hover img{filter:none}
 .cv{margin:.4em 0 0;padding-left:1.2em}
 .cv li{font-size:15px !important;line-height:1.7em;color:#666 !important;margin:0 0 .2em}
 .tl-v .tech{font-size:13px !important;color:#767676 !important;margin:.5em 0 0}
+.case .from-cv{font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#666;margin:2.2em 0 .2em}
+/* 6b. Recommendations: cards grouped by company; (to confirm) note while the person has not OK'd the mention */
+.rec-group h3{margin:1.6em 0 .6em}
+.rec h4 small{font-size:10px;letter-spacing:1px;color:#999;text-transform:none}
+.rec .links{margin:0}
 
 /* 7. Carousel (home featured + projects.html): scroll-snap track, arrows, dots */
 .carousel{position:relative;padding:0 44px}
