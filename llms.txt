@@ -85,12 +85,12 @@ That path took me from individual contributor to technical manager, leading inte
   - **Programme.** The 2019 class: about 50k candidates for just under 40 spots. A banking-market course first, then rotations through acquiring, the credit desk, the insurance desk, AML, the ombudsman, procurement, back and middle office, asset recovery and legal, plus time at a branch and projects presented to the board.
   - Rotated through key departments, including Credit, Risk, Audit, Back Office, and IT.
   - Developed data-driven projects in business intelligence, PMO, and machine learning.
-  Tech: [PLACEHOLDER]
+  Tech: Python, SQL, Angular, product ownership
 - **Market Intelligence Analyst** — B2W Digital — Oct 2018 – Dec 2018
   - **Scope.** Client side after consulting. Starting with the commercial and logistics areas: map the processes, define and measure the KPIs, build the board reports for each business unit, and work with the data teams on data quality, granularity and timeliness.
   - **Why it mattered.** It was the technology-plus-business hybrid I had set out to become at the start of my career.
   - Automated business intelligence processes and improved reporting structures.
-  Tech: [PLACEHOLDER]
+  Tech: Python, SQL, solution architecture, stakeholder communication
 - **Advanced Analytics Consultant** — Deloitte — Feb 2017 – Oct 2018
   - **Context.** Advanced Analytics consulting at one of the Big Four. Promoted after 5 months.
   - **Claro process mapping.** Mapping the processes of the Claro group after the Claro / Embratel / NET merger. Lean Six Sigma and PMBOK used as technologies for transformation; I was the technologist in a team of administrators, engineers, statisticians and mathematicians.
@@ -171,7 +171,7 @@ Proven time plus the share of topics mastered gives the score.
   Samsung Health for babies: a mobile-first PWA where parents and caretakers log water, feeding, vaccines, medication and development milestones for children from 0 to 3.
   Tech: Mobile-first PWA, Python API backend
 - **Spot** — Bain & Company (NPS Prism) · 2023
-  A data-quality gateway that compares two Tableau workbooks data point by data point via API: 4 people × 2 weeks → 1 person × 30 minutes per validation cycle, covering 100% of data points instead of a sample. It became the NPS Prism data team's largest product.
+  A data-quality gateway that compares two Tableau workbooks data point by data point via API: 4 people × 3 weeks per client → 1 person × 20–30 minutes per workbook, covering 100% of data points instead of a sample. It became the NPS Prism data team's largest product.
   Tech: Python, Tableau REST + Metadata API, pandas, stdlib concurrency
 - **SOS: Safra's budgeting system** — Safra · 2020
   Replaced bank-wide budgeting by spreadsheet with a web system the whole bank adopted: instant validation, calendars, and full visibility for the budget owners. I led a team of four and wrote a good part of the backend.

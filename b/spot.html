@@ -9,9 +9,9 @@
 <div class="ph ph-wide"><b>Placeholder · Imagem de capa</b><span>Screenshot de um workbook Tableau do NPS Prism, ou uma ilustração de "spot the difference" entre dois dashboards</span></div>
 
 <div class="tldr">
-<p><strong>TL;DR.</strong> No NPS Prism, o negócio de benchmarking de experiência do cliente da Bain, cada entrega trimestral de um workbook Tableau (~150 gráficos) passava por uma revisão manual de 4 pessoas durante 2 semanas, e erros ainda escapavam. Criei o <strong>Spot</strong>, uma ferramenta que compara dois workbooks data point a data point via API do Tableau. Ele virou o <em>Data Quality Gateway</em> oficial antes de toda publicação.</p>
+<p><strong>TL;DR.</strong> No NPS Prism, o negócio de benchmarking de experiência do cliente da Bain, cada entrega trimestral de um workbook Tableau (~150 gráficos) passava por uma revisão manual de 4 pessoas durante cerca de 3 semanas, e erros ainda escapavam. Criei o <strong>Spot</strong>, uma ferramenta que compara dois workbooks data point a data point via API do Tableau. Ele virou o <em>Data Quality Gateway</em> oficial antes de toda publicação.</p>
 <ul>
-<li><strong>4 pessoas × 2 semanas → 1 pessoa × 30 minutos</strong> por ciclo de validação</li>
+<li><strong>4 pessoas × 3 semanas → 1 pessoa × 20–30 minutos</strong> por ciclo de validação</li>
 <li><strong>100% dos data points</strong> verificados, contra uma amostra revisada por humanos</li>
 <li><strong>Runtime 6–8× menor</strong> (3–4 h → 30 min) com paralelismo</li>
 <li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism</li>
@@ -92,16 +92,16 @@
 <h2>5. Resultados</h2>
 <table>
 <tr><th>Métrica</th><th>Antes</th><th>Depois</th></tr>
-<tr><td>Esforço por ciclo de validação</td><td>3–4 pessoas × ~2 semanas</td><td>1 pessoa × ~30 min</td></tr>
+<tr><td>Esforço por ciclo de validação</td><td>4 pessoas × ~3 semanas</td><td>1 pessoa × ~30 min</td></tr>
 <tr><td>Cobertura</td><td>amostra revisada por humanos</td><td>100% dos data points</td></tr>
 <tr><td>Natureza do processo</td><td>manual, sujeito a erro</td><td>automatizado, reprodutível, auditável (relatório)</td></tr>
 <tr><td>Erros que chegariam ao cliente</td><td>já tinham ocorrido</td><td>ao menos um erro real interceptado antes da publicação</td></tr>
 </table>
 
-<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>Barras antes vs. depois: ~320 pessoa-hora por ciclo → ~0,5 pessoa-hora; runtime 3–4 h → 30 min</span></div>
+<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>Barras antes vs. depois: ~480 pessoa-hora por ciclo → ~0,5 pessoa-hora; runtime 3–4 h → 30 min</span></div>
 
 <ul>
-<li><strong>Ordem de grandeza:</strong> 4 pessoas × 2 semanas ≈ <strong>320 pessoa-hora por ciclo</strong>. Com os 3–6 clientes já atendidos quando saí, em 4 ondas por ano, são <strong>~3.800 a ~7.700 pessoa-hora/ano</strong> liberadas. Com toda a base de clientes, o número multiplica. <em>(estimativa)</em></li>
+<li><strong>Ordem de grandeza:</strong> 4 pessoas × 3 semanas ≈ <strong>480 pessoa-hora por ciclo</strong>. Com os 3–6 clientes já atendidos quando saí, em 4 ondas por ano, são <strong>~5.800 a ~11.500 pessoa-hora/ano</strong> liberadas. Com toda a base de clientes, o número multiplica. <em>(estimativa)</em></li>
 <li>Tornou-se o <strong>Data Quality Gateway oficial</strong>: nenhum workbook ia ao cliente sem passar pelo Spot.</li>
 <li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism.</li>
 </ul>
