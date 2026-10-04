@@ -87,6 +87,14 @@ Fonte: `docs/trajetoria-profissional.md` e `docs/telus-scope-and-recommendations
 - **Résumé**: footer "Résumé (PDF)" e About → `/assets/lucas-lukasavicus-cv-en.pdf` (`title="English, Feb 2025"`), com nota de que a versão PT vem depois. O PDF é adicionado pelo Lucas; até lá o link check acusa o arquivo.
 - **Projetos**: página do RPA (Deloitte) com "93% of addresses corrected" e "R$700k+ in revenue for Deloitte" no Result (B: também na linha Numbers do card); página do SOS com o time "1 senior backend, 1 junior backend, 2 mid-level frontend developers, plus DB, business and infra teams". Spot intocado.
 
+## Home polish (branch `home-polish`, 2026-10-03) — feedback do Lucas sobre o site no ar
+
+- **"What I'm about" (só A; B mantém os três cards)**: o parágrafo único virou `<dl class="pillars">` em duas colunas (rótulo em small caps à direita | filete `border-left` | frase), 760px, centrado; a 640px os rótulos ficam sobre o texto e o filete some. Frases iguais, sem os "As a …". `build.js` (seção `#pillars`) e `.pillars*` em `custom.css` (com regra `html.dark`).
+- **Timeline da home (A)**: rótulos centrados nas barras (28px, 11px/1px), grid mais claro, lane labels 10px `#999`, anos com tick todo ano e rótulo a cada 2 anos abaixo de 1024px (`span.odd`). Tooltip CSS (`<span class="tl-tip">` dentro da barra, cartão branco 12px Georgia com borda `var(--line)`, acima da barra em `:hover`/`:focus-visible`), texto "cargo(s) · empresa · datas"; o mesmo texto fica no `aria-label` do link (o `title` saiu). `.tl-h-wrap` passa a `overflow:visible` a partir de 820px; abaixo disso o wrap ganha `padding-top` pra o tooltip caber dentro do scroll. Dados intocados (UFSCar, USP, PUC Minas nas escolas).
+- **"A few numbers" (A e B)**: "26 professional projects" (constante `PROFESSIONAL_PROJECTS` no `build.js`, contagem no lab em `docs/projects-inventory.md`; B à mão em `b/index.html`). "3 personal projects" continua derivado de `PROJECTS`. `llms.txt` não lista números.
+- **Bullet duplo no CV**: estava em `experience.html` (A): `.tl-v li::before` (o círculo da timeline vertical) também pegava os `li` aninhados de `.cv`. Agora `.tl-v>li`; `.cv` força `list-style:disc` (aninhado o default do browser é `circle`). B tinha o oposto: o preflight do Tailwind zera `list-style`, então `.detail .cv` e `.tl ul` ganharam `list-style:disc` em `theme.css`.
+- Pré-existente, fora do escopo: a home da A estoura a largura a 390px (já acontecia antes desta branch).
+
 ## Bug encontrado na passada
 
 B tinha um `index.md`, que o Jekyll converteria em `b/index.html` por cima da home. Removido; o footer da B aponta pro `/llms.txt` da raiz.
