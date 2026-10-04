@@ -234,6 +234,7 @@ pre.code{margin:0;overflow:auto;padding:16px;border-radius:12px;border:1px solid
 .rec-group h3{margin:0 0 14px;font:600 22px/28px Fraunces,serif}
 .rec h4{margin:0 0 4px;font:600 17px/24px Geist,sans-serif;color:var(--t-ink)}
 .rec h4 small{font-weight:400;font-size:12px;color:var(--t-stone)}
+.detail .cv,.tl ul{list-style:disc} /* Tailwind preflight resets ul to none; one native bullet per CV item */
 .detail .cv{margin:0 0 12px;padding-left:22px}
 .detail .cv li{margin:0 0 6px}
 .detail .tech{font:500 14px/22px Geist,sans-serif;color:var(--t-stone)}

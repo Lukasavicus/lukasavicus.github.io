@@ -150,7 +150,10 @@ const PROJECTS = [
     page: [['Context.', 'BTG\'s digital bank received payment events (Pix, TED, DOC, utility bills) from Pismo, the core-banking platform behind BTG+, through an SNS topic. The architecture aimed at two lanes: a hot lane (stream) and a cold lane (daily files).'], ['Hot lane.', 'SNS → SQS → Lambda (with a dead-letter queue) → JSON events in an S3 data lake partitioned by year/month/day → a Glue job loading an Aurora database.'], ['Cold lane.', 'The same partner delivered D-1 files by FTP; a daily job pulled them, and a reconciliation process compared the two lanes to make sure nothing was lost.'], ['Honest scope.', 'I was not the author of this architecture; a good part of it was in place when I arrived. My contributions:', ['**Documentation** of the whole platform, which did not exist.', '**Observability**: how to use Datadog to watch the pipelines and the databases (table sizes, flow, failures) and start looking at things nobody was looking at, such as processing cost and the data swamp forming in S3.', '**Small-files consolidation** (my proposal): thousands of tiny JSONs made the Aurora load slow. We measured an optimal file size of about 256 MB and designed a scheduled Lambda that sweeps the partition and merges files, with a final merge at the end of each day.', 'Supporting the move from Aurora to **Athena**, proposed by the directors: better fit for the query pattern and faster development since Glue already produced the data.']]] },
 ];
 const N_PERSONAL = PROJECTS.filter(p => p.meta.startsWith('personal')).length;
-const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['2', 'languages'], [N_PERSONAL, 'personal projects'], [PROJECTS.length - N_PERSONAL, 'professional projects']];
+// Not derived from PROJECTS (the site only features a few): full count kept in the lab repo, docs/projects-inventory.md
+// (InstaCarro 3, Squid 1, Deloitte 3, B2W 1, Safra 7, BTG 2, Bain 2, TELUS 7). Mirrored by hand in b/index.html.
+const PROFESSIONAL_PROJECTS = 26;
+const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['2', 'languages'], [N_PERSONAL, 'personal projects'], [PROFESSIONAL_PROJECTS, 'professional projects']];
 // Role ↔ project cross-links (detail pages, both directions). Hrefs are relative to the detail folder.
 const roleOf = (pr, r) => { const e = EXP.find(x => x.slug === pr.role); return e ? `<p class="links"><strong>Role:</strong> <a href="${r}experience/${e.slug}.html">${esc(e.role)} · ${esc(e.short)}</a></p>` : ''; };
 const projectsOf = e => { const ps = PROJECTS.filter(p => p.role === e.slug); return ps.length ? `<p class="links"><strong>Related project${ps.length > 1 ? 's' : ''}:</strong> ${ps.map(p => `<a href="../${p.href}">${esc(p.title)}</a>`).join(' · ')}</p>` : ''; };
@@ -261,17 +264,18 @@ const write = (file, html) => { const f = path.join(OUT, file); fs.mkdirSync(pat
 // Stints under 6 months go to a thin strip below the main lane, labels alternating below/above so InstaCarro and Squid don't collide.
 const T0 = 2016, T1 = 2027, tlYears = Array.from({ length: T1 - T0 }, (_, i) => T0 + i);
 const pct = y => ((Math.max(y, T0) - T0) / (T1 - T0) * 100).toFixed(2);
-const bar = (cls, href, title, label, s, e) => `<a role="listitem" class="tl-bar ${cls}" style="left:${pct(s)}%;width:${(pct(e) - pct(s)).toFixed(2)}%" href="${href}" title="${esc(title)}"><span>${esc(label)}</span></a>`;
-const byCo = COMPANIES.map(c => { const rs = EXP.filter(e => e.short === c).sort((a, b) => a.start - b.start), last = rs[rs.length - 1]; return { short: c, first: last, start: rs[0].start, end: Math.max(...rs.map(r => r.end)), title: `${rs.map(r => r.role).join(' → ')} · ${rs[0].period.split(' – ')[0]} – ${last.period.split(' – ')[1]}` }; });
+// tip = "role · company · dates": aria-label for screen readers + a CSS-only hover/focus tooltip (.tl-tip, aria-hidden so it is not read twice).
+const bar = (cls, href, tip, label, s, e) => `<a role="listitem" class="tl-bar ${cls}" style="left:${pct(s)}%;width:${(pct(e) - pct(s)).toFixed(2)}%" href="${href}" aria-label="${esc(tip)}"><span>${esc(label)}</span><span class="tl-tip" aria-hidden="true">${esc(tip)}</span></a>`;
+const byCo = COMPANIES.map(c => { const rs = EXP.filter(e => e.short === c).sort((a, b) => a.start - b.start), last = rs[rs.length - 1]; return { short: c, first: last, start: rs[0].start, end: Math.max(...rs.map(r => r.end)), title: `${rs.map(r => r.role).join(' → ')} · ${c} · ${rs[0].period.split(' – ')[0]} – ${last.period.split(' – ')[1]}` }; });
 const edus = EDU.filter(e => e.end > T0);
 const isShort = c => c.end - c.start < 0.5;
 const workBar = (c, cls) => bar(cls, `experience/${c.first.slug}.html`, c.title, c.short, c.start, c.end);
 const timelineH = `<div class="tl-h-wrap"><div class="tl-h" role="list" aria-label="Career timeline 2016–2026">
   ${tlYears.map(y => `<i class="tl-h-grid" style="left:${pct(y)}%"></i>`).join('')}
-  <div class="tl-lane"><b>Schools</b>${edus.map(e => bar('edu', `education/${e.slug}.html`, `${e.degree} · ${e.period}`, e.short, e.start, e.end)).join('')}</div>
+  <div class="tl-lane"><b>Schools</b>${edus.map(e => bar('edu', `education/${e.slug}.html`, `${e.degree} · ${e.short} · ${e.period}`, e.short, e.start, e.end)).join('')}</div>
   <div class="tl-lane"><b>Companies</b>${byCo.filter(c => !isShort(c)).map(c => workBar(c, 'work')).join('')}</div>
   <div class="tl-lane tl-lane-thin">${byCo.filter(isShort).map((c, i) => workBar(c, i % 2 ? 'thin up' : 'thin dn')).join('')}</div>
-  <div class="tl-axis">${tlYears.map(y => `<span style="left:${pct(y)}%">${y}</span>`).join('')}</div>
+  <div class="tl-axis">${tlYears.map(y => `<span${y % 2 ? ' class="odd"' : ''} style="left:${pct(y)}%">${y}</span>`).join('')}</div>
 </div></div>`;
 const SHOW_TESTIMONIALS = false; // false → the section is still emitted, but inside an HTML comment
 const homeBody = `
@@ -289,7 +293,11 @@ const homeBody = `
 </section>
 <section id="pillars">
   <h3>What I'm about</h3>
-  <p class="pillars-p">As a <strong>Data &amp; AI Engineering Leader</strong>, I enjoy being around highly skilled people who challenge my views — and I've had the privilege of leading people like that. As a <strong>Tech Innovator</strong>, I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy. And as a <strong>Lifelong Learner</strong>, I thrive in environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet.</p>
+  <dl class="pillars">
+    <dt>Data &amp; AI Engineering Leader</dt><dd>I enjoy being around highly skilled people who challenge my views — and I've had the privilege of leading people like that.</dd>
+    <dt>Tech Innovator</dt><dd>I use technology not as an end, but as a means — an extremely powerful tool to reach business goals, whether they are concrete or fuzzy.</dd>
+    <dt>Lifelong Learner</dt><dd>I thrive in environments where I have to reinvent myself: where the questions haven't been asked yet and the answers don't exist yet.</dd>
+  </dl>
 </section>
 <section id="featured">
   <h3>Featured projects</h3>

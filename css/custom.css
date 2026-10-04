@@ -92,8 +92,16 @@ body #topNav a{color:#555} /* was #999 (2.85:1); active/hover keep #111 */
 .cols3 h4,.card h4{font:12px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;margin:0 0 .5em;color:#444}
 .cols3 p{font-size:15px !important;line-height:1.7em;margin:0}
 .cols3 .ph,.cards .ph,.grid3 .ph{margin:0 0 12px}
-.pillars-p{max-width:720px;margin:0 auto;text-align:center;line-height:1.8em}
-.pillars-p strong{color:#444}
+/* "What I'm about": label column (small caps, right-aligned) | thin rule | sentence. No row gap so the dd borders form one continuous rule. */
+.pillars{display:grid;grid-template-columns:260px 1fr;max-width:760px;margin:0 auto;align-items:start}
+.pillars dt{text-align:right;padding:3px 24px 26px 0;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#444}
+.pillars dd{margin:0;padding:0 0 26px 24px;border-left:1px solid var(--line);font-size:15px;line-height:1.7em;color:#555}
+.pillars dt:last-of-type,.pillars dd:last-of-type{padding-bottom:0}
+@media (max-width:640px){
+  .pillars{display:block}
+  .pillars dt{text-align:left;padding:0 0 4px}
+  .pillars dd{border-left:0;padding:0 0 22px}
+}
 .card{display:block;border:1px solid var(--line);padding:16px;color:#444;text-decoration:none}
 .card:hover{border-color:var(--accent)}
 .card .meta{font:11px/1.6 "Varela Round",arial,sans-serif !important;letter-spacing:1px;text-transform:uppercase;color:#999 !important;margin:0 0 .6em}
@@ -107,28 +115,35 @@ body #topNav a{color:#555} /* was #999 (2.85:1); active/hover keep #111 */
 
 /* Horizontal timeline (home teaser): Gantt bars, 2016 → 2027. Thin grey lines, accent borders, no shadows. */
 .tl-h-wrap{overflow-x:auto;padding:4px 0}
-.tl-h{position:relative;min-width:760px;margin:0 30px;padding-top:16px}
-.tl-h-grid{position:absolute;top:0;bottom:16px;width:1px;background:var(--line);opacity:.6}
-.tl-lane{position:relative;height:26px;margin:0 0 30px}
-.tl-lane>b{position:absolute;left:0;top:-14px;font:9px/1 "Varela Round",arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;font-weight:normal}
-.tl-bar{position:absolute;top:0;height:100%;box-sizing:border-box;display:flex;align-items:center;overflow:hidden;text-decoration:none;color:#444;border:1px solid var(--accent);background:var(--bg);outline:2px solid var(--bg)}
-.tl-bar span{padding:0 8px;font:10.5px/1 "Varela Round",arial,sans-serif;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tl-h{position:relative;min-width:760px;margin:0 30px;padding-top:18px}
+.tl-h-grid{position:absolute;top:0;bottom:16px;width:1px;background:var(--line);opacity:.35}
+.tl-lane{position:relative;height:28px;margin:0 0 30px} /* 30 = 12px gap + room for the next lane's label */
+.tl-lane>b{position:absolute;left:0;top:-18px;font:10px/1 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#999;font-weight:normal}
+.tl-bar{position:absolute;top:0;height:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#444;border:1px solid var(--accent);background:var(--bg);outline:2px solid var(--bg)}
+.tl-bar>span:first-child{min-width:0;max-width:100%;padding:0 6px;font:11px/1 "Varela Round",arial,sans-serif;letter-spacing:1px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tl-bar.work:hover{background:var(--accent);color:#fff}
 .tl-bar.edu{border-style:dashed;border-color:#aaa;color:#777}
 .tl-bar.edu:hover{border-color:var(--accent);color:var(--accent)}
 .tl-lane-thin{height:4px;margin:0 0 26px}
-.tl-bar.thin{height:4px;min-width:4px;border:0;outline:0;overflow:visible;background:var(--accent)}
-.tl-bar.thin span{position:absolute;left:0;padding:0;font-size:9.5px;color:#888}
-.tl-bar.thin.dn span{top:8px}
-.tl-bar.thin.up span{bottom:8px}
-.tl-bar.thin:hover span{color:var(--accent)}
+.tl-bar.thin{height:4px;min-width:4px;border:0;outline:0;background:var(--accent)}
+.tl-bar.thin>span:first-child{position:absolute;left:50%;transform:translateX(-50%);max-width:none;overflow:visible;padding:0;font-size:9.5px;color:#888}
+.tl-bar.thin.dn>span:first-child{top:8px}
+.tl-bar.thin.up>span:first-child{bottom:8px}
+.tl-bar.thin:hover>span:first-child{color:var(--accent)}
+/* Tooltip: CSS only, shown above the bar on hover / keyboard focus. The wrap stops clipping it once the 760px chart fits (≥ 820px). */
+.tl-tip{display:none;position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);z-index:5;pointer-events:none;white-space:nowrap;padding:6px 10px;border:1px solid var(--line);background:var(--bg);color:#444;font:12px/1.4 Georgia,serif;letter-spacing:0;text-transform:none;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.tl-bar.thin .tl-tip{bottom:calc(100% + 20px)}
+.tl-bar:hover .tl-tip,.tl-bar:focus-visible .tl-tip{display:block}
+@media (min-width:820px){.tl-h-wrap{overflow:visible}}
+@media (max-width:819px){.tl-h{padding-top:56px}} /* room for the Schools tooltip inside the scrolling wrap */
 .tl-axis{position:relative;height:16px;border-top:1px solid var(--line)}
 .tl-axis span{position:absolute;top:5px;transform:translateX(-50%);font:10px/1 "Varela Round",arial,sans-serif;letter-spacing:1px;color:#aaa}
+@media (max-width:1023px){.tl-axis span.odd{display:none}} /* ticks stay yearly; labels every 2 years */
 
 /* Vertical timeline (experience page) */
 .tl-v{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--line)}
-.tl-v li{position:relative;margin:0 0 28px;padding-left:18px}
-.tl-v li::before{content:"";position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.tl-v>li{position:relative;margin:0 0 28px;padding-left:18px} /* child combinator: the nested .cv li keep only their native bullet */
+.tl-v>li::before{content:"";position:absolute;left:-30px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
 .tl-v .when{display:block;font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#999}
 .tl-v p{font-size:15px !important;line-height:1.7em;margin:.3em 0 0;color:#666 !important}
 
@@ -227,7 +242,7 @@ html.dark .ph{background:var(--ph);border-color:#555;color:#aaa}
 html.dark .ph b{color:#bbb}
 html.dark .case .tldr,html.dark .case pre,html.dark .codebox pre,html.dark .case code{background:var(--soft) !important}
 html.dark .btn-primary{background:var(--accent) !important;color:#fff !important}
-html.dark .tl-bar{color:var(--fg)}
+html.dark .tl-bar,html.dark .tl-tip,html.dark .pillars dt,html.dark .pillars dd{color:var(--fg)}
 html.dark .tl-bar.work:hover{color:#fff}
 
 /* ---- v6 adjustments ---- */
@@ -259,7 +274,7 @@ html.dark .logos .logo:hover img{filter:none}
 .skill-group .skills li:last-child{border-bottom:0}
 
 /* 6. Full role text on experience.html and detail pages */
-.cv{margin:.4em 0 0;padding-left:1.2em}
+.cv{margin:.4em 0 0;padding-left:1.2em;list-style:disc} /* disc also when nested in .tl-v (browser default would be circle) */
 .cv li{font-size:15px !important;line-height:1.7em;color:#666 !important;margin:0 0 .2em}
 .tl-v .tech{font-size:13px !important;color:#767676 !important;margin:.5em 0 0}
 .case .from-cv{font:11px/1.6 "Varela Round",arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#666;margin:2.2em 0 .2em}
