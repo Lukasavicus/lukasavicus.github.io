@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """One-off: closes the A/B parity gaps in b/ (static HTML). Idempotent-ish: skips patches already applied."""
 import json, re, subprocess, os, html, datetime
-ROOT = '/Users/lucassilva/Documents/90.LUKE/2.PROJECTS/lukasavicus.github.io'
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 B = ROOT + '/b'
 HERE = os.path.dirname(os.path.abspath(__file__))
-D = json.loads(subprocess.check_output(['node', HERE + '/data.js', ROOT + '/_build/build.js']))
+D = json.loads(subprocess.check_output([os.environ.get('NODE_BIN', 'node'), HERE + '/data.js', ROOT + '/_build/build.js']))
 esc = lambda s: html.escape(str(s), quote=False)
 PAGES = ['404', 'about', 'code-shop', 'contact', 'experience', 'faq', 'index', 'personal', 'projects']
 NOW = (2026, 10)
@@ -80,7 +80,7 @@ if 'class="scope' not in s:
 # Hidden by default; assets/site.js shows it only while a query is typed. Same list as build.js footer(). Rewritten on every run.
 POSTS = [('/articles/' + re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f)[:-3] + '/', re.search(r'^title:\s*"?(.+?)"?\s*$', rd(f'{ROOT}/_posts/{f}'), re.M).group(1))
          for f in sorted(os.listdir(ROOT + '/_posts')) if f.endswith('.md')]
-PAGE_LINKS = ([(pr['href'], pr['title']) for pr in D['PROJECTS']] + [(f'experience/{e["slug"]}.html', f'{e["role"]} · {e["short"]}') for e in D['EXP']]
+PAGE_LINKS = ([(pr['href'], pr['title']) for pr in D['PROJECTS'] if not pr.get('draft')] + [(f'experience/{e["slug"]}.html', f'{e["role"]} · {e["short"]}') for e in D['EXP']]
               + [(f'education/{e["slug"]}.html', f'{e["degree"]} · {e["short"]}') for e in D['EDU']] + POSTS + [('recommendations.html', 'Recommendations')])
 PAGES_COL = '<div class="pages" hidden><h4>Pages</h4>' + ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in PAGE_LINKS) + '</div>'
 for p in PAGES:
@@ -137,19 +137,27 @@ def shell(page, depth):
     return head, tail
 
 SHARE = '<div class="share"><span>Share:</span> <button type="button" data-share="copy">Copy link</button> <a href="#" data-share="linkedin" target="_blank" rel="noopener">LinkedIn</a> <a href="#" data-share="x" target="_blank" rel="noopener">X</a></div>'
+def case_visual(pr, root=''):
+    return f'<figure class="case-visual"><img src="{root}../{pr["visual"]}" alt="{esc(pr["title"])}: conceptual workflow"><figcaption>Reconstructed conceptual workflow; not a production screenshot.</figcaption></figure>' if pr.get('visual') else ''
 ph = lambda cls, label, desc: f'<div class="ph {cls}"><b>{label}</b><span>{esc(desc)}</span></div>'
 
-def page(file, parent, title, desc, main):
+def page(file, parent, title, desc, main, lang=None):
     head, tail = shell(parent, '/' in file)
     head = sub1(head, r'<title>.*?</title>', f'<title>{esc(title)} · Lucas Lukasavicus</title>', name='title')
     head = sub1(head, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{html.escape(desc)}">', name='desc')
+    if lang:
+        head = re.sub(r'<html lang="[^"]*"', '<html lang="' + ('pt-BR' if lang == 'pt' else 'en') + '"', head)
+        switch = '<nav class="lang case-language" aria-label="Case language"><a href="spot.html" lang="en" hreflang="en"' + (' aria-current="page"' if lang == 'en' else '') + '>English</a> · <a href="spot-pt.html" lang="pt-BR" hreflang="pt-BR"' + (' aria-current="page"' if lang == 'pt' else '') + '>Português</a></nav>'
+        head = re.sub(r'<span class="lang"[^>]*>.*?</span></span>', switch, head)
+        tail = re.sub(r'<span class="lang"[^>]*>.*?</span></span>', switch, tail)
+        head = head.replace('</head>', '<link rel="alternate" hreflang="en" href="spot.html"><link rel="alternate" hreflang="pt-BR" href="spot-pt.html"></head>')
     wr(f'{B}/{file}', head + '<main id="main" class="relative">' + main + '</main>' + tail)
 
 def detail(file, parent, kick, title, meta, body_html, tech, back, back_label, ph_desc, after=''):
     main = (f'<section class="page-hero"><p class="kick">{kick}</p><h1>{esc(title)}</h1><p>{esc(meta)}</p></section>'
             f'<div class="page"><section class="detail">'
             f'<p class="back"><a href="{back}">&larr; {back_label}</a></p>'
-            + ph('ph-mid', 'Placeholder · Imagem', ph_desc) + body_html +
+            + (case_visual(next((p for p in D['PROJECTS'] if p['href'] == file), {}), '../') or ph('ph-mid', 'Placeholder · Imagem', ph_desc)) + body_html +
             f'<p class="tech"><strong>Tech:</strong> {esc(tech)}</p>{after}{SHARE}'
             f'<p class="back"><a href="{back}">&larr; Back</a></p></section></div>')
     page(file, parent, title, meta, main)
@@ -166,7 +174,7 @@ def role_of(pr, r):
     e = next((x for x in D['EXP'] if x['slug'] == pr.get('role')), None)
     return f'<p class="links"><strong>Role:</strong> <a href="{r}experience/{e["slug"]}.html">{esc(e["role"])} · {esc(e["short"])}</a></p>' if e else ''
 def projects_of(e):
-    ps = [p for p in D['PROJECTS'] if p.get('role') == e['slug']]
+    ps = [p for p in D['PROJECTS'] if p.get('role') == e['slug'] and not p.get('draft')]
     return (f'<p class="links"><strong>Related project{"s" if len(ps) > 1 else ""}:</strong> ' + ' · '.join(f'<a href="../{p["href"]}">{esc(p["title"])}</a>' for p in ps) + '</p>') if ps else ''
 for e in D['EXP']:
     d = duration(e['period'])
@@ -208,6 +216,10 @@ BCARDS = {  # title: (color, icon, short line, problem, delivery, numbers or Non
         'I documented it end to end, brought observability in, and proposed the file consolidation that made the daily load viable.',
         'Optimal file size measured at about 256 MB.'),
 }
+for pr in D['PROJECTS']:
+    if pr['title'] not in BCARDS:
+        BCARDS[pr['title']] = ('#8bbca5', 'DE', pr['text'], pr['page'][0][1], pr['page'][1][1], None)
+BCARDS['Data lake for BTG+ payments'] = ('#b99cff', 'BTG', 'An existing AWS platform for BTG+ payment data.', 'An existing platform needed documentation and better visibility of its flows.', 'Documentation, observability, a file-consolidation proposal and support for changes to the query layer.', None)
 PLUS_SM = '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" class="absolute right-5 top-5 size-6 shrink-0 transition-transform duration-300"><circle cx="16" cy="16" r="16" fill="#0E0E0E"></circle><path stroke="#fff" stroke-linecap="round" stroke-width="1.5" d="M15.997 8v16M8 16.003h16"></path></svg>'
 PLUS_LG = PLUS_SM.replace('class="absolute right-5 top-5 size-6 shrink-0 transition-transform duration-300"', 'class="absolute bottom-6 right-6 size-8 hover:brightness-150"')
 bmeta = lambda pr: pr['meta'][0].upper() + pr['meta'][1:]
@@ -231,45 +243,53 @@ def list_cards(prs):
     out = []
     for pr in prs:
         short = BCARDS[pr['title']][2]
-        out.append(f'<article class="card"><div class="ph ph-wide"><b>Placeholder · Screenshot</b><span>{esc(pr["title"])}</span></div><p class="muted" style="margin:0 0 4px;font-size:13px">{esc(bmeta(pr))}</p><h3 style="font-size:24px;line-height:30px;font-family:Fraunces,serif"><a href="{pr["href"]}">{esc(pr["title"])}</a></h3><p style="margin:8px 0 14px">{esc(short)}</p><dl class="pj-dl" style="color:#1a1714">{bdl(pr, " style=\"color:#8a7a5c\"", " style=\"color:#2b2723\"")}</dl><p class="tech" style="margin:12px 0 0;font:500 13px/18px Geist,sans-serif;color:#6b6358">Tech: {btech(pr)}</p><p style="margin:12px 0 0"><a href="{pr["href"]}" class="more-link" style="margin:0">{blink(pr)}</a></p></article>')
+        out.append(f'<article class="card">{case_visual(pr) or ph("ph-wide", "Placeholder · Screenshot", pr["title"])}<p class="muted" style="margin:0 0 4px;font-size:13px">{esc(bmeta(pr))}</p><h3 style="font-size:24px;line-height:30px;font-family:Fraunces,serif"><a href="{pr["href"]}">{esc(pr["title"])}</a></h3><p style="margin:8px 0 14px">{esc(short)}</p><dl class="pj-dl" style="color:#1a1714">{bdl(pr, " style=\"color:#8a7a5c\"", " style=\"color:#2b2723\"")}</dl><p class="tech" style="margin:12px 0 0;font:500 13px/18px Geist,sans-serif;color:#6b6358">Tech: {btech(pr)}</p><p style="margin:12px 0 0"><a href="{pr["href"]}" class="more-link" style="margin:0">{blink(pr)}</a></p></article>')
     return '<div class="grid2">' + ''.join(out) + '</div>'
 def replace_between(s, start, end, new, keep_end=True):
     i = s.index(start); j = s.index(end, i)
     return s[:i] + new + (s[j:] if keep_end else s[j + len(end):])
-PRS = D['PROJECTS']; n_pers = sum(p['meta'].startswith('personal') for p in PRS); n_pro = len(PRS) - n_pers
+PRS = [p for p in D['PROJECTS'] if not p.get('draft')]; n_pers = sum(p['meta'].startswith('personal') for p in PRS); n_pro = len(PRS) - n_pers
 WORDS = {3: 'three', 5: 'five', 8: 'eight'}
-blurb = f'{WORDS.get(n_pers, n_pers).capitalize()} personal projects and {WORDS.get(n_pro, n_pro)} professional builds.'
+blurb = f'{str(WORDS.get(n_pers, n_pers)).capitalize()} personal projects and {WORDS.get(n_pro, n_pro)} professional case studies and engineering contributions.'
 s = rd(f'{B}/index.html')
 s = replace_between(s, '<div class="mt-10 flex flex-col gap-3 px-4 lg:hidden">', '<p class="mt-10 text-center"><a href="projects.html" class="pj-more">All projects →</a></p>', home_cards(PRS))
 s = sub1(s, r'(The problem, what I delivered, and the numbers\. )[^<]*(</p>)', r'\g<1>' + blurb + r'\2', name='home blurb')
 wr(f'{B}/index.html', s)
 s = rd(f'{B}/projects.html')
-s = replace_between(s, '<section id="list">', '</section>', '<section id="list">' + list_cards(PRS))
+s = replace_between(s, '<section id="list">', '</section>', '<section id="list"><p>Professional cases describe my contribution within team projects. Figures are reported outcomes or estimates, not independently audited measurements.</p>' + list_cards(PRS))
 s = sub1(s, r'<section class="page-hero"><h1>Projects\.</h1><p>[^<]*</p>', f'<section class="page-hero"><h1>Projects.</h1><p>{blurb} The problem, what I delivered, the numbers.</p>', name='projects hero')
-s = sub1(s, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{html.escape(f"{WORDS.get(len(PRS), len(PRS)).capitalize()} projects: " + ", ".join(p["title"] for p in PRS) + ".")}">', name='projects desc')
+s = sub1(s, r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{html.escape(f"{str(WORDS.get(len(PRS), len(PRS))).capitalize()} projects: " + ", ".join(p["title"] for p in PRS) + ".")}">', name='projects desc')
 wr(f'{B}/projects.html', s)
 
 # detail pages: page bullets as bold lead-in paragraphs (**bold**, `code`), then Tech (stack), then Links (URLs auto-linked), same as build.js
 linkify = lambda t: re.sub(r'https?://[^\s<]+', lambda m: f'<a href="{m.group(0)}" rel="noopener">{re.sub(r"^https?://", "", m.group(0))}</a>', esc(t))
 def project_html(pr):
-    out = ''
-    for item in pr['page']:
+    out = pr.get('article', '').replace('../assets/cases/', '../../assets/cases/')
+    for item in ([] if pr.get('article') else pr['page']):
         label, text, sub = (item + [None])[:3]
         out += f'<p><strong>{esc(label)}</strong> {inline(text)}</p>' + (f'<ul>{"".join(f"<li>{inline(x)}</li>" for x in sub)}</ul>' if sub else '')
+    if pr.get('gallery'):
+        out += '<section class="case-gallery" aria-labelledby="demo-screens"><h2 id="demo-screens">An illustrative reconstruction</h2><p>A small offline demonstration recreates the interface style with synthetic records. The walkthrough below shows the current reconstruction with fictional data.</p>'
+        for g in pr['gallery']:
+            out += f'<figure><a href="../../{g["src"]}"><img src="../../{g["src"]}" alt="{esc(g["alt"])}" loading="lazy"></a><figcaption>{esc(g["caption"])}</figcaption></figure>'
+        out += '</section>'
     return out
 for pr in D['PROJECTS']:
     if not pr['href'].startswith('projects/'): continue
     links = f'<p class="links"><strong>Links:</strong> {linkify(pr["links"])}</p>' if pr.get('links') else ''
     detail(pr['href'], 'projects', 'Project', pr['title'], 'Personal project' if pr['meta'] == 'personal' else pr['meta'],
-           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr['phDesc'], after=links + role_of(pr, '../'))
+           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr.get('phDesc', pr['title']), after=links + role_of(pr, '../'))
 
-# spot: body verbatim (PT), role line + share before the closing back link, same as build.js; the title is the page's H1
-spot = rd(ROOT + '/_build/spot-body.html').strip()
-spot = sub1(spot, r'<h2 class="case-title">(.*?)</h2>', r'<h1 class="case-title">\1</h1>', name='spot h1')
-spot = sub1(spot, r'<p class="back"><a href="projects\.html">&larr; Back to Projects</a></p>\s*$',
-            role_of(next(p for p in D['PROJECTS'] if p['href'] == 'spot.html'), '') + '\n' + SHARE + '\n<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>', name='spot back')
-page('spot.html', 'projects', 'Spot — case study', 'Spot: a data-quality gateway that compares two Tableau workbooks data point by data point (case study, in Portuguese).',
-     '<div class="page case">' + spot + '</div>')
+# Spot: complete bilingual bodies and shared, adapted code examples.
+for lang in ['pt', 'en']:
+    file = 'spot-pt.html' if lang == 'pt' else 'spot.html'
+    source = '/_build/spot-body.html' if lang == 'pt' else '/_build/spot-body-en.html'
+    examples = subprocess.check_output([os.environ.get('NODE_BIN', 'node'), '-e', "process.stdout.write(require(process.argv[1])(process.argv[2]))", ROOT + '/_build/spot-render.js', lang], text=True)
+    spot = rd(ROOT + source).strip().replace('<!-- CODE_EXAMPLES -->', examples).replace('src="assets/cases/', 'src="../assets/cases/')
+    spot = sub1(spot, r'<h2 class="case-title">(.*?)</h2>', r'<h1 class="case-title">\1</h1>', name='spot h1')
+    back = 'Voltar aos projetos' if lang == 'pt' else 'Back to Projects'
+    spot = sub1(spot, r'<p class="back"><a href="projects\.html">&larr; (?:Back to Projects|Voltar aos projetos)</a></p>\s*$', role_of(next(p for p in D['PROJECTS'] if p['href'] == 'spot.html'), '') + '\n' + SHARE + '\n<p class="back"><a href="projects.html">&larr; ' + back + '</a></p>', name='spot back')
+    page(file, 'projects', 'Spot — estudo de caso' if lang == 'pt' else 'Spot — case study', 'Spot: comparação automatizada de workbooks Tableau.' if lang == 'pt' else 'Spot: automated Tableau workbook comparison.', '<div class="page case">' + spot + '</div>', lang=lang)
 
 # ---------------------------------------------------------------- 4. career content (branch career-content): About intro + Q&A from build.js, Recommendations page
 s = rd(f'{B}/about.html')
@@ -291,4 +311,14 @@ def rec_card(co, p):
 rec_main = ('<section class="page-hero"><h1>Recommendations.</h1><p>The inverse of testimonials: people I worked with and would vouch for, in my own words. Short, honest, and only with their OK.</p></section><div class="page">'
             + ''.join(f'<section class="rec-group"><h3>{esc(co)}</h3><div class="grid2">{"".join(rec_card(co, p) for p in people)}</div></section>' for co, people in D['RECS']) + '</div>')
 page('recommendations.html', 'faq', 'Recommendations', 'People Lucas worked with and would vouch for, in his own words.', rec_main)
+# Keep the version B experience summary aligned with the scoped BTG case.
+p = B + '/experience.html'
+s = rd(p).replace('Implemented Lambda architecture for payment processing, integrating batch and near real-time data.', 'Documented and observed an existing payments platform with batch and near real-time ingestion; proposed file consolidation and supported changes to its query layer.')
+wr(p, s)
 print('ok')
+
+# Directly addressable drafts must not be indexed.
+for pr in D["PROJECTS"]:
+    if pr.get("draft"):
+        target = f'{B}/{pr["href"]}'
+        wr(target, rd(target).replace("</head>", '<meta name="robots" content="noindex, nofollow"></head>'))

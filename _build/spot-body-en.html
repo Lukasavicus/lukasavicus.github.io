@@ -1,0 +1,88 @@
+<p class="back"><a href="projects.html">&larr; Projects</a></p>
+<h2 class="case-title">Spot: how we turned two weeks of manual review into 30 minutes of quality assurance</h2>
+<p class="meta">Bain &amp; Company (NPS Prism) · 2023, ~3 months of development · Architect and developer of Spot<br>Stack: Python, Tableau Server REST API, Tableau Metadata API, pandas, concurrency (stdlib)</p>
+<figure class="case-visual"><img src="assets/cases/spot.svg" alt="Spot: workbook comparison workflow"><figcaption>Reconstructed conceptual workflow; no corporate data.</figcaption></figure>
+<div class="tldr">
+<p><strong>TL;DR.</strong> At NPS Prism, Bain's customer-experience benchmarking business, each quarterly delivery of a Tableau workbook (~150 charts) went through two weeks of manual review by four people, and errors still slipped through. I created <strong>Spot</strong>, a tool that compares two workbooks data point by data point through Tableau's APIs. It became the official <em>Data Quality Gateway</em> before publication.</p>
+<ul>
+<li><strong>4 people × 2 weeks → 1 person × 30 minutes</strong> per validation cycle</li>
+<li><strong>100% of data points</strong> checked, compared with a sample reviewed by people</li>
+<li><strong>6–8× shorter runtime</strong> (3–4 hours → 30 minutes) through parallelism</li>
+<li>Became the <strong>largest product in the NPS Prism data team</strong></li>
+</ul>
+</div>
+<h2>1. Context: a business that sells trust</h2>
+<p>In 2003, Fred Reichheld of Bain &amp; Company published <em>“The One Number You Need to Grow”</em> in Harvard Business Review, introducing the <strong>Net Promoter Score (NPS)</strong>. Two decades later, some version of NPS is used by roughly two-thirds of the Fortune 1000.<sup><a href="#fn1">1</a></sup></p>
+<p>In 2019, Bain launched <strong>NPS Prism</strong>, its competitive NPS benchmarking business. It shows how a company compares with named competitors at each episode of the customer journey.<sup><a href="#fn2">2</a></sup> A bank might discover, for example, that it is losing ground in digital experience to a particular competitor within a particular customer segment.</p>
+<p>Each delivery had three stages:</p>
+<ol>
+<li><strong>Survey design.</strong> The <strong>Client Engagement</strong> team—the commercial team working with the client from requirements gathering through presentation—identifies what the client wants to understand (credit cards, the app, service, promotions…) and translates it into a questionnaire with conditional branches. The longest path exceeds 120 questions.</li>
+<li><strong>Panel collection.</strong> Specialist panel providers distribute the survey to <strong>tens of thousands of respondents</strong> per wave, across social class, age, gender, region and other dimensions. Representativeness is monitored throughout collection.</li>
+<li><strong>Engineering and delivery.</strong> Data is ingested from panel providers' APIs into a medallion data lake (bronze → silver → gold). The gold layer feeds a <strong>Tableau workbook with ~50 dashboards and ~150 charts</strong>, sold through subscriptions.</li>
+</ol>
+<p class="example">Survey → collection → bronze / silver / gold → Tableau → review → delivery. Spot checks the workbook; it does not replace survey-representativeness checks.</p>
+<p>Behind this was an <strong>industry × region</strong> matrix (Banking LatAm, Auto Europe, Insurance APAC…), with specialist analysts responsible for quality and insights in each cell.</p>
+<p>The subscription was not a one-off purchase: the cycle repeated <strong>every quarter</strong>, typically under annual contracts covering four waves. Clients act on the findings—restructuring a card product or changing a rewards programme—and measure the effect in the next wave.</p>
+<p>This is the central idea of the case:</p>
+<blockquote><p><strong>NPS Prism sells more than insights. Above all, it sells trust.</strong></p></blockquote>
+<p>As Reichheld put it at launch: <em>“Finally, there is Net Promoter benchmarking data you can count on.”</em><sup><a href="#fn2">2</a></sup> Clients make investment decisions and change strategic direction based on these numbers. Bain also has a <strong>ZD (Zero Defect)</strong> principle: review as many times as necessary so that nothing incorrect reaches the client.</p>
+<h2>2. The problem: when the past changes without warning</h2>
+<p>Between waves, clients can change almost everything: the target audience, questions and analytical segments. Each change introduces two risks.</p>
+<p><strong>Risk 1: schema changes.</strong> The survey structure changes and the data no longer has the same format.</p>
+<p><strong>Risk 2: business-rule changes that rewrite history.</strong> This is the more subtle risk. Imagine a bank with three income segments:</p>
+<table><tr><th>Segment</th><th>Monthly income range</th></tr><tr><td>Low income</td><td>up to R$2,000</td></tr><tr><td>Middle income</td><td>R$2,000–R$15,000</td></tr><tr><td>High income</td><td>above R$15,000</td></tr></table>
+<p>After restructuring, the bank creates a fourth segment: <strong>Ultra-high income (above R$50,000)</strong>. If the rule only applies going forward, waves become an apples-to-oranges comparison. It therefore needs to be <strong>applied retrospectively</strong>. But an incorrect backfill changes the insight:</p>
+<blockquote><p>Three months ago, the credit card was performing well among high-income customers. The new wave shows a negative result. You open the dashboard from three months ago to compare—and it now shows a negative result too. Historical data has been corrupted, along with trust.</p></blockquote>
+<p class="example">Synthetic example: segment A had an NPS of 32 in the previous wave. After reprocessing, the same slice returns 28. Comparison flags the change; review determines whether it is expected or an error.</p>
+<p><strong>The existing process:</strong> before each publication, <strong>3–4 people</strong> from Client Engagement and analytics spent <strong>roughly two weeks</strong> reviewing workbook data points: charts, tooltips and underlying-data downloads. Reviewing everything was impossible, and a manual process inevitably carried error risk. Errors had already slipped through.</p>
+<h2>3. My role</h2>
+<p>I was the <strong>architect and developer of Spot</strong> within the NPS Prism data engineering team:</p>
+<ul>
+<li><strong>Idea:</strong> I identified that Tableau Server exposed not only metadata through its APIs, but also the <strong>data behind each sheet</strong>. This enabled automated, granular comparison.</li>
+<li><strong>Architecture and implementation:</strong> API wrapper, CLI, comparison engine, parallelism and the execution-plan system (dry run).</li>
+<li><strong>Timeline:</strong> roughly <strong>three months</strong>, in 2023.</li>
+</ul>
+<h2>4. The solution: Spot</h2>
+<p>The Analytics Engineer selects <strong>two workbooks</strong>, such as the previous wave and the publication candidate. Spot:</p>
+<ol>
+<li>Traverses the <strong>workbook → dashboard → sheet</strong> hierarchy through the API.</li>
+<li>Extracts each sheet's data from both workbooks.</li>
+<li>Compares <strong>each data point</strong>, aligning keys and identifying changed or missing values.</li>
+<li>Reports <strong>all</strong> differences in an Excel report at several levels: missing or renamed sheets, categories present in only one version (such as a new segment), and changed values.</li>
+</ol>
+<figure class="case-visual"><img src="assets/cases/spot.svg" alt="Planning, parallel extraction and comparison"><figcaption>Conceptual architecture: separates planning, execution and review.</figcaption></figure>
+<h3>Key decisions</h3>
+<p><strong>1. Predictability: dry run and execution plan.</strong> <em>(the hardest decision)</em><br>The first version was a CLI that simply ran. Users did not know how many comparisons would be made or how long they would take. Leadership asked for predictability. I redesigned the core to <strong>separate plan definition from execution</strong>: tasks are organized before extraction and comparison run. The available implementation expresses this through task objects and containers linked by dependencies, without a fluent API. This allowed Spot to:</p>
+<ul><li>generate a <strong>plan</strong> (sheets, comparisons and estimated effort) before extracting and comparing data;</li><li>inspect the plan and <strong>execute it in a separate stage</strong>;</li><li>provide execution progress.</li></ul>
+<pre><code>RECONSTRUCTED EXAMPLE — not output from the original CLI
+Workbooks: baseline / candidate
+Comparable sheets: 3
+Plan: extract → align keys → compare → report
+Execution: after reviewing the plan</code></pre>
+<p><strong>2. Two APIs and direct <code>requests</code> calls instead of the official library.</strong><br>The official library (<code>tableauserverclient</code>) did not expose what I needed. I combined the <strong>REST API</strong> (view data) and <strong>Metadata API</strong> (workbook structure) in a custom wrapper over <code>requests</code>.</p>
+<p><strong>3. Object-oriented design instead of a procedural script.</strong><br>The Tech Lead preferred a more direct procedural approach. I kept an object-oriented design with classes, inheritance and polymorphism. That made it possible to add dry runs and new checks without rewriting the core.</p>
+<p><strong>4. Standard library first.</strong><br>I used Python's standard library for concurrency, I/O and the CLI, together with pandas, NumPy and <code>requests</code> for data and integration. Fewer dependencies meant less adoption friction in a team whose focus was not software development.</p>
+<p><strong>5. Parallelism by sheet.</strong><br>Each sheet is independent and comparison is dominated by I/O. Parallel calls reduced runtime from <strong>3–4 hours to ~30 minutes</strong>.</p>
+<h2>5. Results</h2>
+<p>The figures below are reported in the original case. They have not been independently recalculated or audited from the archives. The development timeline is also my estimate.</p>
+<table><tr><th>Metric</th><th>Before</th><th>After</th></tr><tr><td>Effort per validation cycle</td><td>3–4 people × ~2 weeks</td><td>1 person × ~30 min</td></tr><tr><td>Coverage</td><td>sample reviewed by people</td><td>100% of data points</td></tr><tr><td>Process</td><td>manual, subject to error</td><td>automated, reproducible, auditable through reports</td></tr><tr><td>Errors that would reach clients</td><td>had occurred before</td><td>at least one real error caught before publication</td></tr></table>
+<p class="example">Reported effort per cycle: 3–4 people for roughly two weeks → one person for roughly 30 minutes. This comparison involves human effort and execution time; it is not an independent cost measurement.</p>
+<ul><li><strong>Order of magnitude:</strong> four people × two weeks ≈ <strong>320 person-hours per cycle</strong>. With the 3–6 clients served when I left and four waves per year, that represents <strong>~3,800–7,700 person-hours/year</strong> freed up. Across the entire client base, the figure scales further. <em>(estimate)</em></li><li>Became the <strong>official Data Quality Gateway</strong>: no workbook went to a client without passing through Spot.</li><li>Became the <strong>largest product in the NPS Prism data team</strong>.</li></ul>
+<table><caption>Synthetic report example, without client data</caption><tr><th>Sheet</th><th>Key</th><th>Baseline</th><th>Candidate</th><th>Review</th></tr><tr><td>Summary</td><td>Segment A / NPS</td><td>32</td><td>28</td><td>Changed value</td></tr><tr><td>Detail</td><td>New segment</td><td>Missing</td><td>Present</td><td>Structural change</td></tr></table>
+<h2>6. Lessons</h2>
+<p><strong>Technical lessons</strong></p>
+<ul><li>Knowing the language well pays off. Separating planning from execution, object-oriented design and concurrency are what turned a three-month tool into infrastructure.</li><li>Look at what the platform already exposes. The solution did not require a new system; it came from studying the APIs of a platform the business already used.</li><li>Predictability is a feature. Dry runs did not change the results, but they changed users' confidence in the tool.</li></ul>
+<p><strong>People: what I would do differently</strong></p>
+<p>Leadership told me more than once that they did not have clarity on <em>what</em> I was doing or <em>why</em>. I was not sharing technical decisions and their reasoning sufficiently. I recognize that this made communication with the team harder, particularly when concepts such as parallelism and object-oriented design were not yet familiar to everyone.</p>
+<p>If I did it again, I would have a <strong>communication plan</strong> from the start: recorded decisions and their rationale, checkpoints with leadership, and team involvement in technical discussions. A good technical decision that nobody understands is a risky decision for the organization.</p>
+<h2>Technical appendix</h2>
+<!-- CODE_EXAMPLES -->
+<h3>D. Levels of reported differences</h3>
+<table><tr><th>Level</th><th>Example</th></tr><tr><td>Workbook structure</td><td>dashboard present in only one workbook</td></tr><tr><td>Sheet structure</td><td>renamed or missing sheet</td></tr><tr><td>Dimension</td><td>new (“Ultra-high income”) or removed category</td></tr><tr><td>Value</td><td>metric with a changed value</td></tr></table>
+<h3>E. Known limitations</h3>
+<ul><li>Not all Tableau filters could be manipulated through the API. Changing filter values and reading defaults exposed in the UI remained partially unresolved.</li><li>There was no automatic mapping between different schemas: structural changes were <strong>reported</strong>, not reconciled.</li></ul>
+<div class="footnotes">
+<p id="fn1">1. Reichheld, F. <em>The One Number You Need to Grow</em>. Harvard Business Review, December 2003. See also <a href="https://en.wikipedia.org/wiki/Net_promoter_score" target="_blank">Net Promoter Score (Wikipedia)</a>.</p>
+<p id="fn2">2. <a href="https://www.bain.com/about/media-center/press-releases/2019/bain-launches-nps-prism/" target="_blank">Bain &amp; Company launches NPS Prism (press release, March 6, 2019)</a>; <a href="https://www.npsprism.com/" target="_blank">npsprism.com</a>.</p>
+</div>
+<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>

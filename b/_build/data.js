@@ -5,4 +5,5 @@ const grab = name => { const m = src.match(new RegExp('const ' + name + ' = (\\[
 const str = name => { const m = src.match(new RegExp('const ' + name + " = '((?:[^'\\\\]|\\\\.)*)'")); if (!m) throw new Error(name); return eval("'" + m[1] + "'"); };
 const esc = s => s;
 const EXP = eval(grab('EXP')), EDU = eval(grab('EDU')), PROJECTS = eval(grab('PROJECTS')), ABOUT = eval(grab('ABOUT')), QA = eval(grab('QA')), RECS = eval(grab('RECS'));
+require(require('path').join(require('path').dirname(process.argv[2]), 'professional-cases'))(PROJECTS, EXP);
 process.stdout.write(JSON.stringify({ EXP, EDU, PROJECTS, ABOUT, QA, RECS, HEADLINE: str('HEADLINE'), SCOPE: str('SCOPE'), MOTTO: str('MOTTO'), CV_PDF: str('CV_PDF'), CV_TITLE: str('CV_TITLE') }));
