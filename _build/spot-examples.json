@@ -1,0 +1,32 @@
+[
+  {
+    "id": "plan",
+    "pt": "A. Definir o plano antes de executar",
+    "en": "A. Define the plan before running it",
+    "kind_pt": "Adaptado de main_parallel_definition e main_parallel_execution. O exemplo recebe tarefas já preparadas; descoberta de metadados, filtros e configuração de conexão foram omitidos.",
+    "kind_en": "Adapted from main_parallel_definition and main_parallel_execution. This excerpt takes prepared tasks; metadata discovery, filters and connection configuration are omitted.",
+    "text_pt": "O plano mantém contêineres de download de A e B e uma tarefa de comparação que referencia esses mesmos objetos. Construir o plano não baixa os dados das sheets. A execução respeita a ordem: os downloads precisam terminar antes da comparação. Isso permite inspecionar a lista de tarefas antes da etapa mais cara.",
+    "text_en": "The plan holds download containers for A and B and a comparison task referencing those same objects. Building it does not download sheet data. Execution preserves the dependency order: downloads must finish before comparison. The task list can therefore be inspected before the expensive stage.",
+    "code": "def build_plan(tasks_a, tasks_b, workers):\n    downloads_a = TaskContainer(tasks_a, workers)\n    downloads_b = TaskContainer(tasks_b, workers)\n    comparisons = CompareMultipleSheetsTask({\n        \"download_sheets_tasks_a\": downloads_a.tasks,\n        \"download_sheets_tasks_b\": downloads_b.tasks,\n    })\n    task_table = pd.concat([\n        downloads_a.as_dataframe(),\n        downloads_b.as_dataframe(),\n        comparisons.as_dataframe(),\n    ]).reset_index(drop=True)\n    return {\n        \"execution_plan\": task_table,\n        \"set_of_tasks\": [downloads_a, downloads_b, comparisons],\n    }\n\n\ndef execute_plan(plan):\n    for stage in plan[\"set_of_tasks\"]:\n        stage.parallel_tasks_execution()\n    return plan"
+  },
+  {
+    "id": "compare",
+    "pt": "B. Alinhar chaves e classificar divergências",
+    "en": "B. Align keys and classify differences",
+    "kind_pt": "Adaptado de compare_sheets. Mantém o outer join por chave e a distinção entre ausência e valor divergente. A versão para leitura usa o indicador do merge para explicitar linhas presentes em apenas um lado e trata nulos com pandas. Não acrescenta tolerância numérica à implementação original.",
+    "kind_en": "Adapted from compare_sheets. It preserves the outer join on keys and the distinction between absence and mismatch. This readable version uses the merge indicator to identify one-sided rows explicitly and pandas to handle nulls. It does not add numerical tolerance to the original implementation.",
+    "text_pt": "Um join interno esconderia categorias que desapareceram. O outer join mantém essas linhas visíveis. Chaves compostas precisam identificar uma linha unicamente; o exemplo valida essa condição para evitar uma multiplicação silenciosa de registros. Nulos em ambos os lados são equivalentes; a diferença de um único valor continua sendo reportada.",
+    "text_en": "An inner join would hide categories that disappeared. An outer join keeps those rows visible. Composite keys must uniquely identify a row; this version validates that condition to avoid silently multiplying records. Nulls on both sides are equivalent, while a single changed value is still reported.",
+    "code": "import pandas as pd\n\n\ndef compare_values(left, right, keys, fields):\n    joined = left.merge(\n        right, on=keys, how=\"outer\", suffixes=(\"_a\", \"_b\"),\n        indicator=True, validate=\"one_to_one\",\n    )\n    differences = []\n    for _, row in joined.iterrows():\n        for field in fields:\n            a, b = row[f\"{field}_a\"], row[f\"{field}_b\"]\n            missing_side = row[\"_merge\"] != \"both\"\n            both_null = pd.isna(a) and pd.isna(b)\n            same = both_null or (\n                not pd.isna(a) and not pd.isna(b) and a == b\n            )\n            if missing_side or not same:\n                differences.append({\n                    \"key\": tuple(row[key] for key in keys),\n                    \"field\": field,\n                    \"type\": \"absence\" if missing_side or\n                            pd.isna(a) or pd.isna(b) else \"mismatch\",\n                    \"baseline\": a,\n                    \"candidate\": b,\n                })\n    return pd.DataFrame(differences)"
+  },
+  {
+    "id": "concurrency",
+    "pt": "C. Distribuir trabalho entre workers",
+    "en": "C. Distribute work across workers",
+    "kind_pt": "Adaptado de TaskContainer.tasks_assignment e parallel_tasks_execution_definition. Mantém o filtro por status, a atribuição de workers e ThreadPoolExecutor. A divisão em lotes foi simplificada e os resultados são aguardados dentro do contexto do executor.",
+    "kind_en": "Adapted from TaskContainer.tasks_assignment and parallel_tasks_execution_definition. It preserves status filtering, worker assignment and ThreadPoolExecutor. Chunking is simplified and results are collected inside the executor context.",
+    "text_pt": "Cada worker recebe um lote e executa suas tarefas em sequência, enquanto os lotes avançam em paralelo. O número de workers limita as chamadas simultâneas. Tarefas já concluídas são excluídas; esse filtro ajuda a evitar trabalho repetido, mas não equivale a um sistema completo de retries ou persistência.",
+    "text_en": "Each worker receives a batch and executes its tasks sequentially, while batches progress in parallel. The worker count bounds simultaneous calls. Successful tasks are excluded to avoid repeated work; this filter alone is not a complete retry or persistence system.",
+    "code": "from concurrent.futures import ThreadPoolExecutor\n\n\ndef run_parallel(tasks, workers):\n    if not workers:\n        raise ValueError(\"At least one worker is required\")\n    pending = [task for task in tasks\n               if task.status != TaskStatus.SUCCESS]\n    batches = [pending[i::len(workers)]\n               for i in range(len(workers))]\n\n    def run_batch(batch, worker):\n        for task in batch:\n            task.set_worker(worker)\n            task.execute()\n        return batch\n\n    with ThreadPoolExecutor(max_workers=len(workers)) as executor:\n        futures = [executor.submit(run_batch, batch, worker)\n                   for batch, worker in zip(batches, workers)]\n        return [future.result() for future in futures]"
+  }
+]

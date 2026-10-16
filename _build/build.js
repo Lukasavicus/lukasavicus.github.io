@@ -52,7 +52,7 @@ const EXP = [
       ['Data platform.', 'The project had not been sold yet and the architecture lived in the heads of a few senior engineers. I extracted that knowledge into a specification (close to an RFP), a client deck and a POC. The project was sold; the whitepaper I co-wrote became showcase material for other clients.'],
       ['US telecom account.', 'Staff augmentation for one of the largest US telecom operators. I joined one of the client teams first and documented where the data was, the daily processes, the key people and the pains. From there I grew the team to 11 direct reports, 8 data analysts and 3 data engineers, mostly senior and staff: about US$1.2M/year in revenue. I organized the work on three pillars: delivery; communication and collaboration (short daily reports, structured weekly reviews, internal deep dives); and innovation through POCs and MVPs. That is how the client got its first end-to-end Python pipelines on AWS EMR, custom observability alerts with Datadog and an adoption plan for Airflow.'],
       ['Data Strategy.', 'A GCP platform with heavy tech debt and little documentation. More than ten pipeline patterns were unified into two or three, infrastructure cost came down about 70% from about US$7.5k/month, and I ran the full handover to a team in India, with recorded tutorials and documentation. BigQuery at the center, with Datastream, Workflows, Dataproc, Cloud Run and GCS.'],
-      ['Domo migration.', 'The client had used Domo for about 10 years; a pricing change would raise the cost up to 100×. I took the project over at about 80% done, after the previous manager left, and wrote a delivery report of everything done so far. Then I built tooling on the Domo API that mapped about 40k datasets and 16k flows, built the dependency graph and automated the backups. About 95% was migrated on time; the remaining ~2 TB were extracted to GCP without extending the Domo contract. Estimated savings: about US$13M/year. I led 10 people plus a PM.'],
+      ['Domo migration.', 'Joined an established team of ten for the final three months of a DOMO-to-GCP migration workstream. Built dependency mapping and export tooling, connected the inventory to the tracking spreadsheet and supported delivery coordination with our PM. A separate script checked exports against DOMO before an access cutoff brought forward by roughly forty days. The previous tech lead authored the team’s migration data-quality tool. [Read the case](../projects/domo-gcp-migration.html).'],
       ['AI copilots analytics.', 'A full data platform on GCP, with ingestion, enrichment, validation, data quality and observability, to measure the rollout of AI copilots with call-center agents. A team of 11 built it, along with two analytics products and two internal tools: one for annotating data against a taxonomy, one for asking questions over the data in natural language.'],
       ['Practice.', 'Co-wrote the Data Engineering career rubric and wrote the Data Analyst one from scratch; set up the bench programme; mapped and redesigned the hiring process; and organized internal data-product initiatives for people between allocations.']] },
   { slug: 'senior-data-engineer-bain', role: 'Senior Data Engineer', co: 'Bain & Company', short: 'Bain', period: 'Apr 2023 – Jun 2024', start: 2023.25, end: 2024.5, line: 'Batch ingestion on Azure, Dash Enterprise data apps and a QA framework for analytics pipelines.', body: ['Batch ingestion pipelines on Azure, Dash Enterprise data apps, a QA framework for analytics pipelines, Databricks ↔ Tableau integration, and infrastructure for fraud detection and text analysis projects.'], tech: 'Databricks, Azure, Python, Tableau, Dash Enterprise',
@@ -88,7 +88,7 @@ const EXP = [
     cvText: ['Applied PMBOK and Lean Six Sigma methodologies to optimize business processes.', 'Conducted process mapping and technology integration for multinational clients.', 'Developed executive dashboards in Tableau, connected to Amazon Big Data environments.', 'Led robotic process automation (RPA) training and proof-of-concept initiatives.'],
     story: [['Context.', 'Advanced Analytics consulting at one of the Big Four. Promoted after 5 months.'],
       ['Claro process mapping.', 'Mapping the processes of the Claro group after the Claro / Embratel / NET merger. Lean Six Sigma and PMBOK used as technologies for transformation; I was the technologist in a team of administrators, engineers, statisticians and mathematicians.'],
-      ['Address RPA.', 'Python and pandas over Oracle via ODBC, with string rules that went from expanding abbreviations to Levenshtein similarity; an RPA tool applied the corrections and a Qlik dashboard monitored the operation. 93% of addresses corrected, about R$1M/year saved for the client, R$700k+ in revenue for Deloitte. [Project page](../projects/address-rpa-deloitte.html).'],
+      ['Address RPA.', 'Exploratory analysis over Oracle, Python/pandas resolution rules, regex and Levenshtein matching, with ambiguous candidates routed to human review. I built the rules and dashboard; a colleague implemented the RPA write-back through the client application. The latest recollection revises initial resolution to approximately 86%; its validation and financial impact remain under review. [Project page](../projects/address-rpa-deloitte.html).'],
       ['Johnson & Johnson.', 'Sold as the "data visualization specialist" with no Tableau experience; first dashboards delivered in under 2 weeks. Strategic, managerial and operational dashboards in an infographic format for desktop and mobile, over Redshift data warehouses, plus a design-thinking workshop with the directors and managers.']] },
   { slug: 'full-stack-developer-squid', role: 'Full-Stack Developer', co: 'Squid', short: 'Squid', period: 'Jan 2017 – Feb 2017', start: 2017, end: 2017.15, line: 'MEAN stack (later React), social-media data analysis and self-service BI tools.', body: ['MEAN stack (later React), plus social-media data analysis and self-service BI tools.'], tech: 'MongoDB, Express, Angular, Node, React',
     cvText: ['Developed web applications using the MEAN stack (MongoDB, Express.js, AngularJS, Node.js).', 'Applied data analytics to social media insights.'],
@@ -144,11 +144,13 @@ const PROJECTS = [
     page: [['Problem.', 'Each area planned its budget (office expenses up to travel, sponsorships and philanthropy) in Excel. About 30 budget "champions" sent files to the planning area, which validated, consolidated and reconciled everything by hand and sent errors back. Slow, manual, error-prone.'], ['What we built.', '"SOS" (Sistema de Orçamento do Safra), a responsive web system on the bank\'s intranet. Users enter the budget with validation at input time, so there is no back-and-forth; the budget manager sees who filled what and when, sets calendars and deadlines, and approves; approved budgets flow to finance for release.'], ['My role.', 'Tech lead and backend developer. I coordinated a team of four (1 senior backend, 1 junior backend, 2 mid-level frontend developers, plus DB, business and infra teams) and built the backend and the database with the other backend developer.'], ['Result.', 'The whole bank moved to it.']] },
   { title: 'Red Hat AML onboarding', meta: 'Safra · ~2020', href: 'projects/aml-onboarding-safra.html', role: 'data-engineer-safra', text: 'When the Central Bank required a single, auditable view of customer onboarding across channels, I was the product owner who got eight channels, five teams and Red Hat to deliver it in just under three months.', tech: 'Red Hat Process Automation Manager (Drools/jBPM), Apache Camel', phDesc: 'Diagram of the onboarding gateway (channels → one process → regulator)',
     page: [['Trigger.', 'Central Bank of Brazil Circular 3.978/2020 on anti-money-laundering (PLD/FT) required banks to run know-your-customer and background checks under one consolidated, auditable process, whatever the channel the customer came through.'], ['What we built.', 'With Red Hat\'s team, a single onboarding gateway on Red Hat Process Automation Manager and Apache Camel, in a hexagonal architecture: every channel feeds the same process, the same rules decide, and the bank reports to the regulator from one place and can block a customer it does not trust.'], ['The rules engine.', 'Deliberately white-box. The regulator had to be able to audit the rules and look for bias, so we built a simple, explicit rules engine instead of an opaque model.'], ['My role.', 'Product owner and delivery lead; I did not write code. I coordinated eight channels spread over five teams, set the meeting cadence and the communication plan (status to each team and to the regulator), unified what had been channel-specific processes into central rules with some flexibility per team, and unblocked access, change management (the bank\'s GMD process) and other internal procedures for the Red Hat team.'], ['People.', 'Red Hat: two consultants, a scrum master, an account manager. Safra: about 14 people, from five channel teams, the AML area, my director and superintendent.'], ['Result.', 'Compliant in a little under three months, fast for the complexity involved.']] },
-  { title: 'Address-resolution RPA', meta: 'Deloitte · 2018', href: 'projects/address-rpa-deloitte.html', role: 'advanced-analytics-consultant-deloitte', text: 'A rules engine plus RPA that fixed bad customer addresses before invoices went to the post, saving Claro, a Brazilian telecom operator, an estimated R$1M a year in returned mail.', tech: 'Python, regex, Levenshtein, an RPA tool, Qlik', phDesc: 'Diagram of the address-resolution flow (rules → human review → RPA → dashboard)',
-    page: [['Problem.', 'Customers signed up through many channels (mall kiosks, subway campaigns, the website) and addresses arrived wrong or in inconsistent forms ("R." for Rua, "AV", "DR", missing side of the street). Invoices went out by post and every returned letter cost extra. The estimate was about R$1M per year in returns, in the finance area (collections).'], ['What I built: the brain.', 'An address-resolution rules engine with roughly 12 to 20 rules, derived from empirical tests on the client\'s data: simple normalizations, regexes, then fuzzy matching with Levenshtein distance. Only when the rules could not resolve an address did a small app ask a person to correct it.'], ['What the team built: the hands.', 'An RPA bot that took the corrected address and replicated it across the client\'s systems, plus a Qlik dashboard fed in near real time so the directors could watch the process live.'], ['My role.', 'Analyst on the Deloitte side: rules engine, data analysis, dashboard; RPA training and proof of concept.'], ['Result.', '93% of addresses corrected. Savings of approximately R$1M per year for the client\'s finance area (estimate at the time), and R$700k+ in revenue for Deloitte.']] },
+  { title: 'Address-resolution RPA', meta: 'Deloitte · 2018', href: 'projects/address-rpa-deloitte.html', role: 'advanced-analytics-consultant-deloitte', text: 'Exploring customer-address data, developing ordered resolution rules and routing ambiguous matches to human review to support billing and collection.', tech: 'Python, pandas, Oracle, regex, Levenshtein, RPA, Qlik', phDesc: 'Address resolution: exploratory analysis, ordered rules, candidate review, RPA and monitoring',
+    page: [['Problem.', 'Customer details were entered through several channels. Inconsistent or incorrect addresses could obstruct billing and collection. The author has corrected the earlier account: the business problem was revenue collection, rather than the cost of returned mail.'], ['Investigation.', 'Working on the client’s computer with access to Oracle, I explored a large sample through SQL queries, identified recurring patterns and evaluated rules by how many cases they could resolve.'], ['Ordered rules.', 'Whitespace cleanup came before contextual expansion of street types and titles. Regex helped separate address components placed in one field. Geographic consistency checks narrowed candidates before Levenshtein-based similarity matching.'], ['Human review.', 'When several candidates met the matching criteria, the process presented options in a spreadsheet for a person to examine. The similarity threshold mentioned in the recollection was illustrative and is not a confirmed production setting.'], ['My contribution and the team’s work.', 'I developed the analysis, resolution rules and monitoring dashboard. A colleague built the RPA integration that applied corrections through the application interface, since we could not update the database directly, and populated the review spreadsheet.'], ['Reported outcome; still under review.', 'The author now recalls approximately 86% resolution in the initial treatment; the exact denominator and validation need confirmation. A recurring process aimed to achieve similar coverage, but its operational outcome remains to be clarified. The recollection places the financial issue and approximate benefit around R$1 million per month in revenue collection; whether this was exposure, potential recovery or measured incremental receipts still needs confirmation. These figures have not been independently verified.']] },
   { title: 'Data lake for BTG+ payments', meta: 'BTG Pactual · 2021 – 2022', href: 'projects/btg-payments-data-lake.html', role: 'data-engineer-team-leader-btg-pactual', text: 'An AWS Kappa-style pipeline for BTG+ payment events. Most of it existed when I arrived; I documented it end to end, brought observability in, and proposed the file consolidation that made the daily load viable.', tech: 'AWS SNS, SQS, Lambda, S3, Glue, Aurora, Athena, EMR, PySpark, Datadog', phDesc: 'Architecture diagram: hot lane (SNS → SQS → Lambda → S3 → Glue → Aurora) and cold lane (D-1 files)',
     page: [['Context.', 'BTG\'s digital bank received payment events (Pix, TED, DOC, utility bills) from Pismo, the core-banking platform behind BTG+, through an SNS topic. The architecture aimed at two lanes: a hot lane (stream) and a cold lane (daily files).'], ['Hot lane.', 'SNS → SQS → Lambda (with a dead-letter queue) → JSON events in an S3 data lake partitioned by year/month/day → a Glue job loading an Aurora database.'], ['Cold lane.', 'The same partner delivered D-1 files by FTP; a daily job pulled them, and a reconciliation process compared the two lanes to make sure nothing was lost.'], ['Honest scope.', 'I was not the author of this architecture; a good part of it was in place when I arrived. My contributions:', ['**Documentation** of the whole platform, which did not exist.', '**Observability**: how to use Datadog to watch the pipelines and the databases (table sizes, flow, failures) and start looking at things nobody was looking at, such as processing cost and the data swamp forming in S3.', '**Small-files consolidation** (my proposal): thousands of tiny JSONs made the Aurora load slow. We measured an optimal file size of about 256 MB and designed a scheduled Lambda that sweeps the partition and merges files, with a final merge at the end of each day.', 'Supporting the move from Aurora to **Athena**, proposed by the directors: better fit for the query pattern and faster development since Glue already produced the data.']]] },
 ];
+require('./professional-cases')(PROJECTS, EXP);
+const VISIBLE_PROJECTS = PROJECTS.filter(p => !p.draft);
 const N_PERSONAL = PROJECTS.filter(p => p.meta.startsWith('personal')).length;
 // Not derived from PROJECTS (the site only features a few): full count kept in the lab repo, docs/projects-inventory.md
 // (InstaCarro 3, Squid 1, Deloitte 3, B2W 1, Safra 7, BTG 2, Bain 2, TELUS 7). Mirrored by hand in b/index.html.
@@ -156,7 +158,7 @@ const PROFESSIONAL_PROJECTS = 26;
 const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'companies'], [EDU.length, 'degrees & diplomas'], ['3', 'countries visited'], ['2', 'languages'], [N_PERSONAL, 'personal projects'], [PROFESSIONAL_PROJECTS, 'professional projects']];
 // Role ↔ project cross-links (detail pages, both directions). Hrefs are relative to the detail folder.
 const roleOf = (pr, r) => { const e = EXP.find(x => x.slug === pr.role); return e ? `<p class="links"><strong>Role:</strong> <a href="${r}experience/${e.slug}.html">${esc(e.role)} · ${esc(e.short)}</a></p>` : ''; };
-const projectsOf = e => { const ps = PROJECTS.filter(p => p.role === e.slug); return ps.length ? `<p class="links"><strong>Related project${ps.length > 1 ? 's' : ''}:</strong> ${ps.map(p => `<a href="../${p.href}">${esc(p.title)}</a>`).join(' · ')}</p>` : ''; };
+const projectsOf = e => { const ps = VISIBLE_PROJECTS.filter(p => p.role === e.slug); return ps.length ? `<p class="links"><strong>Related project${ps.length > 1 ? 's' : ''}:</strong> ${ps.map(p => `<a href="../${p.href}">${esc(p.title)}</a>`).join(' · ')}</p>` : ''; };
 // Articles (Jekyll _posts, permalink /articles/:title/) for the footer page index.
 const POSTS = fs.readdirSync(path.join(OUT, '_posts')).filter(f => f.endsWith('.md')).map(f => ['/articles/' + f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '') + '/', (fs.readFileSync(path.join(OUT, '_posts', f), 'utf8').match(/^title:\s*"?(.+?)"?\s*$/m) || [])[1] || f]);
 // Inline markup for page bullets: **bold**, `code`, [text](href); bare URLs → links.
@@ -164,7 +166,8 @@ const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').repl
 // Role detail page: story first, then the CV bullets under "From the CV" (experience.html keeps roleHtml only).
 const storyHtml = e => !e.story ? roleHtml(e) : e.story.map(([l, t]) => `<p><strong>${esc(l)}</strong> ${inline(t)}</p>`).join('\n') + (e.cvText ? `\n<h3 class="from-cv">From the CV</h3>${roleHtml(e)}` : '');
 const linkify = s => esc(s).replace(/https?:\/\/[^\s<]+/g, u => `<a href="${u}" rel="noopener">${u.replace(/^https?:\/\//, '')}</a>`);
-const projectHtml = pr => pr.page.map(([label, text, sub]) => `<p><strong>${esc(label)}</strong> ${inline(text)}</p>${sub ? `<ul>${sub.map(s => `<li>${inline(s)}</li>`).join('')}</ul>` : ''}`).join('\n');
+const projectGallery = (pr, root) => pr.gallery ? `<section class="case-gallery" aria-labelledby="demo-screens"><h2 id="demo-screens">An illustrative reconstruction</h2><p>A small offline demonstration recreates the interface style with synthetic records. The walkthrough below shows the current reconstruction with fictional data.</p>${pr.gallery.map(g => `<figure><a href="${root}${g.src}"><img src="${root}${g.src}" alt="${esc(g.alt)}" loading="lazy"></a><figcaption>${esc(g.caption)}</figcaption></figure>`).join('')}</section>` : '';
+const projectHtml = pr => (pr.article || pr.page.map(([label, text, sub]) => `<p><strong>${esc(label)}</strong> ${inline(text)}</p>${sub ? `<ul>${sub.map(s => `<li>${inline(s)}</li>`).join('')}</ul>` : ''}`).join('\n')) + projectGallery(pr, '../');
 // Carousel: horizontal scroll-snap track + arrows + dots (js/site.js wires the controls).
 const carousel = (cards) => `<div class="carousel" data-carousel>
   <button type="button" class="car-btn prev" aria-label="Previous projects">&lsaquo;</button>
@@ -192,7 +195,7 @@ function navList(r, active, cls) {
 function footer(r) {
   const col = (title, items, attrs) => `<div${attrs || ''}><h3>${title}</h3><ul>${items.map(([h, t, extra]) => `<li><a href="${h}"${extra || ''}>${t}</a></li>`).join('')}</ul></div>`;
   // Every detail page, so the footer search finds Spot, roles, projects, schools and articles; shown only while a query is typed (js/site.js).
-  const pages = [...PROJECTS.map(p => ['/' + p.href, esc(p.title)]), ...EXP.map(e => [`/experience/${e.slug}.html`, `${esc(e.role)} · ${esc(e.short)}`]), ...EDU.map(e => [`/education/${e.slug}.html`, `${esc(e.degree)} · ${esc(e.short)}`]), ...POSTS.map(([h, t]) => [h, esc(t)]), ['/recommendations.html', 'Recommendations']];
+  const pages = [...VISIBLE_PROJECTS.map(p => ['/' + p.href, esc(p.title)]), ...EXP.map(e => [`/experience/${e.slug}.html`, `${esc(e.role)} · ${esc(e.short)}`]), ...EDU.map(e => [`/education/${e.slug}.html`, `${esc(e.degree)} · ${esc(e.short)}`]), ...POSTS.map(([h, t]) => [h, esc(t)]), ['/recommendations.html', 'Recommendations']];
   return `<div class="info-footer-wrapper clear"><div class="info-footer">
   <div id="socialLinks" class="social-links sqs-svg-icon--list">${SOCIAL}</div>
 </div></div>
@@ -215,7 +218,7 @@ function shell(p) {
   const navIdx = NAV.findIndex(([h]) => h === p.nav);
   const home = p.file === 'index.html';
   return `<!doctype html>
-<html lang="en">
+<html lang="${p.lang || 'en'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -234,7 +237,7 @@ ${p.head || ''}
   <div id="mobileMenuLink"><a role="button" aria-label="Menu" aria-controls="mobileNav" aria-expanded="false">&#9776;</a></div>
   <header id="header" class="clear">
     <div id="upper-logo"><div class="logo"><a href="/">Lucas Lukasavicus</a></div></div>
-    <div class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a> · <span title="coming soon" aria-disabled="true">PT</span></div>
+    ${p.languageSwitch || '<div class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a> · <span title="coming soon" aria-disabled="true">PT</span></div>'}
   </header>
   <div id="topNav">${navList(r, p.nav, '')}</div>
   <div class="page-divider top-divider"></div>
@@ -254,6 +257,8 @@ ${SYMBOLS}
 </html>
 `;
 }
+const caseVisual = (pr, root = '') => `<figure class="case-visual"><img src="${root}${pr.visual}" alt="${esc(pr.title)}: conceptual workflow" loading="lazy"><figcaption>Reconstructed conceptual workflow; not a production screenshot.</figcaption></figure>`;
+const projectVisual = pr => pr.visual ? caseVisual(pr) : ph('ph-small', 'Imagem · projeto', esc(pr.title));
 const ph = (cls, label, desc) => `<div class="ph ${cls}"><b>${label}</b><span>${desc}</span></div>`;
 const share = `<div class="share"><span>Share:</span> <button type="button" data-share="copy">Copy link</button> <a href="#" data-share="linkedin" target="_blank" rel="noopener">LinkedIn</a> <a href="#" data-share="x" target="_blank" rel="noopener">X</a></div>`;
 const write = (file, html) => { const f = path.join(OUT, file); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, html); console.log('wrote', file); };
@@ -301,7 +306,7 @@ const homeBody = `
 </section>
 <section id="featured">
   <h3>Featured projects</h3>
-  ${carousel(PROJECTS.map(pr => `<a class="card" role="listitem" href="${pr.href}">${ph('ph-small', 'Imagem · projeto', esc(pr.title))}<h4>${esc(pr.title)}</h4><p class="meta">${esc(pr.meta)}</p></a>`))}
+  ${carousel(VISIBLE_PROJECTS.map(pr => `<a class="card" role="listitem" href="${pr.href}">${projectVisual(pr)}<h4>${esc(pr.title)}</h4><p class="meta">${esc(pr.meta)}</p></a>`))}
   <p class="more"><a href="projects.html">View all projects &rarr;</a></p>
 </section>
 <section id="career">
@@ -383,12 +388,12 @@ const expBody = `
 write('experience.html', shell({ file: 'experience.html', title: 'Experience', nav: 'experience.html', heroTitle: 'Experience', bodyClass: 'wide', body: expBody }));
 
 // ---------------- detail pages ----------------
-function detail({ file, title, meta, paras, html, tech, links, rel, back, backLabel, nav, phDesc }) {
+function detail({ file, title, meta, paras, html, tech, links, rel, back, backLabel, nav, phDesc, visual }) {
   const body = `
 <p class="back"><a href="${back}">&larr; ${backLabel}</a></p>
 <h1 class="case-title">${esc(title)}</h1>
 <p class="meta">${esc(meta)}</p>
-${ph('ph-mid', 'Imagem · logo/foto do projeto', phDesc)}
+${visual ? caseVisual({visual, title}, '../') : ph('ph-mid', 'Imagem · logo/foto do projeto', phDesc)}
 ${html || paras.map(p => `<p>${esc(p)}</p>`).join('')}
 <p class="tech"><strong>Tech:</strong> ${esc(tech)}</p>
 ${links ? `<p class="links"><strong>Links:</strong> ${linkify(links)}</p>\n` : ''}${rel ? rel + '\n' : ''}${share}
@@ -398,10 +403,10 @@ ${links ? `<p class="links"><strong>Links:</strong> ${linkify(links)}</p>\n` : '
 EXP.forEach(e => detail({ file: `experience/${e.slug}.html`, title: e.role, meta: `${e.co} · ${e.period}`, html: storyHtml(e), tech: e.tech, rel: projectsOf(e), back: '../experience.html', backLabel: 'Experience', nav: 'experience.html', phDesc: `Logo of ${e.short} or a photo from this period` }));
 EDU.forEach(e => detail({ file: `education/${e.slug}.html`, title: e.degree, meta: `${e.school} · ${e.period}`, paras: ['[PLACEHOLDER] What I studied, thesis or final project, and what stayed with me.'], tech: '[PLACEHOLDER]', back: '../about.html#education', backLabel: 'About · Education', nav: 'about.html', phDesc: `Logo of ${e.short}` }));
 // Project detail pages (Spot has its own case study, spot.html): page bullets as bold lead-in paragraphs, then Tech (stack), then Links.
-PROJECTS.filter(pr => pr.href.startsWith('projects/')).forEach(pr => detail({ file: pr.href, title: pr.title, meta: pr.meta === 'personal' ? 'Personal project' : pr.meta, html: projectHtml(pr), tech: pr.tech, links: pr.links, rel: roleOf(pr, '../'), back: '../projects.html', backLabel: 'Projects', nav: 'projects.html', phDesc: pr.phDesc }));
+PROJECTS.filter(pr => pr.href.startsWith('projects/')).forEach(pr => detail({ file: pr.href, title: pr.title, meta: pr.meta === 'personal' ? 'Personal project' : pr.meta, html: projectHtml(pr), tech: pr.tech, links: pr.links, rel: roleOf(pr, '../'), back: '../projects.html', backLabel: 'Projects', nav: 'projects.html', phDesc: pr.phDesc, visual: pr.visual }));
 
 // ---------------- projects ----------------
-const projBody = `<section id="projects-list">${carousel(PROJECTS.map(pr => `<div class="card" role="listitem">${ph('ph-small', 'Imagem · projeto', esc(pr.title))}<h4><a href="${pr.href}">${esc(pr.title)}</a></h4><p class="meta">${esc(pr.meta)}</p><p>${esc(pr.text)}</p><p class="tech"><strong>Tech:</strong> ${esc(pr.tech)}</p><p><a href="${pr.href}">Read more &rarr;</a></p></div>`))}</section>`;
+const projBody = `<p>Professional cases describe my contribution within team projects. Figures are my reported outcomes or estimates, not independently audited measurements. Conceptual visuals and synthetic examples contain no client records.</p><section id="projects-list">${carousel(VISIBLE_PROJECTS.map(pr => `<div class="card" role="listitem">${projectVisual(pr)}<h4><a href="${pr.href}">${esc(pr.title)}</a></h4><p class="meta">${esc(pr.meta)}</p><p>${esc(pr.text)}</p><p class="tech"><strong>Tech:</strong> ${esc(pr.tech)}</p><p><a href="${pr.href}">Read more &rarr;</a></p></div>`))}</section>`;
 write('projects.html', shell({ file: 'projects.html', title: 'Projects', nav: 'projects.html', heroTitle: 'Projects', bodyClass: 'wide', body: projBody }));
 
 // ---------------- personal ----------------
@@ -475,9 +480,18 @@ const nfBody = `<section id="nf" class="center">
 write('404.html', shell({ file: '404.html', title: 'Page not found', nav: '', heroTitle: 'Not found', body: nfBody }));
 
 // ---------------- spot (existing case study, re-wrapped) ----------------
-let spotBody = fs.readFileSync(path.join(__dirname, 'spot-body.html'), 'utf8').trim();
-spotBody = spotBody.replace(/<p class="back"><a href="projects.html">&larr; Back to Projects<\/a><\/p>\s*$/, roleOf(PROJECTS.find(p => p.href === 'spot.html'), '') + '\n' + share + '\n<p class="back"><a href="projects.html">&larr; Back to Projects</a></p>');
-write('spot.html', shell({ file: 'spot.html', title: 'Spot — case study', nav: 'projects.html', heroTitle: 'Work Examples', pageClass: 'case', body: spotBody }));
+const renderSpotExamples = require('./spot-render');
+for (const lang of ['pt', 'en']) {
+  const file = lang === 'pt' ? 'spot-pt.html' : 'spot.html';
+  const languageSwitch = `<nav class="lang case-language" aria-label="${lang === 'pt' ? 'Idioma do case' : 'Case language'}"><a href="spot.html" lang="en" hreflang="en" ${lang === 'en' ? 'aria-current="page"' : ''}>English</a> · <a href="spot-pt.html" lang="pt-BR" hreflang="pt-BR" ${lang === 'pt' ? 'aria-current="page"' : ''}>Português</a></nav>`;
+  let body = fs.readFileSync(path.join(__dirname, lang === 'pt' ? 'spot-body.html' : 'spot-body-en.html'), 'utf8').trim();
+  body = body.replace('<!-- CODE_EXAMPLES -->', renderSpotExamples(lang)).replace(/<h2 class="case-title">(.*?)<\/h2>/, '<h1 class="case-title">$1</h1>');
+  const back = lang === 'pt' ? 'Voltar aos projetos' : 'Back to Projects';
+  body = body.replace(/<p class="back"><a href="projects.html">&larr; (?:Back to Projects|Voltar aos projetos)<\/a><\/p>\s*$/, roleOf(PROJECTS.find(p => p.href === 'spot.html'), '') + '\n' + share + `\n<p class="back"><a href="projects.html">&larr; ${back}</a></p>`);
+  const alternates = '<link rel="alternate" hreflang="en" href="spot.html"><link rel="alternate" hreflang="pt-BR" href="spot-pt.html">';
+  write(file, shell({file, title: lang === 'pt' ? 'Spot — estudo de caso' : 'Spot — case study', nav: 'projects.html', pageClass: 'case', body, lang: lang === 'pt' ? 'pt-BR' : 'en', languageSwitch, head: alternates}).replace(/[ \t]+$/gm, ''));
+}
+
 
 // ---------------- llms.txt (machine-readable version) ----------------
 const md = `Machine-readable version of lukasavicus.github.io
@@ -516,7 +530,7 @@ Each skill's score (0–10) combines two axes:
 Proven time plus the share of topics mastered gives the score.
 
 ## Projects
-${PROJECTS.map(p => `- **${p.title}** — ${p.meta}\n  ${p.text}\n  Tech: ${p.tech}`).join('\n')}
+${VISIBLE_PROJECTS.map(p => `- **${p.title}** — ${p.meta}\n  ${p.text}\n  Tech: ${p.tech}`).join('\n')}
 
 ## Interests
 ${INTERESTS.map(i => `- ${i}`).join('\n')}
@@ -541,3 +555,9 @@ write('llms.txt', md);
 
 // ---------------- Jekyll layout (articles/, research/) — same shell, absolute asset paths ----------------
 write('_layouts/default.html', shell({ file: '_layouts/default.html', raw: true, title: '{{ page.title }}', nav: 'articles/', pageClass: 'case', root: '/', head: '<!-- analytics: GoatCounter snippet goes here -->', body: '<h1 class="case-title">{{ page.title }}</h1>\n{{ content }}' }));
+
+// Keep review drafts out of search-engine indexes while allowing direct URLs.
+for (const p of PROJECTS.filter(p => p.draft)) {
+ const file = path.join(OUT, p.href);
+ fs.writeFileSync(file, fs.readFileSync(file, "utf8").replace("</head>", '<meta name="robots" content="noindex, nofollow"></head>'));
+}

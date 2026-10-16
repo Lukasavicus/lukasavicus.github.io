@@ -13,7 +13,7 @@
 </style>
 <link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/custom.css">
 <style>body,p,nav li,li{font-size:18px !important}body,p{color:hsl(0,0%,27%) !important}ul{line-height:1.7 !important}.logo{font-size:26px !important}.site-info{display:none !important}</style>
-
+<link rel="alternate" hreflang="en" href="spot.html"><link rel="alternate" hreflang="pt-BR" href="spot-pt.html">
 </head>
 <body class="page-borders-thick canvas-style-normal header-subtitle-address banner-alignment-center social-icon-style-round hide-article-author button-style-outline button-corner-style-square collection-type-page collection-layout-default mobile-style-available site-title" data-nav="3" data-root="">
 <a class="skip" href="#page">Skip to content</a>
@@ -23,166 +23,168 @@
   <div id="mobileMenuLink"><a role="button" aria-label="Menu" aria-controls="mobileNav" aria-expanded="false">&#9776;</a></div>
   <header id="header" class="clear">
     <div id="upper-logo"><div class="logo"><a href="/">Lucas Lukasavicus</a></div></div>
-    <div class="lang" aria-label="Language"><a href="#" aria-current="true">EN</a> · <span title="coming soon" aria-disabled="true">PT</span></div>
+    <nav class="lang case-language" aria-label="Case language"><a href="spot.html" lang="en" hreflang="en" aria-current="page">English</a> · <a href="spot-pt.html" lang="pt-BR" hreflang="pt-BR" >Português</a></nav>
   </header>
   <div id="topNav"><nav class="main-nav"><ul><li class="page-collection"><a href="/">Home</a></li><li class="page-collection"><a href="/about.html">About</a></li><li class="page-collection"><a href="/experience.html">Experience</a></li><li class="page-collection active-link"><a href="/projects.html">Projects</a></li><li class="page-collection"><a href="/articles/">Articles</a></li><li class="page-collection"><a href="/personal.html">Personal</a></li><li class="page-collection"><a href="/contact.html">Contact</a></li></ul><div class="page-divider"></div></nav></div>
   <div class="page-divider top-divider"></div>
-  <div id="hero"><div class="wrapper"><h1 class="page-title">Work Examples</h1></div></div>
+
   <section id="page" class="clear case" role="main" tabindex="-1">
     <div class="sqs-layout sqs-grid-12 columns-12" data-type="page"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block html-block sqs-block-html"><div class="sqs-block-content"><div class="sqs-html-content">
 <p class="back"><a href="projects.html">&larr; Projects</a></p>
-<h2 class="case-title">Spot: como transformamos duas semanas de revisão manual em 30 minutos de garantia de qualidade</h2>
-<p class="meta">Bain &amp; Company (NPS Prism) · 2023, ~3 meses de desenvolvimento · Data Engineer, idealizador e autor principal (~87,5% do código)<br>Stack: Python, Tableau Server REST API, Tableau Metadata API, pandas, concorrência (stdlib)</p>
-
-<div class="ph ph-wide"><b>Placeholder · Imagem de capa</b><span>Screenshot de um workbook Tableau do NPS Prism, ou uma ilustração de "spot the difference" entre dois dashboards</span></div>
-
+<h1 class="case-title">Spot: how we turned two weeks of manual review into 30 minutes of quality assurance</h1>
+<p class="meta">Bain &amp; Company (NPS Prism) · 2023, ~3 months of development · Architect and developer of Spot<br>Stack: Python, Tableau Server REST API, Tableau Metadata API, pandas, concurrency (stdlib)</p>
+<figure class="case-visual"><img src="assets/cases/spot.svg" alt="Spot: workbook comparison workflow"><figcaption>Reconstructed conceptual workflow; no corporate data.</figcaption></figure>
 <div class="tldr">
-<p><strong>TL;DR.</strong> No NPS Prism, o negócio de benchmarking de experiência do cliente da Bain, cada entrega trimestral de um workbook Tableau (~150 gráficos) passava por uma revisão manual de 4 pessoas durante 2 semanas, e erros ainda escapavam. Criei o <strong>Spot</strong>, uma ferramenta que compara dois workbooks data point a data point via API do Tableau. Ele virou o <em>Data Quality Gateway</em> oficial antes de toda publicação.</p>
+<p><strong>TL;DR.</strong> At NPS Prism, Bain's customer-experience benchmarking business, each quarterly delivery of a Tableau workbook (~150 charts) went through two weeks of manual review by four people, and errors still slipped through. I created <strong>Spot</strong>, a tool that compares two workbooks data point by data point through Tableau's APIs. It became the official <em>Data Quality Gateway</em> before publication.</p>
 <ul>
-<li><strong>4 pessoas × 2 semanas → 1 pessoa × 30 minutos</strong> por ciclo de validação</li>
-<li><strong>100% dos data points</strong> verificados, contra uma amostra revisada por humanos</li>
-<li><strong>Runtime 6–8× menor</strong> (3–4 h → 30 min) com paralelismo</li>
-<li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism</li>
+<li><strong>4 people × 2 weeks → 1 person × 30 minutes</strong> per validation cycle</li>
+<li><strong>100% of data points</strong> checked, compared with a sample reviewed by people</li>
+<li><strong>6–8× shorter runtime</strong> (3–4 hours → 30 minutes) through parallelism</li>
+<li>Became the <strong>largest product in the NPS Prism data team</strong></li>
 </ul>
 </div>
-
-<h2>1. Contexto: um negócio que vende confiança</h2>
-<p>Em 2003, Fred Reichheld, da Bain &amp; Company, publicou na Harvard Business Review o artigo <em>"The One Number You Need to Grow"</em>, que apresentou ao mundo o <strong>Net Promoter Score (NPS)</strong>. Duas décadas depois, alguma versão do NPS é usada por cerca de dois terços da Fortune 1000.<sup><a href="#fn1">1</a></sup></p>
-<p>Em 2019 a Bain lançou o <strong>NPS Prism</strong>, um negócio próprio de benchmarking competitivo de NPS. Ele mostra, por episódio da jornada do cliente, como uma empresa se compara aos concorrentes nomeados.<sup><a href="#fn2">2</a></sup> Um banco pode descobrir, por exemplo, que está perdendo terreno em experiência digital para um concorrente específico, em um segmento específico de clientes.</p>
-<p>O processo de cada entrega tinha três fases:</p>
+<h2>1. Context: a business that sells trust</h2>
+<p>In 2003, Fred Reichheld of Bain &amp; Company published <em>“The One Number You Need to Grow”</em> in Harvard Business Review, introducing the <strong>Net Promoter Score (NPS)</strong>. Two decades later, some version of NPS is used by roughly two-thirds of the Fortune 1000.<sup><a href="#fn1">1</a></sup></p>
+<p>In 2019, Bain launched <strong>NPS Prism</strong>, its competitive NPS benchmarking business. It shows how a company compares with named competitors at each episode of the customer journey.<sup><a href="#fn2">2</a></sup> A bank might discover, for example, that it is losing ground in digital experience to a particular competitor within a particular customer segment.</p>
+<p>Each delivery had three stages:</p>
 <ol>
-<li><strong>Desenho da pesquisa.</strong> O time de <strong>Client Engagement</strong> (a frente comercial, que acompanha o cliente do levantamento de requisitos à apresentação dos resultados) mapeia com o cliente o que ele quer entender (cartão de crédito, app, atendimento, promoções...) e transforma isso num questionário com ramificações condicionais. O caminho mais longo passa de 120 perguntas.</li>
-<li><strong>Coleta via painéis.</strong> Empresas especializadas ("panelistas") distribuem a pesquisa para <strong>dezenas de milhares de respondentes</strong> por onda, numa amostra diversa em classe social, idade, gênero, região e outras dimensões. A representatividade é monitorada durante toda a coleta.</li>
-<li><strong>Engenharia e entrega.</strong> Os dados são ingeridos das APIs dos panelistas para um data lake em arquitetura medallion (bronze → silver → gold). A camada gold alimenta um <strong>workbook Tableau com ~50 dashboards e ~150 gráficos</strong>, vendido como assinatura.</li>
+<li><strong>Survey design.</strong> The <strong>Client Engagement</strong> team—the commercial team working with the client from requirements gathering through presentation—identifies what the client wants to understand (credit cards, the app, service, promotions…) and translates it into a questionnaire with conditional branches. The longest path exceeds 120 questions.</li>
+<li><strong>Panel collection.</strong> Specialist panel providers distribute the survey to <strong>tens of thousands of respondents</strong> per wave, across social class, age, gender, region and other dimensions. Representativeness is monitored throughout collection.</li>
+<li><strong>Engineering and delivery.</strong> Data is ingested from panel providers' APIs into a medallion data lake (bronze → silver → gold). The gold layer feeds a <strong>Tableau workbook with ~50 dashboards and ~150 charts</strong>, sold through subscriptions.</li>
 </ol>
-
-<div class="ph ph-mid"><b>Placeholder · Diagrama</b><span>Fluxo de entrega do NPS Prism: desenho da pesquisa → coleta via panelistas → data lake medallion (bronze → silver → gold) → workbook Tableau → cliente</span></div>
-
-<p>Por trás de tudo isso havia uma matriz de <strong>indústria × região</strong> (Banking LatAm, Auto Europa, Insurance APAC...), cada célula com analistas especialistas cuidando da qualidade e dos insights.</p>
-<p>A assinatura não era compra única: o ciclo se repetia <strong>a cada trimestre</strong>, tipicamente em contratos anuais de quatro ondas. A lógica é simples. O cliente age sobre os insights (reestrutura o cartão, troca o programa de pontos) e na onda seguinte mede se funcionou.</p>
-<p>É aqui que mora a tese deste case:</p>
-<blockquote><p><strong>O NPS Prism não vende só insight. Vende, principalmente, confiança.</strong></p></blockquote>
-<p>Na palavra do próprio Reichheld, no lançamento do produto: <em>"Finally, there is Net Promoter benchmarking data you can count on."</em><sup><a href="#fn2">2</a></sup> Os clientes tomam decisões de investimento e mudam de rumo estratégico com base nesses números. A Bain tem até um princípio para isso, o <strong>ZD (Zero Defect)</strong>: revisar quantas vezes forem necessárias até que nada chegue errado às mãos do cliente.</p>
-
-<h2>2. O problema: quando o passado muda sem avisar</h2>
-<p>Entre uma onda e outra, o cliente pode mudar quase tudo: o público-alvo, as perguntas, os cortes de análise. Cada mudança traz dois riscos.</p>
-<p><strong>Risco 1: mudança de esquema.</strong> A estrutura da pesquisa muda, e os dados deixam de ter o mesmo formato.</p>
-<p><strong>Risco 2: mudança de regra de negócio que reescreve o histórico.</strong> Esse é o risco mais traiçoeiro. Imagine um banco com três segmentos de renda:</p>
-<table>
-<tr><th>Segmento</th><th>Faixa de renda mensal</th></tr>
-<tr><td>Baixa renda</td><td>até R$ 2 mil</td></tr>
-<tr><td>Média renda</td><td>R$ 2 mil – R$ 15 mil</td></tr>
-<tr><td>Alta renda</td><td>acima de R$ 15 mil</td></tr>
-</table>
-<p>Após uma reestruturação, o banco cria um quarto segmento, <strong>Ultra alta renda (acima de R$ 50 mil)</strong>. Se a regra valer só daqui para frente, as ondas deixam de ser comparáveis: é banana com maçã. Então é preciso <strong>retroagir</strong> a regra. Mas uma retroação errada muda o insight:</p>
-<blockquote><p>Três meses atrás, o cartão de crédito ia bem na alta renda. A nova onda mostra resultado negativo. Você abre o dashboard de três meses atrás para comparar e ele <em>também</em> mostra negativo. O dado histórico foi corrompido, e com ele a confiança.</p></blockquote>
-
-<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>NPS da "alta renda" na onda N-1 antes e depois de uma retroação errada: o mesmo dashboard histórico passa a mostrar outro resultado</span></div>
-
-<p><strong>O processo que existia:</strong> a cada publicação, <strong>3 a 4 pessoas</strong> (Client Engagement + analytics) paravam por <strong>cerca de duas semanas</strong> para revisar data points do workbook: gráficos, tooltips, downloads dos dados subjacentes. Era impossível revisar tudo, e sendo um processo manual, era inevitavelmente sujeito a erro. Erros já tinham escapado antes.</p>
-
-<h2>3. Meu papel</h2>
-<p>Eu era <strong>Data Engineer</strong> no time de engenharia de dados do NPS Prism. O Spot nasceu de uma descoberta minha, e eu o projetei e implementei:</p>
+<p class="example">Survey → collection → bronze / silver / gold → Tableau → review → delivery. Spot checks the workbook; it does not replace survey-representativeness checks.</p>
+<p>Behind this was an <strong>industry × region</strong> matrix (Banking LatAm, Auto Europe, Insurance APAC…), with specialist analysts responsible for quality and insights in each cell.</p>
+<p>The subscription was not a one-off purchase: the cycle repeated <strong>every quarter</strong>, typically under annual contracts covering four waves. Clients act on the findings—restructuring a card product or changing a rewards programme—and measure the effect in the next wave.</p>
+<p>This is the central idea of the case:</p>
+<blockquote><p><strong>NPS Prism sells more than insights. Above all, it sells trust.</strong></p></blockquote>
+<p>As Reichheld put it at launch: <em>“Finally, there is Net Promoter benchmarking data you can count on.”</em><sup><a href="#fn2">2</a></sup> Clients make investment decisions and change strategic direction based on these numbers. Bain also has a <strong>ZD (Zero Defect)</strong> principle: review as many times as necessary so that nothing incorrect reaches the client.</p>
+<h2>2. The problem: when the past changes without warning</h2>
+<p>Between waves, clients can change almost everything: the target audience, questions and analytical segments. Each change introduces two risks.</p>
+<p><strong>Risk 1: schema changes.</strong> The survey structure changes and the data no longer has the same format.</p>
+<p><strong>Risk 2: business-rule changes that rewrite history.</strong> This is the more subtle risk. Imagine a bank with three income segments:</p>
+<table><tr><th>Segment</th><th>Monthly income range</th></tr><tr><td>Low income</td><td>up to R$2,000</td></tr><tr><td>Middle income</td><td>R$2,000–R$15,000</td></tr><tr><td>High income</td><td>above R$15,000</td></tr></table>
+<p>After restructuring, the bank creates a fourth segment: <strong>Ultra-high income (above R$50,000)</strong>. If the rule only applies going forward, waves become an apples-to-oranges comparison. It therefore needs to be <strong>applied retrospectively</strong>. But an incorrect backfill changes the insight:</p>
+<blockquote><p>Three months ago, the credit card was performing well among high-income customers. The new wave shows a negative result. You open the dashboard from three months ago to compare—and it now shows a negative result too. Historical data has been corrupted, along with trust.</p></blockquote>
+<p class="example">Synthetic example: segment A had an NPS of 32 in the previous wave. After reprocessing, the same slice returns 28. Comparison flags the change; review determines whether it is expected or an error.</p>
+<p><strong>The existing process:</strong> before each publication, <strong>3–4 people</strong> from Client Engagement and analytics spent <strong>roughly two weeks</strong> reviewing workbook data points: charts, tooltips and underlying-data downloads. Reviewing everything was impossible, and a manual process inevitably carried error risk. Errors had already slipped through.</p>
+<h2>3. My role</h2>
+<p>I was the <strong>architect and developer of Spot</strong> within the NPS Prism data engineering team:</p>
 <ul>
-<li><strong>Idealização:</strong> identifiquei que o Tableau Server expunha, via API, não só metadados mas os <strong>dados por trás de cada sheet</strong>. Isso tornou possível uma comparação automática e granular.</li>
-<li><strong>Arquitetura e implementação:</strong> API wrapper, CLI, motor de comparação, paralelismo e o sistema de plano de execução (dry run).</li>
-<li><strong>Autoria:</strong> cerca de <strong>87,5% do código</strong>. Três colegas contribuíram com validação/testes e com o tratamento de parte dos filtros do Tableau.</li>
-<li><strong>Prazo:</strong> cerca de <strong>3 meses</strong>, em 2023.</li>
+<li><strong>Idea:</strong> I identified that Tableau Server exposed not only metadata through its APIs, but also the <strong>data behind each sheet</strong>. This enabled automated, granular comparison.</li>
+<li><strong>Architecture and implementation:</strong> API wrapper, CLI, comparison engine, parallelism and the execution-plan system (dry run).</li>
+<li><strong>Timeline:</strong> roughly <strong>three months</strong>, in 2023.</li>
 </ul>
-
-<h2>4. A solução: Spot</h2>
-<p><em>(O nome original era METIS. O Spot, de "spot the difference", veio depois, dado pela liderança: mais comercial e mais memorável.)</em></p>
-<p>O Analytics Engineer informa <strong>dois workbooks</strong>, por exemplo o da onda anterior e o candidato à publicação. O Spot:</p>
+<h2>4. The solution: Spot</h2>
+<p>The Analytics Engineer selects <strong>two workbooks</strong>, such as the previous wave and the publication candidate. Spot:</p>
 <ol>
-<li>Percorre via API a hierarquia <strong>workbook → dashboard → sheet</strong>.</li>
-<li>Extrai os dados de cada sheet nos dois workbooks.</li>
-<li>Compara <strong>cada data point</strong>, com tolerância numérica configurável.</li>
-<li>Reporta <strong>todas</strong> as divergências num relatório Excel, em vários níveis: sheets ausentes ou renomeadas, categorias que aparecem numa versão e não na outra (como um segmento novo), e valores fora da tolerância.</li>
+<li>Traverses the <strong>workbook → dashboard → sheet</strong> hierarchy through the API.</li>
+<li>Extracts each sheet's data from both workbooks.</li>
+<li>Compares <strong>each data point</strong>, aligning keys and identifying changed or missing values.</li>
+<li>Reports <strong>all</strong> differences in an Excel report at several levels: missing or renamed sheets, categories present in only one version (such as a new segment), and changed values.</li>
 </ol>
+<figure class="case-visual"><img src="assets/cases/spot.svg" alt="Planning, parallel extraction and comparison"><figcaption>Conceptual architecture: separates planning, execution and review.</figcaption></figure>
+<h3>Key decisions</h3>
+<p><strong>1. Predictability: dry run and execution plan.</strong> <em>(the hardest decision)</em><br>The first version was a CLI that simply ran. Users did not know how many comparisons would be made or how long they would take. Leadership asked for predictability. I redesigned the core to <strong>separate plan definition from execution</strong>: tasks are organized before extraction and comparison run. The available implementation expresses this through task objects and containers linked by dependencies, without a fluent API. This allowed Spot to:</p>
+<ul><li>generate a <strong>plan</strong> (sheets, comparisons and estimated effort) before extracting and comparing data;</li><li>inspect the plan and <strong>execute it in a separate stage</strong>;</li><li>provide execution progress.</li></ul>
+<pre><code>RECONSTRUCTED EXAMPLE — not output from the original CLI
+Workbooks: baseline / candidate
+Comparable sheets: 3
+Plan: extract → align keys → compare → report
+Execution: after reviewing the plan</code></pre>
+<p><strong>2. Two APIs and direct <code>requests</code> calls instead of the official library.</strong><br>The official library (<code>tableauserverclient</code>) did not expose what I needed. I combined the <strong>REST API</strong> (view data) and <strong>Metadata API</strong> (workbook structure) in a custom wrapper over <code>requests</code>.</p>
+<p><strong>3. Object-oriented design instead of a procedural script.</strong><br>The Tech Lead preferred a more direct procedural approach. I kept an object-oriented design with classes, inheritance and polymorphism. That made it possible to add dry runs and new checks without rewriting the core.</p>
+<p><strong>4. Standard library first.</strong><br>I used Python's standard library for concurrency, I/O and the CLI, together with pandas, NumPy and <code>requests</code> for data and integration. Fewer dependencies meant less adoption friction in a team whose focus was not software development.</p>
+<p><strong>5. Parallelism by sheet.</strong><br>Each sheet is independent and comparison is dominated by I/O. Parallel calls reduced runtime from <strong>3–4 hours to ~30 minutes</strong>.</p>
+<h2>5. Results</h2>
+<p>The figures below are reported in the original case. They have not been independently recalculated or audited from the archives. The development timeline is also my estimate.</p>
+<table><tr><th>Metric</th><th>Before</th><th>After</th></tr><tr><td>Effort per validation cycle</td><td>3–4 people × ~2 weeks</td><td>1 person × ~30 min</td></tr><tr><td>Coverage</td><td>sample reviewed by people</td><td>100% of data points</td></tr><tr><td>Process</td><td>manual, subject to error</td><td>automated, reproducible, auditable through reports</td></tr><tr><td>Errors that would reach clients</td><td>had occurred before</td><td>at least one real error caught before publication</td></tr></table>
+<p class="example">Reported effort per cycle: 3–4 people for roughly two weeks → one person for roughly 30 minutes. This comparison involves human effort and execution time; it is not an independent cost measurement.</p>
+<ul><li><strong>Order of magnitude:</strong> four people × two weeks ≈ <strong>320 person-hours per cycle</strong>. With the 3–6 clients served when I left and four waves per year, that represents <strong>~3,800–7,700 person-hours/year</strong> freed up. Across the entire client base, the figure scales further. <em>(estimate)</em></li><li>Became the <strong>official Data Quality Gateway</strong>: no workbook went to a client without passing through Spot.</li><li>Became the <strong>largest product in the NPS Prism data team</strong>.</li></ul>
+<table><caption>Synthetic report example, without client data</caption><tr><th>Sheet</th><th>Key</th><th>Baseline</th><th>Candidate</th><th>Review</th></tr><tr><td>Summary</td><td>Segment A / NPS</td><td>32</td><td>28</td><td>Changed value</td></tr><tr><td>Detail</td><td>New segment</td><td>Missing</td><td>Present</td><td>Structural change</td></tr></table>
+<h2>6. Lessons</h2>
+<p><strong>Technical lessons</strong></p>
+<ul><li>Knowing the language well pays off. Separating planning from execution, object-oriented design and concurrency are what turned a three-month tool into infrastructure.</li><li>Look at what the platform already exposes. The solution did not require a new system; it came from studying the APIs of a platform the business already used.</li><li>Predictability is a feature. Dry runs did not change the results, but they changed users' confidence in the tool.</li></ul>
+<p><strong>People: what I would do differently</strong></p>
+<p>Leadership told me more than once that they did not have clarity on <em>what</em> I was doing or <em>why</em>. I was not sharing technical decisions and their reasoning sufficiently. I recognize that this made communication with the team harder, particularly when concepts such as parallelism and object-oriented design were not yet familiar to everyone.</p>
+<p>If I did it again, I would have a <strong>communication plan</strong> from the start: recorded decisions and their rationale, checkpoints with leadership, and team involvement in technical discussions. A good technical decision that nobody understands is a risky decision for the organization.</p>
+<h2>Technical appendix</h2>
+<p>Examples adapted from the available Spot implementation. They retain the mechanisms described, with names and interfaces simplified for readability. They contain no corporate connection, configuration or client data.</p><section class="code-example" aria-labelledby="code-plan"><h3 id="code-plan">A. Define the plan before running it</h3><p class="code-origin">Adapted from main_parallel_definition and main_parallel_execution. This excerpt takes prepared tasks; metadata discovery, filters and connection configuration are omitted.</p><pre tabindex="0" aria-label="Python: A. Define the plan before running it"><code class="language-python">def build_plan(tasks_a, tasks_b, workers):
+    downloads_a = TaskContainer(tasks_a, workers)
+    downloads_b = TaskContainer(tasks_b, workers)
+    comparisons = CompareMultipleSheetsTask({
+        &quot;download_sheets_tasks_a&quot;: downloads_a.tasks,
+        &quot;download_sheets_tasks_b&quot;: downloads_b.tasks,
+    })
+    task_table = pd.concat([
+        downloads_a.as_dataframe(),
+        downloads_b.as_dataframe(),
+        comparisons.as_dataframe(),
+    ]).reset_index(drop=True)
+    return {
+        &quot;execution_plan&quot;: task_table,
+        &quot;set_of_tasks&quot;: [downloads_a, downloads_b, comparisons],
+    }
 
-<div class="ph ph-wide"><b>Placeholder · Diagrama de arquitetura</b><span>Workbook onda N-1 + workbook onda N (candidato) → Spot [plano de execução / dry run → workers paralelos por sheet → comparação de estrutura + valores com tolerância] ⇄ Tableau Server (REST + Metadata API) → relatório Excel de divergências → Data Quality Gateway → publicação ao cliente <i>ou</i> correção<br><br>(existe em Mermaid no spot.md; renderizar como imagem)</span></div>
 
-<h3>Decisões-chave</h3>
-<p><strong>1. Previsibilidade: dry run e plano de execução.</strong> <em>(a decisão mais difícil)</em><br>A primeira versão era um CLI que simplesmente rodava. O usuário não sabia, antes de começar, quantas comparações seriam feitas nem quanto tempo levaria. A liderança pediu previsibilidade. Redesenhei o núcleo como um <strong>pipeline encadeável com avaliação preguiçosa (lazy evaluation)</strong>: as etapas são declaradas e só executam quando pedido. Com isso, o Spot passou a:</p>
-<ul>
-<li>gerar um <strong>plano</strong> (quantas sheets, quantas comparações, estimativa de esforço) sem executar nada;</li>
-<li>salvar esse plano e <strong>executá-lo depois</strong>, sem recalcular;</li>
-<li>dar acompanhamento durante a execução.</li>
-</ul>
+def execute_plan(plan):
+    for stage in plan[&quot;set_of_tasks&quot;]:
+        stage.parallel_tasks_execution()
+    return plan</code></pre><p>The plan holds download containers for A and B and a comparison task referencing those same objects. Building it does not download sheet data. Execution preserves the dependency order: downloads must finish before comparison. The task list can therefore be inspected before the expensive stage.</p></section>
+<section class="code-example" aria-labelledby="code-compare"><h3 id="code-compare">B. Align keys and classify differences</h3><p class="code-origin">Adapted from compare_sheets. It preserves the outer join on keys and the distinction between absence and mismatch. This readable version uses the merge indicator to identify one-sided rows explicitly and pandas to handle nulls. It does not add numerical tolerance to the original implementation.</p><pre tabindex="0" aria-label="Python: B. Align keys and classify differences"><code class="language-python">import pandas as pd
 
-<div class="ph ph-small"><b>Placeholder · Screenshot</b><span>Terminal com o CLI do Spot exibindo o resumo de um plano (dry run): nº de dashboards, sheets e comparações estimadas</span></div>
 
-<p><strong>2. Duas APIs e <code>requests</code> direto, em vez da biblioteca oficial.</strong><br>A biblioteca oficial (<code>tableauserverclient</code>) não expunha o que eu precisava. Combinei a <strong>REST API</strong> (dados das views) com a <strong>Metadata API</strong> (estrutura dos workbooks), num wrapper próprio sobre <code>requests</code>.</p>
-<p><strong>3. Orientação a objeto em vez de script procedural.</strong><br>O Tech Lead da época preferia uma abordagem procedural, "mais direta". Mantive um desenho orientado a objetos, com classes, herança e polimorfismo. Foi o que permitiu acrescentar o dry run e novos tipos de checagem sem reescrever o núcleo.</p>
-<p><strong>4. Stdlib primeiro.</strong><br>Fora o pandas e o <code>requests</code>, as duas exceções, tudo com a biblioteca padrão do Python: concorrência, I/O, CLI. Menos dependências, menos atrito para adotar numa área que não era de software.</p>
-<p><strong>5. Paralelismo por sheet.</strong><br>Cada sheet é independente e a comparação é dominada por I/O. Paralelizar as chamadas derrubou o runtime de <strong>3–4 horas para ~30 minutos</strong>.</p>
+def compare_values(left, right, keys, fields):
+    joined = left.merge(
+        right, on=keys, how=&quot;outer&quot;, suffixes=(&quot;_a&quot;, &quot;_b&quot;),
+        indicator=True, validate=&quot;one_to_one&quot;,
+    )
+    differences = []
+    for _, row in joined.iterrows():
+        for field in fields:
+            a, b = row[f&quot;{field}_a&quot;], row[f&quot;{field}_b&quot;]
+            missing_side = row[&quot;_merge&quot;] != &quot;both&quot;
+            both_null = pd.isna(a) and pd.isna(b)
+            same = both_null or (
+                not pd.isna(a) and not pd.isna(b) and a == b
+            )
+            if missing_side or not same:
+                differences.append({
+                    &quot;key&quot;: tuple(row[key] for key in keys),
+                    &quot;field&quot;: field,
+                    &quot;type&quot;: &quot;absence&quot; if missing_side or
+                            pd.isna(a) or pd.isna(b) else &quot;mismatch&quot;,
+                    &quot;baseline&quot;: a,
+                    &quot;candidate&quot;: b,
+                })
+    return pd.DataFrame(differences)</code></pre><p>An inner join would hide categories that disappeared. An outer join keeps those rows visible. Composite keys must uniquely identify a row; this version validates that condition to avoid silently multiplying records. Nulls on both sides are equivalent, while a single changed value is still reported.</p></section>
+<section class="code-example" aria-labelledby="code-concurrency"><h3 id="code-concurrency">C. Distribute work across workers</h3><p class="code-origin">Adapted from TaskContainer.tasks_assignment and parallel_tasks_execution_definition. It preserves status filtering, worker assignment and ThreadPoolExecutor. Chunking is simplified and results are collected inside the executor context.</p><pre tabindex="0" aria-label="Python: C. Distribute work across workers"><code class="language-python">from concurrent.futures import ThreadPoolExecutor
 
-<h2>5. Resultados</h2>
-<table>
-<tr><th>Métrica</th><th>Antes</th><th>Depois</th></tr>
-<tr><td>Esforço por ciclo de validação</td><td>3–4 pessoas × ~2 semanas</td><td>1 pessoa × ~30 min</td></tr>
-<tr><td>Cobertura</td><td>amostra revisada por humanos</td><td>100% dos data points</td></tr>
-<tr><td>Natureza do processo</td><td>manual, sujeito a erro</td><td>automatizado, reprodutível, auditável (relatório)</td></tr>
-<tr><td>Erros que chegariam ao cliente</td><td>já tinham ocorrido</td><td>ao menos um erro real interceptado antes da publicação</td></tr>
-</table>
 
-<div class="ph ph-mid"><b>Placeholder · Gráfico</b><span>Barras antes vs. depois: ~320 pessoa-hora por ciclo → ~0,5 pessoa-hora; runtime 3–4 h → 30 min</span></div>
+def run_parallel(tasks, workers):
+    if not workers:
+        raise ValueError(&quot;At least one worker is required&quot;)
+    pending = [task for task in tasks
+               if task.status != TaskStatus.SUCCESS]
+    batches = [pending[i::len(workers)]
+               for i in range(len(workers))]
 
-<ul>
-<li><strong>Ordem de grandeza:</strong> 4 pessoas × 2 semanas ≈ <strong>320 pessoa-hora por ciclo</strong>. Com os 3–6 clientes já atendidos quando saí, em 4 ondas por ano, são <strong>~3.800 a ~7.700 pessoa-hora/ano</strong> liberadas. Com toda a base de clientes, o número multiplica. <em>(estimativa)</em></li>
-<li>Tornou-se o <strong>Data Quality Gateway oficial</strong>: nenhum workbook ia ao cliente sem passar pelo Spot.</li>
-<li>Tornou-se o <strong>maior produto da área de dados</strong> do NPS Prism.</li>
-</ul>
+    def run_batch(batch, worker):
+        for task in batch:
+            task.set_worker(worker)
+            task.execute()
+        return batch
 
-<div class="ph ph-mid"><b>Placeholder · Screenshot</b><span>Relatório Excel de divergências gerado pelo Spot (dados anonimizados): abas por nível: workbook, sheet, dimensão, valor</span></div>
-
-<h2>6. Lições</h2>
-<p><strong>Técnicas</strong></p>
-<ul>
-<li>Conhecer bem a linguagem rende. Lazy evaluation, OO e concorrência não são academicismo: são o que fez uma ferramenta de 3 meses virar infraestrutura.</li>
-<li>Vale olhar o que a plataforma já expõe. A solução não exigiu nenhum sistema novo; bastou ler a fundo a API de algo que a empresa já usava.</li>
-<li>Previsibilidade é feature. O dry run não mudou nenhum resultado, mas mudou a confiança dos usuários na ferramenta.</li>
-</ul>
-<p><strong>Sobre pessoas: o que eu faria diferente</strong></p>
-<p>A liderança me disse, mais de uma vez, que não tinha clareza sobre <em>o que</em> eu estava fazendo nem <em>por quê</em>. Em retrospecto, havia dois motivos. O primeiro: eu tinha certeza das minhas decisões técnicas e não queria abri-las para discussão. Hoje reconheço que isso era arrogância. O segundo: alguns conceitos (paralelismo, OO) não eram familiares ao time, e explicar parecia custoso.</p>
-<p>Se fizesse de novo, eu teria um <strong>plano de comunicação</strong> desde o início: decisões registradas com seus porquês, checkpoints com a liderança e o time envolvido nas discussões técnicas. Uma boa decisão técnica que ninguém entende é, para a organização, uma decisão arriscada.</p>
-
-<h2>Apêndice técnico</h2>
-<p><em>Para leitores técnicos. Os trechos abaixo são <strong>ilustrativos</strong>, escritos para este artigo. Não são o código original.</em></p>
-<h3>A. Pipeline encadeável com avaliação preguiçosa</h3>
-<div class="ph ph-small" style="min-height:0;padding:10px"><b>Placeholder · Trecho de código</b><span>Interface hipotética, escrita sem acesso ao código. Substituir quando o repositório estiver disponível.</span></div>
-<pre><code># PLACEHOLDER: ilustra a ideia do dry run, não a API real.
-plan = (
-    Spot(server)
-    .compare(baseline="wb_2023_q1", candidate="wb_2023_q2")
-    .dashboards(exclude=["Cover", "Methodology"])
-    .tolerance(abs=1e-6)
-    .plan()          # nada foi baixado ainda
-)
-
-print(plan.summary())    # ex.: 48 dashboards, 147 sheets, ~147 comparações
-plan.save("q2_check.plan")
-
-report = Plan.load("q2_check.plan").run(workers=16)
-report.to_excel("q2_diff.xlsx")</code></pre>
-<p>A ideia central: cada chamada encadeada só <strong>registra</strong> a intenção. <code>plan()</code> resolve a hierarquia via Metadata API, que é barata, e <code>run()</code> executa as extrações e comparações, que são caras.</p>
-<h3>B. Níveis de divergência reportados</h3>
-<table>
-<tr><th>Nível</th><th>Exemplo</th></tr>
-<tr><td>Estrutura do workbook</td><td>dashboard presente em só um dos workbooks</td></tr>
-<tr><td>Estrutura da sheet</td><td>sheet renomeada ou ausente</td></tr>
-<tr><td>Dimensão</td><td>categoria nova ("Ultra alta renda") ou removida</td></tr>
-<tr><td>Valor</td><td>métrica fora da tolerância numérica</td></tr>
-</table>
-<h3>C. Limitações conhecidas</h3>
-<ul>
-<li>Nem todos os filtros do Tableau eram manipuláveis via API. Trocar valores de filtro e ler os defaults expostos na UI ficou sem solução completa.</li>
-<li>Não havia mapeamento automático entre esquemas diferentes: a mudança estrutural era <strong>reportada</strong>, não reconciliada.</li>
-</ul>
-
+    with ThreadPoolExecutor(max_workers=len(workers)) as executor:
+        futures = [executor.submit(run_batch, batch, worker)
+                   for batch, worker in zip(batches, workers)]
+        return [future.result() for future in futures]</code></pre><p>Each worker receives a batch and executes its tasks sequentially, while batches progress in parallel. The worker count bounds simultaneous calls. Successful tasks are excluded to avoid repeated work; this filter alone is not a complete retry or persistence system.</p></section>
+<h3>D. Levels of reported differences</h3>
+<table><tr><th>Level</th><th>Example</th></tr><tr><td>Workbook structure</td><td>dashboard present in only one workbook</td></tr><tr><td>Sheet structure</td><td>renamed or missing sheet</td></tr><tr><td>Dimension</td><td>new (“Ultra-high income”) or removed category</td></tr><tr><td>Value</td><td>metric with a changed value</td></tr></table>
+<h3>E. Known limitations</h3>
+<ul><li>Not all Tableau filters could be manipulated through the API. Changing filter values and reading defaults exposed in the UI remained partially unresolved.</li><li>There was no automatic mapping between different schemas: structural changes were <strong>reported</strong>, not reconciled.</li></ul>
 <div class="footnotes">
-<p id="fn1">1. Reichheld, F. <em>The One Number You Need to Grow</em>. Harvard Business Review, dez. 2003. Ver também <a href="https://en.wikipedia.org/wiki/Net_promoter_score" target="_blank">Net Promoter Score (Wikipedia)</a>.</p>
-<p id="fn2">2. <a href="https://www.bain.com/about/media-center/press-releases/2019/bain-launches-nps-prism/" target="_blank">Bain &amp; Company launches NPS Prism (press release, 6 mar. 2019)</a>; <a href="https://www.npsprism.com/" target="_blank">npsprism.com</a>.</p>
+<p id="fn1">1. Reichheld, F. <em>The One Number You Need to Grow</em>. Harvard Business Review, December 2003. See also <a href="https://en.wikipedia.org/wiki/Net_promoter_score" target="_blank">Net Promoter Score (Wikipedia)</a>.</p>
+<p id="fn2">2. <a href="https://www.bain.com/about/media-center/press-releases/2019/bain-launches-nps-prism/" target="_blank">Bain &amp; Company launches NPS Prism (press release, March 6, 2019)</a>; <a href="https://www.npsprism.com/" target="_blank">npsprism.com</a>.</p>
 </div>
 <p class="links"><strong>Role:</strong> <a href="experience/senior-data-engineer-bain.html">Senior Data Engineer · Bain</a></p>
 <div class="share"><span>Share:</span> <button type="button" data-share="copy">Copy link</button> <a href="#" data-share="linkedin" target="_blank" rel="noopener">LinkedIn</a> <a href="#" data-share="x" target="_blank" rel="noopener">X</a></div>
@@ -201,7 +203,7 @@ report.to_excel("q2_diff.xlsx")</code></pre>
     <div><h3>Main</h3><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/experience.html">Experience</a></li><li><a href="/projects.html">Projects</a></li><li><a href="/articles/">Articles</a></li><li><a href="/personal.html">Personal</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
     <div><h3>More</h3><ul><li><a href="/code-shop.html">Code Shop</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/recommendations.html">Recommendations</a></li><li><a href="/assets/lucas-lukasavicus-cv-en.pdf" title="English, Feb 2025">Résumé (PDF)</a></li><li><a href="#" title="coming soon">Tip jar</a></li><li><a href="/llms.txt">This site as markdown</a></li><li><a href="/research/">Research</a></li></ul></div>
     <div><h3>Meta</h3><ul><li><a href="/404.html">404</a></li><li><a href="https://callieschweitzer.com/" target="_blank" rel="noopener">Design inspired by callieschweitzer.com</a></li><li><a href="/b/">Version B</a></li><li><a href="/2016/">2016 version</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
-    <div class="pages" hidden><h3>Pages</h3><ul><li><a href="/projects/mission-control.html">Mission Control</a></li><li><a href="/projects/phynances.html">PhYnances</a></li><li><a href="/projects/baby-health.html">Baby Health</a></li><li><a href="/spot.html">Spot</a></li><li><a href="/projects/sos-safra-budgeting.html">SOS: Safra's budgeting system</a></li><li><a href="/projects/aml-onboarding-safra.html">Red Hat AML onboarding</a></li><li><a href="/projects/address-rpa-deloitte.html">Address-resolution RPA</a></li><li><a href="/projects/btg-payments-data-lake.html">Data lake for BTG+ payments</a></li><li><a href="/experience/genai-manager-telus-digital.html">GenAI Manager · TELUS Digital</a></li><li><a href="/experience/data-ai-manager-telus-digital.html">Data &amp; AI Manager · TELUS Digital</a></li><li><a href="/experience/senior-data-engineer-bain.html">Senior Data Engineer · Bain</a></li><li><a href="/experience/data-engineer-team-leader-btg-pactual.html">Data Engineer &amp; Team Leader · BTG Pactual</a></li><li><a href="/experience/data-engineer-safra.html">Data Engineer · Safra</a></li><li><a href="/experience/trainee-safra.html">Trainee · Safra</a></li><li><a href="/experience/market-intelligence-analyst-b2w.html">Market Intelligence Analyst · B2W</a></li><li><a href="/experience/advanced-analytics-consultant-deloitte.html">Advanced Analytics Consultant · Deloitte</a></li><li><a href="/experience/full-stack-developer-squid.html">Full-Stack Developer · Squid</a></li><li><a href="/experience/growth-hacking-intern-instacarro.html">Growth Hacking Intern · InstaCarro</a></li><li><a href="/education/mba-business-intelligence-puc-minas.html">MBA, Business Intelligence &amp; Business Analytics · PUC Minas</a></li><li><a href="/education/mba-data-science-usp.html">MBA, Data Science · USP</a></li><li><a href="/education/bsc-computer-science-ufscar.html">B.Sc. Computer Science · UFSCar</a></li><li><a href="/education/technical-it-ete-basilides-de-godoy.html">Technical Degree, Information Technology · ETE</a></li><li><a href="/education/technical-electronics-senai.html">Technical Degree, Electronics &amp; Electrotechnics · SENAI</a></li><li><a href="/articles/rebuilding-my-personal-site-with-ai-and-the-double-diamond/">Rebuilding my personal site with AI and the Double Diamond</a></li><li><a href="/recommendations.html">Recommendations</a></li></ul></div>
+    <div class="pages" hidden><h3>Pages</h3><ul><li><a href="/projects/mission-control.html">Mission Control</a></li><li><a href="/projects/phynances.html">PhYnances</a></li><li><a href="/projects/baby-health.html">Baby Health</a></li><li><a href="/spot.html">Spot</a></li><li><a href="/projects/sos-safra-budgeting.html">SOS: Safra's budgeting system</a></li><li><a href="/projects/address-rpa-deloitte.html">Address-resolution RPA</a></li><li><a href="/projects/instacarro-analytics-tools.html">Analytics tools: DataCutter &amp; Selecter</a></li><li><a href="/projects/account-adoption-metrics.html">Account adoption metrics</a></li><li><a href="/projects/domo-gcp-migration.html">DOMO to GCP: dependency mapping and migration</a></li><li><a href="/experience/genai-manager-telus-digital.html">GenAI Manager · TELUS Digital</a></li><li><a href="/experience/data-ai-manager-telus-digital.html">Data &amp; AI Manager · TELUS Digital</a></li><li><a href="/experience/senior-data-engineer-bain.html">Senior Data Engineer · Bain</a></li><li><a href="/experience/data-engineer-team-leader-btg-pactual.html">Data Engineer &amp; Team Leader · BTG Pactual</a></li><li><a href="/experience/data-engineer-safra.html">Data Engineer · Safra</a></li><li><a href="/experience/trainee-safra.html">Trainee · Safra</a></li><li><a href="/experience/market-intelligence-analyst-b2w.html">Market Intelligence Analyst · B2W</a></li><li><a href="/experience/advanced-analytics-consultant-deloitte.html">Advanced Analytics Consultant · Deloitte</a></li><li><a href="/experience/full-stack-developer-squid.html">Full-Stack Developer · Squid</a></li><li><a href="/experience/growth-hacking-intern-instacarro.html">Growth Hacking Intern · InstaCarro</a></li><li><a href="/education/mba-business-intelligence-puc-minas.html">MBA, Business Intelligence &amp; Business Analytics · PUC Minas</a></li><li><a href="/education/mba-data-science-usp.html">MBA, Data Science · USP</a></li><li><a href="/education/bsc-computer-science-ufscar.html">B.Sc. Computer Science · UFSCar</a></li><li><a href="/education/technical-it-ete-basilides-de-godoy.html">Technical Degree, Information Technology · ETE</a></li><li><a href="/education/technical-electronics-senai.html">Technical Degree, Electronics &amp; Electrotechnics · SENAI</a></li><li><a href="/articles/rebuilding-my-personal-site-with-ai-and-the-double-diamond/">Rebuilding my personal site with AI and the Double Diamond</a></li><li><a href="/recommendations.html">Recommendations</a></li></ul></div>
   </div>
   <p class="nomatch" id="nomatch" hidden>No page matches that.</p>
   <p class="copy-line">© 2026 Lucas Lukasavicus · <button type="button" id="darktoggle" class="linklike" aria-pressed="false">Dark mode</button></p>
