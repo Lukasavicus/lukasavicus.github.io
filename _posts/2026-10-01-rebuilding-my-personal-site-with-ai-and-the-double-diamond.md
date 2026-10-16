@@ -1,6 +1,5 @@
 ---
 layout: post
-draft: true
 title: "Rebuilding my personal site with AI and the Double Diamond"
 ---
 

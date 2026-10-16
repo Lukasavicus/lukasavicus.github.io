@@ -79,7 +79,7 @@ if 'class="scope' not in s:
 # footer sitemap, 4th column "Pages": every detail page, so the search finds Spot, roles, projects, schools and articles.
 # Hidden by default; assets/site.js shows it only while a query is typed. Same list as build.js footer(). Rewritten on every run.
 POSTS = [('/articles/' + re.sub(r'^\d{4}-\d{2}-\d{2}-', '', f)[:-3] + '/', re.search(r'^title:\s*"?(.+?)"?\s*$', rd(f'{ROOT}/_posts/{f}'), re.M).group(1))
-         for f in sorted(os.listdir(ROOT + '/_posts')) if f.endswith('.md') and not re.search(r'^draft:\s*true\s*$', rd(f'{ROOT}/_posts/{f}'), re.M)]
+         for f in sorted(os.listdir(ROOT + '/_posts')) if f.endswith('.md')]
 PAGE_LINKS = ([(pr['href'], pr['title']) for pr in D['PROJECTS'] if not pr.get('draft')] + [(f'experience/{e["slug"]}.html', f'{e["role"]} · {e["short"]}') for e in D['EXP']]
               + [(f'education/{e["slug"]}.html', f'{e["degree"]} · {e["short"]}') for e in D['EDU']] + POSTS + [('recommendations.html', 'Recommendations')])
 PAGES_COL = '<div class="pages" hidden><h4>Pages</h4>' + ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in PAGE_LINKS) + '</div>'

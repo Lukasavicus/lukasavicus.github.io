@@ -5,12 +5,10 @@ title: Articles
 <p class="center">Longer-form notes on how I work. New ones land here first.</p>
 <ul class="plain">
 {% for post in site.posts %}
-{% unless post.draft %}
   <li>
     <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a>
     <p class="meta">{{ post.date | date: "%B %-d, %Y" }}</p>
     {{ post.excerpt }}
   </li>
-{% endunless %}
 {% endfor %}
 </ul>
