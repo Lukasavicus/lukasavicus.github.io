@@ -160,7 +160,7 @@ const NUMBERS = [['10', 'years in tech (since 2016)'], [COMPANIES.length, 'compa
 const roleOf = (pr, r) => { const e = EXP.find(x => x.slug === pr.role); return e ? `<p class="links"><strong>Role:</strong> <a href="${r}experience/${e.slug}.html">${esc(e.role)} · ${esc(e.short)}</a></p>` : ''; };
 const projectsOf = e => { const ps = VISIBLE_PROJECTS.filter(p => p.role === e.slug); return ps.length ? `<p class="links"><strong>Related project${ps.length > 1 ? 's' : ''}:</strong> ${ps.map(p => `<a href="../${p.href}">${esc(p.title)}</a>`).join(' · ')}</p>` : ''; };
 // Articles (Jekyll _posts, permalink /articles/:title/) for the footer page index.
-const POSTS = fs.readdirSync(path.join(OUT, '_posts')).filter(f => f.endsWith('.md')).map(f => ['/articles/' + f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '') + '/', (fs.readFileSync(path.join(OUT, '_posts', f), 'utf8').match(/^title:\s*"?(.+?)"?\s*$/m) || [])[1] || f]);
+const POSTS = fs.readdirSync(path.join(OUT, '_posts')).filter(f => f.endsWith('.md') && !/^draft:\s*true\s*$/m.test(fs.readFileSync(path.join(OUT, '_posts', f), 'utf8'))).map(f => ['/articles/' + f.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '') + '/', (fs.readFileSync(path.join(OUT, '_posts', f), 'utf8').match(/^title:\s*"?(.+?)"?\s*$/m) || [])[1] || f]);
 // Inline markup for page bullets: **bold**, `code`, [text](href); bare URLs → links.
 const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/`(.+?)`/g, '<code>$1</code>').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
 // Role detail page: story first, then the CV bullets under "From the CV" (experience.html keeps roleHtml only).
@@ -554,7 +554,7 @@ Portuguese (native) · English (full professional) · Korean (beginner) · Spani
 write('llms.txt', md);
 
 // ---------------- Jekyll layout (articles/, research/) — same shell, absolute asset paths ----------------
-write('_layouts/default.html', shell({ file: '_layouts/default.html', raw: true, title: '{{ page.title }}', nav: 'articles/', pageClass: 'case', root: '/', head: '<!-- analytics: GoatCounter snippet goes here -->', body: '<h1 class="case-title">{{ page.title }}</h1>\n{{ content }}' }));
+write('_layouts/default.html', shell({ file: '_layouts/default.html', raw: true, title: '{{ page.title }}', nav: 'articles/', pageClass: 'case', root: '/', head: '{% if page.draft %}<meta name="robots" content="noindex, nofollow">{% endif %}<!-- analytics: GoatCounter snippet goes here -->', body: '<h1 class="case-title">{{ page.title }}</h1>\n{{ content }}' }));
 
 // Keep review drafts out of search-engine indexes while allowing direct URLs.
 for (const p of PROJECTS.filter(p => p.draft)) {
