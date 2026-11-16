@@ -234,7 +234,8 @@ pre.code{margin:0;overflow:auto;padding:16px;border-radius:12px;border:1px solid
 .rec-group h3{margin:0 0 14px;font:600 22px/28px Fraunces,serif}
 .rec h4{margin:0 0 4px;font:600 17px/24px Geist,sans-serif;color:var(--t-ink)}
 .rec h4 small{font-weight:400;font-size:12px;color:var(--t-stone)}
-.detail .cv,.tl ul{list-style:disc} /* Tailwind preflight resets ul to none; one native bullet per CV item */
+.detail ul,.tl ul{list-style:disc} /* .detail ul covers the CV and the project-page bullets */
+.detail ul{margin:0 0 12px;padding-left:22px}.detail ul li{margin:0 0 6px} /* Tailwind preflight resets ul to none; one native bullet per CV item */
 .detail .cv{margin:0 0 12px;padding-left:22px}
 .detail .cv li{margin:0 0 6px}
 .detail .tech{font:500 14px/22px Geist,sans-serif;color:var(--t-stone)}
@@ -331,3 +332,6 @@ html.dark .case .example{background:var(--soft);color:var(--fg)}
 
 /* Evidence attached to the twelve editorial drafts. */
 .draft-evidence{margin:2rem 0;padding:1rem;border:1px solid #b9ab95;border-radius:8px}.draft-evidence summary{cursor:pointer;font-weight:600}.draft-evidence code,.draft-source{overflow-wrap:anywhere;white-space:normal}.draft-notice,.editorial-draft{padding:1rem;border-left:4px solid #a37433;background:#f5efe5}.draft-source{color:#70665a;font-size:.85em}
+
+/* Inline SVG diagrams on project pages (assets/diagrams); currentColor follows the theme. */
+.detail figure.diagram{margin:28px 0}.detail figure.diagram .scroll{overflow-x:auto}.detail figure.diagram svg{display:block;width:100%;min-width:720px;height:auto;color:var(--t-ink)}.detail figure.diagram figcaption{font:400 13px/20px Geist,sans-serif;color:var(--t-stone);margin-top:8px;text-align:center}
