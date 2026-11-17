@@ -153,11 +153,11 @@ def page(file, parent, title, desc, main, lang=None):
         head = head.replace('</head>', '<link rel="alternate" hreflang="en" href="spot.html"><link rel="alternate" hreflang="pt-BR" href="spot-pt.html"></head>')
     wr(f'{B}/{file}', head + '<main id="main" class="relative">' + main + '</main>' + tail)
 
-def detail(file, parent, kick, title, meta, body_html, tech, back, back_label, ph_desc, after=''):
+def detail(file, parent, kick, title, meta, body_html, tech, back, back_label, ph_desc, after='', figure=''):
     main = (f'<section class="page-hero"><p class="kick">{kick}</p><h1>{esc(title)}</h1><p>{esc(meta)}</p></section>'
             f'<div class="page"><section class="detail">'
             f'<p class="back"><a href="{back}">&larr; {back_label}</a></p>'
-            + (case_visual(next((p for p in D['PROJECTS'] if p['href'] == file), {}), '../') or ph('ph-mid', 'Placeholder · Imagem', ph_desc)) + body_html +
+            + (figure or case_visual(next((p for p in D['PROJECTS'] if p['href'] == file), {}), '../') or ph('ph-mid', 'Placeholder · Imagem', ph_desc)) + body_html +
             f'<p class="tech"><strong>Tech:</strong> {esc(tech)}</p>{after}{SHARE}'
             f'<p class="back"><a href="{back}">&larr; Back</a></p></section></div>')
     page(file, parent, title, meta, main)
@@ -211,6 +211,10 @@ BCARDS = {  # title: (color, icon, short line, problem, delivery, numbers or Non
     'Address-resolution RPA': ('#5fa8ff', 'RPA', 'Fixing bad customer addresses before invoices went to the post.',
         'Bad customer addresses meant returned mail for Claro, a Brazilian telecom operator.',
         'A rules engine plus RPA that fixed addresses before invoices went to the post.', '93% of addresses corrected · an estimated R$1M a year saved in returned mail · R$700k+ in revenue for Deloitte.'),
+    'Panel-vendor API consumer': ('#ffb454', 'API', 'Automated, auditable ingestion of panel-survey data from two vendors.',
+        'Survey data from two panel vendors was downloaded and consolidated by hand by two engineers, with no audit trail and no governance.',
+        'A scheduled API consumer on Databricks: one interface, one class per vendor, cache decorators for the rate limits, bronze on Delta Lake and Parquet.',
+        '30–72 million responses a quarter in batch (3–7.2 M per client, 10+ clients) · two people freed from a repetitive task · every load traceable and reproducible.'),
     'Data lake for BTG+ payments': ('#b99cff', 'BTG', 'An AWS Kappa-style pipeline for BTG+ payment events.',
         'Most of the pipeline existed when I arrived: no documentation, little observability, and a daily load slowed by thousands of tiny files.',
         'I documented it end to end, brought observability in, and proposed the file consolidation that made the daily load viable.',
@@ -249,7 +253,7 @@ def replace_between(s, start, end, new, keep_end=True):
     i = s.index(start); j = s.index(end, i)
     return s[:i] + new + (s[j:] if keep_end else s[j + len(end):])
 PRS = [p for p in D['PROJECTS'] if not p.get('draft')]; n_pers = sum(p['meta'].startswith('personal') for p in PRS); n_pro = len(PRS) - n_pers
-WORDS = {3: 'three', 5: 'five', 8: 'eight'}
+WORDS = {3: 'three', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'}
 blurb = f'{str(WORDS.get(n_pers, n_pers)).capitalize()} personal projects and {WORDS.get(n_pro, n_pro)} professional case studies and engineering contributions.'
 s = rd(f'{B}/index.html')
 s = replace_between(s, '<div class="mt-10 flex flex-col gap-3 px-4 lg:hidden">', '<p class="mt-10 text-center"><a href="projects.html" class="pj-more">All projects →</a></p>', home_cards(PRS))
@@ -278,7 +282,8 @@ for pr in D['PROJECTS']:
     if not pr['href'].startswith('projects/'): continue
     links = f'<p class="links"><strong>Links:</strong> {linkify(pr["links"])}</p>' if pr.get('links') else ''
     detail(pr['href'], 'projects', 'Project', pr['title'], 'Personal project' if pr['meta'] == 'personal' else pr['meta'],
-           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr.get('phDesc', pr['title']), after=links + role_of(pr, '../'))
+           project_html(pr), pr['tech'], '../projects.html', 'Projects', pr.get('phDesc', pr['title']), after=links + role_of(pr, '../'),
+           figure=(f'<figure class="diagram"><div class="scroll">{rd(ROOT + "/" + pr["figure"]).strip()}</div><figcaption>{esc(pr.get("figCaption", ""))}</figcaption></figure>' if pr.get('figure') else ''))
 
 # Spot: complete bilingual bodies and shared, adapted code examples.
 for lang in ['pt', 'en']:
