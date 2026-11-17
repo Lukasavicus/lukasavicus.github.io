@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="dg-title dg-desc" font-family="Geist,Inter,system-ui,sans-serif" font-size="13" fill="none" stroke="currentColor" stroke-width="1.2" color="currentColor">
+<title id="dg-title">Panel-vendor API consumer on Databricks</title>
+<desc id="dg-desc">Two panel vendors (Dynata and Qualtrics) expose REST APIs. A scheduled Databricks job runs a Python API consumer built on a common PanelProvider interface with one class per vendor and cache, retry and rate-limit decorators. The consumer writes to a bronze layer on Delta Lake and Parquet with schema evolution. A silver data-warehouse layer and its BI consumers are designed but not implemented, shown dashed.</desc>
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor" stroke="none"/></marker>
+</defs>
+<!-- vendors -->
+<rect x="16" y="60" width="210" height="300" rx="10" stroke-dasharray="0" opacity=".55"/>
+<text x="121" y="84" text-anchor="middle" font-weight="600" fill="currentColor" stroke="none" font-size="12" letter-spacing=".08em">PANEL VENDORS · REST APIs</text>
+<rect x="34" y="110" width="174" height="96" rx="8" fill="currentColor" fill-opacity=".05"/>
+<text x="121" y="136" text-anchor="middle" font-weight="700" fill="currentColor" stroke="none" font-size="15">Dynata</text>
+<text x="121" y="158" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">signed requests</text>
+<text x="121" y="176" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">(access key + secret + expiry)</text>
+<rect x="34" y="236" width="174" height="96" rx="8" fill="currentColor" fill-opacity=".05"/>
+<text x="121" y="262" text-anchor="middle" font-weight="700" fill="currentColor" stroke="none" font-size="15">Qualtrics</text>
+<text x="121" y="284" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">async export</text>
+<text x="121" y="302" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">(start → progress → file)</text>
+<!-- databricks -->
+<rect x="262" y="16" width="470" height="408" rx="10" opacity=".55"/>
+<text x="497" y="40" text-anchor="middle" font-weight="600" fill="currentColor" stroke="none" font-size="12" letter-spacing=".08em">DATABRICKS · SCHEDULED JOB, QUARTERLY BATCH</text>
+<!-- scheduler -->
+<rect x="402" y="56" width="190" height="40" rx="20" fill="currentColor" fill-opacity=".05"/>
+<text x="497" y="81" text-anchor="middle" fill="currentColor" stroke="none">Workflows · schedule</text>
+<path d="M497 96 V118" marker-end="url(#ar)"/>
+<!-- consumer -->
+<rect x="282" y="120" width="430" height="206" rx="8"/>
+<text x="497" y="142" text-anchor="middle" font-weight="700" fill="currentColor" stroke="none" font-size="14">API consumer · Python, OOP</text>
+<rect x="392" y="156" width="210" height="36" rx="6" stroke-dasharray="4 3"/>
+<text x="497" y="179" text-anchor="middle" fill="currentColor" stroke="none" font-style="italic">«interface» PanelProvider</text>
+<rect x="300" y="222" width="180" height="36" rx="6" fill="currentColor" fill-opacity=".05"/>
+<text x="390" y="245" text-anchor="middle" fill="currentColor" stroke="none" font-family="ui-monospace,Menlo,monospace" font-size="12.5">DynataProvider</text>
+<rect x="514" y="222" width="180" height="36" rx="6" fill="currentColor" fill-opacity=".05"/>
+<text x="604" y="245" text-anchor="middle" fill="currentColor" stroke="none" font-family="ui-monospace,Menlo,monospace" font-size="12.5">QualtricsProvider</text>
+<path d="M390 222 V200 H460 V192" stroke-dasharray="3 3"/>
+<path d="M604 222 V200 H534 V192" stroke-dasharray="3 3"/>
+<rect x="292" y="276" width="410" height="34" rx="17" stroke-dasharray="4 3"/>
+<text x="497" y="297" text-anchor="middle" fill="currentColor" stroke="none" font-size="11.5">decorators: cache · retry · rate limit · pagination · filters · projection · sorting</text>
+<!-- vendor -> provider arrows -->
+<path d="M208 158 H258 V240 H300" marker-end="url(#ar)"/>
+<path d="M208 284 H252 V246 H300" marker-end="url(#ar)"/>
+<!-- bronze -->
+<path d="M497 326 V348" marker-end="url(#ar)"/>
+<g transform="translate(372,352)">
+<path d="M0 10 a125 10 0 0 1 250 0 v38 a125 10 0 0 1 -250 0 z" fill="currentColor" fill-opacity=".07"/>
+<path d="M0 10 a125 10 0 0 0 250 0"/>
+<text x="125" y="34" text-anchor="middle" font-weight="700" fill="currentColor" stroke="none">Bronze / raw · Delta Lake + Parquet</text>
+<text x="125" y="52" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8" font-size="12">schema evolution, compressed</text>
+</g>
+<!-- silver + consumers (future, dashed) -->
+<path d="M622 384 H752" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<g transform="translate(756,352)" stroke-dasharray="4 3" opacity=".75">
+<path d="M0 10 a90 10 0 0 1 180 0 v38 a90 10 0 0 1 -180 0 z"/>
+<path d="M0 10 a90 10 0 0 0 180 0"/>
+<text x="90" y="34" text-anchor="middle" font-weight="700" fill="currentColor" stroke="none" stroke-dasharray="0">Silver · data warehouse</text>
+<text x="90" y="52" text-anchor="middle" fill="currentColor" stroke="none" font-size="12" stroke-dasharray="0">facts and dimensions · not built</text>
+</g>
+<path d="M846 352 V300" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+<rect x="766" y="246" width="160" height="52" rx="8" stroke-dasharray="4 3" opacity=".75"/>
+<text x="846" y="268" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">Consumers</text>
+<text x="846" y="286" text-anchor="middle" fill="currentColor" stroke="none" opacity=".8">BI / analytics</text>
+<text x="846" y="236" text-anchor="middle" fill="currentColor" stroke="none" font-size="11" opacity=".65">dashed = not implemented</text>
+</svg>
