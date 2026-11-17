@@ -1,0 +1,32 @@
+# Git flow guard: only `dev` may be merged into the default branch, and feature branches must be cut from `dev`.
+# Same file in the public site (default branch master) and in the private lab (default branch main).
+name: gitflow
+on:
+  pull_request:
+    branches: [main, master, dev]
+permissions:
+  contents: read
+jobs:
+  gitflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check source branch
+        env:
+          BASE: ${{ github.base_ref }}
+          HEAD: ${{ github.head_ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          DEFAULT: ${{ github.event.repository.default_branch }}
+        run: |
+          if [ "$BASE" = "$DEFAULT" ]; then
+            [ "$HEAD" = dev ] && exit 0
+            echo "::error::Only dev may be merged into $DEFAULT; open this PR against dev instead."
+            exit 1
+          fi
+          # PR into dev: a branch cut from the default branch carries its release merge commits, which dev never has.
+          stray=$(git rev-list "$HEAD_SHA" "^origin/dev" | grep -Fxf <(git rev-list "origin/$DEFAULT" "^origin/dev") || true)
+          [ -z "$stray" ] && exit 0
+          echo "::error::$HEAD was cut from $DEFAULT, not from dev; recreate it from dev."
+          exit 1
